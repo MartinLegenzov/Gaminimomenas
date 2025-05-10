@@ -141,179 +141,254 @@ img {
 <br>
 <br>
 <br>
-<br>
-<br>
+<div style="text-align: center; margin-top: 20px;">
 <style>
-    .daily-recipe {
-        text-align: center;
-        padding: 50px;
-        background-color: #ffffff;
-        border: 2px solid #044565; /* Add border */
-        border-radius: 10px; /* Slightly rounded corners */
-        width: 350px; /* Set a fixed width */
-        margin: 20px auto; /* Center horizontally */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    #atsiliepimai {
+        background-color: #fff3e0; /* Light orange background */
+        border: 1px solid #d84315; /* Darker orange border */
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .daily-recipe a {
-        color: #d84315; 
+    #atsiliepimai h2 {
+        color: #d84315; /* Darker orange for heading */
+    }
+
+    #atsiliepimai button {
+        background-color: #d84315; /* Darker orange button */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #atsiliepimai button:hover {
+        background-color: #bf360c; /* Even darker orange on hover */
+    }
+
+    #dienosReceptas {
+        background-color: #e8f5e9; /* Light green background */
+        border: 1px solid #388e3c; /* Dark green border */
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #dienosReceptas h2 {
+        color: #388e3c; /* Dark green for heading */
+    }
+
+    #dienosReceptas a {
+        color: #388e3c; /* Dark green for link */
         text-decoration: none;
         font-weight: bold;
+        transition: color 0.3s;
     }
 
-    .daily-recipe a:hover {
-        text-decoration: underline;
+    #dienosReceptas a:hover {
+        color: #1b5e20; /* Even darker green on hover */
     }
 </style>
-<div class="daily-recipe">
-    <h2>Dienos receptas</h2>
-    <p><strong>Recepto pavadinimas:</strong> Šokoladinis pyragas</p>
-    <p><a href="receptai.html">Žiūrėti receptą</a></p>
-</div>
-
-
-<style>
-    .testimonials-carousel {
-        text-align: center;
-        padding: 50px;
-        border: 2px solid #044565; /* Add border around the testimonials section */
-        border-radius: 10px; /* Rounded corners for the border */
-        width: 350px; /* Set a fixed width */
-        margin: 20px auto; /* Center horizontally */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
-    }
-
-    .carousel {
-        position: relative;
-        width: 300px;
-        margin: 0 auto;
-        overflow: hidden;
-    }
-
-    .testimonial {
-        display: none;
-        padding: 20px;
-        background-color: #ffffff;
-        border: 2px solid #044565;
-        border-radius: 10px;
-        text-align: center;
-    }
-
-    .testimonial.active {
-        display: block;
-    }
-
-    .carousel-buttons {
-        margin-top: 20px;
-    }
-
-    .carousel-buttons button {
-        padding: 10px 20px;
-        background-color: #d84315;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .carousel-buttons button:hover {
-        background-color: #bf360c;
-    }
-    
-    .testimonial-rating {
-        margin-top: 10px;
-        color: #d84315;
-        font-weight: bold;
-    }
-
-</style>
-<div class="testimonials-carousel">
-    <h2>Atsiliepimai</h2>
-    <div class="carousel">
-        <div class="testimonial active">„Puikūs receptai! Ačiū!“ – Lina</div>
-        <div class="testimonial">„Labai patiko desertų idėjos.“ – Tomas</div>
-        <div class="testimonial">„Rekomenduoju visiems!“ – Greta</div>
-        <div class="testimonial">„Nuostabūs receptai, labai patiko!“ – Jonas</div>
-        <div class="testimonial">„Labai įdomūs patarimai, ačiū!“ – Monika</div>
-        <div class="testimonial">„Puikus puslapis, visada randu ką nors naujo.“ – Karolis</div>
-        <div class="testimonial">„Mano šeima dievina jūsų receptus!“ – Eglė</div>
-        <div class="testimonial">„Labai naudinga informacija pradedantiesiems.“ – Marius</div>
-        <div class="testimonial">„Jūsų desertai yra tiesiog tobuli!“ – Laura</div>
-        <div class="testimonial">„Ačiū už įkvėpimą gaminti!“ – Viktorija</div>
-        <div class="testimonial">„Jūsų patarimai padėjo man atrasti naujus skonius.“ – Tomas</div>
-        <div class="testimonial">„Puikus dizainas ir turinys, rekomenduoju!“ – Rūta</div>
-        <div class="testimonial">„Visada laukiu naujų receptų!“ – Andrius</div>
+<div style="display: flex; justify-content: space-around; align-items: center; margin-top: 20px;">
+    <!-- Atsiliepimai -->
+    <div id="atsiliepimai" style="text-align: center; width: 30%;">
+        <h2>Atsiliepimai</h2>
+        <p id="currentReview">"Puikus receptai! Labai patiko!" - Jonas</p>
+        <button onclick="nextReview()">Kitas atsiliepimas</button>
     </div>
-    <div class="carousel-buttons">
-        <button id="prevButton">Ankstesnis</button>
-        <button id="nextButton">Kitas</button>
+
+    <!-- Dienos receptas -->
+    <div id="dienosReceptas" style="text-align: center; width: 30%;">
+        <h2>Dienos receptas</h2>
+        <p>Šiandien siūlome išbandyti: <b>Šokoladinį pyragą</b></p>
+        <a href="dienos-receptas.html">Skaityti daugiau</a>
     </div>
     <script>
-        const testimonials = document.querySelectorAll('.testimonial');
-        let currentIndex = 0;
+    const reviews = [
+        '"Puikus receptai! Labai patiko!" - Jonas',
+        '"Labai įdomūs patarimai ir idėjos!" - Ona',
+        '"Receptai lengvai suprantami ir skanūs!" - Petras'
+    ];
+    let currentReviewIndex = 0;
 
-        function showTestimonial(index) {
-            testimonials.forEach((testimonial, i) => {
-                testimonial.classList.toggle('active', i === index);
-            });
-        }
-
-        document.getElementById('prevButton').addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
-            showTestimonial(currentIndex);
-        });
-
-        document.getElementById('nextButton').addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % testimonials.length;
-            showTestimonial(currentIndex);
-        });
-
-        // Initialize the first testimonial as active
-        showTestimonial(currentIndex);
-    </script>
-</div>
+    function nextReview() {
+        currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+        document.getElementById('currentReview').textContent = reviews[currentReviewIndex];
+    }
+</script>
 
 <style>
-    .contact-form {
-        text-align: center;
-        padding: 30px;
-        background-color: #ffffff;
-        border: 2px solid #044565; /* Add border */
-        border-radius: 10px; /* Rounded corners */
-        width: 400px; /* Set a fixed width */
-        margin: 20px auto; /* Center horizontally */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
-    }
+    @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400);
 
-    .contact-form input, .contact-form textarea {
-        width: 90%; /* Adjust width */
-        padding: 8px; /* Reduce padding */
-        margin: 8px 0; /* Reduce margin */
-        border: 1px solid #000000;
-        border-radius: 5px;
-    }
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #aca49c;
+  font-size: 0.875em;
+}
 
-    .contact-form button {
-        padding: 8px 16px; /* Reduce button size */
-        background-color: #d84315;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder {
+  color: #bbb5af;
+}
 
-    .contact-form button:hover {
-        background-color: #bf360c;
-    }
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #aca49c;
+  font-size: 0.875em;
+}
+
+input:focus::-moz-placeholder, textarea:focus::-moz-placeholder {
+  color: #bbb5af;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #aca49c;
+  font-size: 0.875em;
+}
+
+input:focus::placeholder, textarea::focus:placeholder {
+  color: #bbb5af;
+}
+
+input::-ms-placeholder, textarea::-ms-placeholder {
+  color: #aca49c;
+  font-size: 0.875em;
+}
+
+input:focus::-ms-placeholder, textarea:focus::-ms-placeholder {
+  color: #bbb5af;
+}
+
+/* on hover placeholder */
+
+input:hover::-webkit-input-placeholder, textarea:hover::-webkit-input-placeholder {
+  color: #e2dedb;
+  font-size: 0.875em;
+}
+
+input:hover:focus::-webkit-input-placeholder, textarea:hover:focus::-webkit-input-placeholder {
+  color: #cbc6c1;
+}
+
+input:hover::-moz-placeholder, textarea:hover::-moz-placeholder {
+  color: #e2dedb;
+  font-size: 0.875em;
+}
+
+input:hover:focus::-moz-placeholder, textarea:hover:focus::-moz-placeholder {
+  color: #cbc6c1;
+}
+
+input:hover::placeholder, textarea:hover::placeholder {
+  color: #e2dedb;
+  font-size: 0.875em;
+}
+
+input:hover:focus::placeholder, textarea:hover:focus::placeholder {
+  color: #cbc6c1;
+}
+
+input:hover::placeholder, textarea:hover::placeholder {
+  color: #e2dedb;
+  font-size: 0.875em;
+}
+
+input:hover:focus::-ms-placeholder, textarea:hover::focus:-ms-placeholder {
+  color: #cbc6c1;
+}
+
+
+#form {
+  position: relative;
+  width: 500px;
+  margin: 50px auto 100px auto;
+}
+
+input {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.875em;
+  width: 470px;
+  height: 50px;
+  padding: 0px 15px 0px 15px;
+  
+  background: transparent;
+  outline: none;
+  color: #726659;
+  
+  border: solid 1px #b3aca7;
+  border-bottom: none;
+  
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+}
+
+input:hover {
+  background: #b3aca7;
+  color: #e2dedb;
+}
+
+textarea {
+  width: 470px;
+  max-width: 470px;
+  height: 110px;
+  max-height: 110px;
+  padding: 15px;
+  
+  background: transparent;
+  outline: none;
+  
+  color: #726659;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.875em;
+  
+  border: solid 1px #b3aca7;
+  
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+}
+
+textarea:hover {
+  background: #b3aca7;
+  color: #e2dedb;
+}
+
+#submit {
+  width: 502px;
+  
+  padding: 0;
+  margin: -5px 0px 0px 0px;
+  
+  font-family: 'Lato', sans-serif;
+  font-size: 0.875em;
+  color: #b3aca7;
+  
+  outline:none;
+  cursor: pointer;
+  
+  border: solid 1px #b3aca7;
+  border-top: none;
+}
+
+#submit:hover {
+  color: #e2dedb;
+}
 </style>
-<div class="contact-form">
-    <h2>Susisiekite su mumis</h2>
-    <form>
-        <input type="text" placeholder="Jūsų vardas" required><br>
-        <input type="email" placeholder="Jūsų el. paštas" required><br>
-        <textarea placeholder="Jūsų žinutė" required></textarea><br>
-        <button type="submit">Siųsti</button>
-    </form>
+
+<form id="form" class="topBefore">
+		
+		  <input id="name" type="text" placeholder="Vardas">
+		  <input id="email" type="text" placeholder="E-MAIL">
+		  <textarea id="message" type="text" placeholder="Žinutė"></textarea>
+  <input id="submit" type="submit" value="GO!">
+  
+</form>
+
 </div>
+
+
 </body>
 </html>
