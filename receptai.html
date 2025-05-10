@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receptai</title>
+    <style>
+        body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #ffffff; /* Light gray background */
+        color: #000000; /* Brown text */
+    }
+
+        header {
+            background-color: #ffffffe3; /* Light orange header */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #5d4037; /* Brown text for links */
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #d84315; /* Darker orange on hover */
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .recipes {
+        margin: 0 auto 30px;
+        max-width: 1200px; /* Increased max-width to accommodate 3 items in a row */
+        text-align: center;
+    }
+
+    #recipe-list {
+        display: flex;
+        flex-wrap: wrap; /* Allow items to wrap to the next line */
+        justify-content: space-around; /* Distribute items evenly */
+    }
+
+    .recipe-item {
+        width: 30%; /* Set width to approximately 30% to fit 3 items in a row */
+        margin: 15px 0; /* Adjust margin for spacing */
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+        border: 2px solid #044565;
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }   
+
+    .recipe-item img {
+        width: 100%;
+        height: auto;
+        max-height: 200px; /* Adjust max-height as needed */
+        object-fit: cover;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+        .add-recipe {
+        margin: 15px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+        max-width: 600px;
+        text-align: left; /* Align text to the left */
+    }
+
+    .add-recipe h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        color: #d84315;
+        text-align: center;
+    }
+
+    .add-recipe form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .add-recipe form label {
+        font-weight: bold;
+        color: #5d4037;
+        display: block; /* Ensure labels take full width */
+        margin-bottom: 5px; /* Add some space below labels */
+    }
+
+    .add-recipe form input,
+    .add-recipe form textarea {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #5d4037;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .add-recipe form input[type="file"] {
+        padding: 5px;
+    }
+
+    .add-recipe form button {
+        padding: 12px 20px;
+        background-color: #ffcc80;
+        color: #5d4037;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .add-recipe form button:hover {
+        background-color: #d84315;
+        color: #fff;
+    }
+        
+        .recipe-item img {
+            width: 100%; /* Make all images the same width */
+            height: auto; /* Maintain aspect ratio */
+            max-height: 300px; /* Set a maximum height for consistency */
+            object-fit: cover; /* Ensure images are cropped to fit */
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .search-section {
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .search-section input {
+        padding: 15px; /* Increase padding for a larger input field */
+        width: 300px; /* Increase width */
+        font-size: 16px; /* Increase font size for better readability */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+    .search-section button {
+        padding: 10px 20px;
+        background-color: #ffcc80;
+        border: none;
+        border-radius: 5px;
+        color: #5d4037;
+        cursor: pointer;
+    }
+
+    .search-section button:hover {
+        background-color: #d84315;
+        color: #fff;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Receptai</h1>
+        <nav>
+            <ul>
+                <li><a href="main.html"><img src="home.png" alt="Pagrindinis" style="width: 50px; height: 50px; vertical-align: middle;"></a></li>
+                <li><a href="receptai.html">Receptai</a></li>
+                <li><a href="gidas.html">Gidas</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="search-section">
+        <input type="text" id="searchTags" placeholder="Search by tags...">
+        <button onclick="searchByTags()">Search by Tags</button>
+    </div>
+    <script>
+        // Add dropdown menu functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuItem = document.createElement('li');
+            menuItem.style.position = 'relative';
+
+            const dropdownLink = document.createElement('a');
+            dropdownLink.href = '#';
+            dropdownLink.textContent = 'Receptų kategorijos';
+            dropdownLink.style.cursor = 'pointer';
+
+            const dropdownMenu = document.createElement('ul');
+            dropdownMenu.style.position = 'absolute';
+            dropdownMenu.style.top = '100%';
+            dropdownMenu.style.left = '0';
+            dropdownMenu.style.backgroundColor = '#fff8e1';
+            dropdownMenu.style.border = '1px solid #ddd';
+            dropdownMenu.style.borderRadius = '5px';
+            dropdownMenu.style.padding = '10px';
+            dropdownMenu.style.listStyle = 'none';
+            dropdownMenu.style.display = 'none';
+            dropdownMenu.style.zIndex = '1000';
+
+            const categories = ['Pusryčiai', 'Pietūs', 'Vakarienė', 'Desertas'];
+            categories.forEach(category => {
+            const categoryItem = document.createElement('li');
+            const categoryLink = document.createElement('a');
+            categoryLink.href = '#';
+            categoryLink.textContent = category;
+            categoryLink.style.textDecoration = 'none';
+            categoryLink.style.color = '#5d4037';
+            categoryLink.style.display = 'block';
+            categoryLink.style.padding = '5px 10px';
+
+            categoryLink.addEventListener('click', function () {
+                filterRecipesByCategory(category.toLowerCase());
+            });
+
+            categoryItem.appendChild(categoryLink);
+            dropdownMenu.appendChild(categoryItem);
+            });
+
+            dropdownLink.addEventListener('mouseover', function () {
+            dropdownMenu.style.display = 'block';
+            });
+
+            menuItem.addEventListener('mouseleave', function () {
+            dropdownMenu.style.display = 'none';
+            });
+
+            menuItem.appendChild(dropdownLink);
+            menuItem.appendChild(dropdownMenu);
+
+            const navList = document.querySelector('nav ul');
+            navList.appendChild(menuItem);
+        });
+
+        // Function to filter recipes by category
+        function filterRecipesByCategory(category) {
+            document.querySelectorAll('.recipe-item').forEach(recipe => {
+            const title = recipe.querySelector('h3').textContent;
+            const tags = recipeTags[title] || [];
+            const hasMatch = tags.includes(category);
+            recipe.style.display = hasMatch ? 'block' : 'none';
+            });
+        }      
+// Add tags in Lithuanian
+const recipeTags = {
+        'Šokoladinis pyragas': ['desertas', 'šokoladas', 'pyragas', 'saldus'],
+        'Obuolių pyragas': ['desertas', 'obuoliai', 'pyragas', 'vaisiai', 'saldus'],
+        'Vištienos salotos': ['salotos', 'vištiena', 'sveikas', 'pietūs'],
+        'Makaronai su sūriu': ['makaronai', 'sūris', 'vakarienė', 'sotus'],
+        'Blynai': ['pusryčiai', 'blynai', 'saldus'],
+        'Kreminė avižinė košė': ['pusryčiai', 'bananai', 'saldus', 'avižos'],
+        'Lašiša su daržovėmis': ['vakarienė', 'lašiša', 'daržovės', 'sveikas'],
+        'Varškėčiai': ['pusryčiai', 'varškė', 'saldus'],
+        'Troškinys su jautiena': [ 'vakarienė', 'jautiena', 'sotus'],
+        'Šalta agurkų sriuba': ['sriuba', 'agurkai', 'sveikas', 'pietūs'],
+        'Sumuštinis su avokadu ir kiaušiniu': ['pusryčiai', 'avokadas', 'sveikas', 'sotus'],
+        'Tiramisu': ['desertas', 'šokoladas', 'saldus', 'italų virtuvė'],
+        'Braškinis tortas': ['desertas', 'braškės', 'saldus'],
+        'Šokoladiniai keksiukai': ['desertas', 'šokoladas', 'saldus'],
+        'Ledai': ['desertas', 'saldus', 'vasara'],
+        'Omletas su sūriu ir daržovėmis': ['pusryčiai', 'sūris', 'daržovės', 'sveikas'],
+        'Bananų ir riešutų kokteilis': ['pusryčiai', 'bananai', 'sveikas', 'kokteilis'],
+        'Šaltibarščiai': ['sriuba', 'burokėliai', 'sveikas', 'vasara', 'pietūs'],
+        'Vištienos sriuba su daržovėmis': ['sriuba', 'vištiena', 'daržovės', 'sveikas', 'pietūs'],
+        'Makaronų apkepas su sūriu ir kumpiu': ['makaronai', 'sūris', 'kumpis', 'vakarienė'],
+        'Lašiša su keptomis bulvėmis ir šparagais': ['lašiša', 'bulvės', 'šparagai', 'vakarienė'],
+        'Vištienos kepsneliai su ryžiais ir salotomis': ['vištiena', 'ryžiai', 'salotos', 'sveikas', 'vakarienė'],
+        'Daržovių troškinys su avinžirniais': ['daržovės', 'avinžirniai', 'sveikas', 'vegetariškas', 'pietūs'],
+        'Lęšių sriuba': ['sriuba', 'lęšiai', 'daržovės', 'sveikas', 'pietūs'],
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        const recipeImages = document.querySelectorAll('.recipe-item img');
+        recipeImages.forEach(img => {
+            img.style.width = '100%';
+            img.style.height = '300px'; /* Set a fixed height */
+            img.style.objectFit = 'cover'; /* Ensure images cover the area */
+            img.style.marginBottom = '10px';
+            img.style.borderRadius = '5px';
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        const recipeImages = document.querySelectorAll('.recipe-item img');
+        recipeImages.forEach(img => {
+            img.style.width = '100%';
+            img.style.height = '300px'; /* Set a fixed height */
+            img.style.objectFit = 'cover'; /* Ensure images cover the area */
+            img.style.marginBottom = '10px';
+            img.style.borderRadius = '5px';
+        });
+    });
+    // Function to search by tags
+    function searchByTags() {
+        const searchText = document.getElementById('searchTags').value.toLowerCase();
+        document.querySelectorAll('.recipe-item').forEach(recipe => {
+            const title = recipe.querySelector('h3').textContent;
+            const tags = recipeTags[title] || [];
+            const hasMatch = tags.some(tag => tag.toLowerCase().includes(searchText));
+            recipe.style.display = hasMatch || searchText === '' ? 'block' : 'none';
+        });
+    }
+
+    // Function to filter recipes by category
+    function filterRecipesByCategory(category) {
+        document.querySelectorAll('.recipe-item').forEach(recipe => {
+            const title = recipe.querySelector('h3').textContent;
+            const tags = recipeTags[title] || [];
+            const hasMatch = tags.includes(category);
+            recipe.style.display = hasMatch ? 'block' : 'none';
+        });
+    }
+
+    // Remove the displayTags function to avoid showing tags
+
+        function searchByTags() {
+            const searchText = document.getElementById('searchTags').value.toLowerCase();
+            document.querySelectorAll('.recipe-item').forEach(recipe => {
+                const title = recipe.querySelector('h3').textContent;
+                const tags = recipeTags[title] || [];
+                const hasMatch = tags.some(tag => tag.toLowerCase().includes(searchText));
+                recipe.style.display = hasMatch || searchText === '' ? 'block' : 'none';
+            });
+        }
+
+        window.addEventListener('load', displayTags);
+    </script>
+
+<div class="content">
+    <div class="recipes">
+        <h2>Receptai</h2>
+        <div id="recipe-list">
+            <div class="recipe-item">
+                <h3>Šokoladinis pyragas</h3>
+                <p><strong>Ingredientai:</strong> 200g miltų, 100g cukraus, 50g kakavos, 2 kiaušiniai, 100ml pieno</p>
+                <p><strong>Gaminimo eiga:</strong> Sumaišykite ingredientus, supilkite į formą ir kepkite 180°C temperatūroje 30 minučių.</p>
+                <img src="sokaladinis pyragas.jfif" alt="Šokoladinis pyragas">
+            </div>
+            <div class="recipe-item">
+                <h3>Obuolių pyragas</h3>
+                <p><strong>Ingredientai:</strong> 3 obuoliai, 200g miltų, 100g cukraus, 2 kiaušiniai, 100ml aliejaus</p>
+                <p><strong>Gaminimo eiga:</strong> Supjaustykite obuolius, sumaišykite ingredientus, supilkite į formą ir kepkite 180°C temperatūroje 40 minučių.</p>
+                <img src="obuoliu pyragas.jpg" alt="Obuolių pyragas">
+            </div>
+            <div class="recipe-item">
+                <h3>Vištienos salotos</h3>
+                <p><strong>Ingredientai:</strong> 200g vištienos, 100g salotų, 50g pomidorų, 50g agurkų, 2 šaukštai alyvuogių aliejaus</p>
+                <p><strong>Gaminimo eiga:</strong> Supjaustykite ingredientus, sumaišykite ir užpilkite alyvuogių aliejumi.</p>
+                <img src="vistienos salotos.jfif" alt="Vištienos salotos">
+            </div>
+            <div class="recipe-item">
+                <h3>Makaronai su sūriu</h3>
+                <p><strong>Ingredientai:</strong> 200g makaronų, 100g sūrio, 50g sviesto, 100ml pieno</p>
+                <p><strong>Gaminimo eiga:</strong> Išvirkite makaronus, sumaišykite su sūriu, sviestu ir pienu.</p>
+                <img src="makaronaisusuriu.jpg" alt="Makaronai su sūriu">
+            </div>
+            <div class="recipe-item">
+                <h3>Blynai</h3>
+                <p><strong>Ingredientai:</strong> 200g miltų, 2 kiaušiniai, 300ml pieno, 50g cukraus</p>
+                <p><strong>Gaminimo eiga:</strong> Sumaišykite ingredientus, kepkite keptuvėje iki auksinės spalvos.</p>
+                <img src="blynai.jpg" alt="Blynai">
+            </div>
+            <div class="recipe-item">
+                <h3>Kreminė avižinė košė</h3>
+                <p><strong>Ingredientai:</strong> 1 stiklinė avižinių dribsnių, 2 stiklinės pieno, banana, šaukštas medaus, Saujelė graikinių riešutų</p>
+                <p><strong>Gaminimo eiga:</strong> Avižas virti piene 5min, įmaišyti supjaustytą bananą, pagardinti medumi, riešutais</p>
+                <img src="Kreminė avižinė košė su bananais ir riešutais.jpg" alt="Kreminė avižinė košė">
+            </div>
+            <div class="recipe-item">
+                <h3>Lašiša su daržovėmis</h3>
+                <p><strong>Ingredientai:</strong> 200g lašišos, įvairios daržovės (brokoliai, morkos, paprika), alyvuogių aliejus, prieskoniai</p>
+                <p><strong>Gaminimo eiga:</strong> Lašišą ir daržoves apšlakstyti aliejumi, pagardinti prieskoniais ir kepti orkaitėje.</p>
+                <img src="lasisa.jpg" alt="Lašiša su daržovėmis">
+            </div>
+            <div class="recipe-item">
+                <h3>Varškėčiai</h3>
+                <p><strong>Ingredientai:</strong> 200g varškės, 1 kiaušinis, 2 šaukštai miltų, 2 šaukštai cukraus, aliejus kepimui</p>
+                <p><strong>Gaminimo eiga:</strong> Sumaišyti varškę, kiaušinį, miltus ir cukrų. Formuoti varškėčius ir kepti keptuvėje.</p>
+                <img src="varskeciai.jpg" alt="Varškėčiai">
+            </div>
+            <div class="recipe-item">
+                <h3>Troškinys su jautiena</h3>
+                <p><strong>Ingredientai:</strong> 300g jautienos, bulvės, morkos, svogūnai, pomidorų padažas, prieskoniai</p>
+                <p><strong>Gaminimo eiga:</strong> Jautieną supjaustyti kubeliais ir apkepti. Sudėti pjaustytas daržoves, pomidorų padažą, prieskonius ir troškinti, kol mėsa suminkštės.</p>
+                <img src="troskinis su jautiena.jpg" alt="Troškinys su jautiena">
+            </div>
+            <div class="recipe-item">
+                <h3>Šalta agurkų sriuba</h3>
+                <p><strong>Ingredientai:</strong> Agurkai, kefyras, krapai, svogūnų laiškai, kiaušiniai</p>
+                <p><strong>Gaminimo eiga:</strong> Supjaustykite agurkus ir kiaušinius, sumaišykite su kefyru ir žolelėmis. Atšaldykite ir patiekite.</p>
+                <img src="Šalta agurkų sriuba.jpg" alt="Šalta agurkų sriuba">
+            </div>
+            <div class="recipe-item">
+                <h3>Sumuštinis su avokadu ir kiaušiniu</h3>
+                <p><strong>Ingredientai:</strong> Duona, avokadas, kiaušinis, druska, pipirai</p>
+                <p><strong>Gaminimo eiga:</strong> Skrudinkite duoną, sutrinkite avokadą, uždėkite keptą kiaušinį. Pagardinkite druska ir pipirais.</p>
+                <img src="sumustinissuavokadu.jpg" alt="Sumuštinis su avokadu ir kiaušiniu">
+            </div>
+            <div class="recipe-item">
+                <h3>Tiramisu</h3>
+                <p><strong>Ingredientai:</strong> Sausainiai "Damų piršteliai", kava, maskarponės sūris, kiaušiniai, cukrus, kakava</p>
+                <p><strong>Gaminimo eiga:</strong> Pamirkykite sausainius kavoje, sluoksniuokite su maskarponės kremu. Pabarstykite kakava ir atšaldykite.</p>
+                <img src="tiramisu.webp" alt="Tiramisu">
+            </div>
+            <div class="recipe-item">
+                <h3>Braškinis tortas</h3>
+                <p><strong>Ingredientai:</strong> Biskvitas, grietinėlė, braškės, cukraus pudra</p>
+                <p><strong>Gaminimo eiga:</strong> Ištepkite biskvitą grietinėle, sudėkite braškes. Papuoškite ir atšaldykite.</p>
+                <img src="braskinistortas.jpg" alt="Braškinis tortas">
+            </div>
+            <div class="recipe-item">
+                <h3>Šokoladiniai keksiukai</h3>
+                <p><strong>Ingredientai:</strong> Miltai, kakava, cukrus, kiaušiniai, aliejus, kepimo milteliai</p>
+                <p><strong>Gaminimo eiga:</strong> Sumaišykite ingredientus, supilkite į formeles ir kepkite orkaitėje.</p>
+                <img src="sokaladiniskeksiukas.jpg" alt="Šokoladiniai keksiukai">
+            </div>
+            <div class="recipe-item">
+                <h3>Ledai</h3>
+                <p><strong>Ingredientai:</strong> Pienas, grietinėlė, cukrus, vanilė</p>
+                <p><strong>Gaminimo eiga:</strong> Sumaišykite ingredientus ir užšaldykite ledų gaminimo aparate arba šaldiklyje.</p>
+                <img src="ledai.jpg" alt="Ledai">
+            </div>
+            <div class="recipe-item">
+                <h3>Omletas su sūriu ir daržovėmis</h3>
+                <p><strong>Ingredientai:</strong> 2 kiaušiniai, 50g sūrio, įvairios daržovės (paprika, svogūnai, pomidorai), druska, pipirai</p>
+                <p><strong>Gaminimo eiga:</strong> Išplakite kiaušinius su druska ir pipirais, įmaišykite smulkintą sūrį ir daržoves. Kepkite keptuvėje ant nedidelės ugnies, kol omletas iškeps.</p>
+                <img src="omletas.jpg" alt="Omletas su sūriu ir daržovėmis">
+            </div>
+            <div class="recipe-item">
+                <h3>Bananų ir riešutų kokteilis</h3>
+                <p><strong>Ingredientai:</strong> 1 bananas, 200ml pieno arba jogurto, 1 šaukštas riešutų sviesto, saujelė riešutų, medus pagal skonį</p>
+                <p><strong>Gaminimo eiga:</strong> Sumaišykite visus ingredientus blenderiu iki vientisos masės. Patiekite iškart.</p>
+                <img src="bananukokteilis.jpg" alt="Bananų ir riešutų kokteilis">
+            </div>
+            <div class="recipe-item">
+                <h3>Šaltibarščiai</h3>
+                <p><strong>Ingredientai:</strong> 500ml kefyro, 2 virti burokėliai, 1 agurkas, krapai, svogūnų laiškai, 2 virti kiaušiniai, druska, pipirai</p>
+                <p><strong>Gaminimo eiga:</strong> Burokėlius ir agurką sutarkuokite, krapus ir svogūnų laiškus susmulkinkite, kiaušinius supjaustykite. Viską sumaišykite su kefyru, pagardinkite druska ir pipirais. Patiekite šaltus.</p>
+                <img src="saltekai.jpg" alt="Šaltibarščiai">
+            </div>
+            <div class="recipe-item">
+                <h3>Vištienos sriuba su daržovėmis</h3>
+                <p><strong>Ingredientai:</strong> 500g vištienos, 2 litrai vandens, 2 morkos, 1 svogūnas, 1 bulvė, petražolės, druska, pipirai</p>
+                <p><strong>Gaminimo eiga:</strong> Vištieną išvirkite vandenyje, nupjaukite putas. Sudėkite pjaustytas daržoves ir virkite, kol jos suminkštės. Pagardinkite druska, pipirais ir petražolėmis.</p>
+                <img src="vistienosriuba.jpg" alt="Vištienos sriuba su daržovėmis">
+            </div>
+            <div class="recipe-item">
+                <h3>Makaronų apkepas su sūriu ir kumpiu</h3>
+                <p><strong>Ingredientai:</strong> 200g makaronų, 100g kumpio, 100g sūrio, 2 kiaušiniai, 200ml pieno, druska, pipirai</p>
+                <p><strong>Gaminimo eiga:</strong> Makaronus išvirkite. Sumaišykite kiaušinius su pienu, druska ir pipirais. Sudėkite makaronus, pjaustytą kumpį ir tarkuotą sūrį. Kepkite orkaitėje, kol apkepas gražiai apskrus.</p>
+                <img src="makaronuapkepas.jpg" alt="Makaronų apkepas su sūriu ir kumpiu">
+            </div>
+            <div class="recipe-item">
+                <h3>Lašiša su keptomis bulvėmis ir šparagais</h3>
+                <p><strong>Ingredientai:</strong> 200g lašišos filė, 2 bulvės, 100g šparagų, alyvuogių aliejus, citrina, druska, pipirai</p>
+                <p><strong>Gaminimo eiga:</strong> Bulves supjaustykite skiltelėmis, šparagus nulupkite. Viską apšlakstykite alyvuogių aliejumi, pagardinkite druska ir pipirais. Kepkite orkaitėje kartu su lašiša, kol viskas iškeps. Patiekite su citrinos skiltele.</p>
+                <img src="lasisasubulvemis.jpg" alt="Lašiša su keptomis bulvėmis ir šparagais">
+            </div>
+            <div class="recipe-item">
+                <h3>Vištienos kepsneliai su ryžiais ir salotomis</h3>
+                <p><strong>Ingredientai:</strong> 200g vištienos filė, 100g ryžių, įvairios salotos, alyvuogių aliejus, prieskoniai</p>
+                <p><strong>Gaminimo eiga:</strong> Vištieną supjaustykite gabaliukais, apibarstykite prieskoniais ir iškepkite keptuvėje arba orkaitėje. Ryžius išvirkite. Patiekite su salotomis, apšlakstytomis alyvuogių aliejumi.</p>
+                <img src="vistienos kepsneliai.jpg" alt="Vištienos kepsneliai su ryžiais ir salotomis">
+            </div>
+            <div class="recipe-item">
+                <h3>Daržovių troškinys su avinžirniais</h3>
+                <p><strong>Ingredientai:</strong> 200g avinžirnių, 1 morka, 1 svogūnas, 1 paprika, 1 cukinija, pomidorų padažas, prieskoniai</p>
+                <p><strong>Gaminimo eiga:</strong> Avinžirnius išvirkite. Daržoves supjaustykite ir troškinkite keptuvėje su pomidorų padažu ir prieskoniais. Sudėkite avinžirnius ir patroškinkite dar kelias minutes.</p>
+                <img src="darzoviu troskinys.jpg" alt="Daržovių troškinys su avinžirniais">
+            </div>
+            <div class="recipe-item">
+                <h3>Lęšių sriuba</h3>
+                <p><strong>Ingredientai:</strong> 1 stiklinė lęšių, 1 morka, 1 svogūnas, 2 skiltelės česnako, 1 litras sultinio, prieskoniai</p>
+                <p><strong>Gaminimo eiga:</strong> Lęšius nuplaukite. Daržoves supjaustykite ir pakepinkite. Sudėkite lęšius, užpilkite sultiniu ir virkite, kol lęšiai suminkštės. Pagardinkite prieskoniais.</p>
+                <img src="lesiusriuba.jpg" alt="Lęšių sriuba">
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="add-recipe">
+            <h2>Pridėti savo receptą</h2>
+            <form id="add-recipe-form">
+                <label for="recipe-name">Pavadinimas:</label>
+                <input type="text" id="recipe-name" placeholder="Įveskite recepto pavadinimą" required>
+                
+                <label for="recipe-author">Kas sukūrė:</label>
+                <input type="text" id="recipe-author" placeholder="Įveskite savo vardą" required>
+                
+                <label for="recipe-photo">Nuotrauka:</label>
+                <input type="file" id="recipe-photo" accept="image/*" required>
+                
+                <label for="recipe-ingredients">Kokių ingredientų reikia:</label>
+                <textarea id="recipe-ingredients" placeholder="Įveskite ingredientus ir jų kiekį (pvz., 200g miltų)" rows="3" required></textarea>
+                
+                <label for="recipe-steps">Kaip darosi:</label>
+                <textarea id="recipe-steps" placeholder="Įveskite recepto aprašymą" rows="5" required></textarea>
+                
+                <button type="submit">Pridėti receptą</button>
+                <script>
+                    document.getElementById('add-recipe-form').addEventListener('submit', function(event) {
+                        event.preventDefault();
+
+                        const name = document.getElementById('recipe-name').value;
+                        const author = document.getElementById('recipe-author').value;
+                        const photo = document.getElementById('recipe-photo').files[0];
+                        const ingredients = document.getElementById('recipe-ingredients').value;
+                        const steps = document.getElementById('recipe-steps').value;
+
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const recipeList = document.getElementById('recipe-list');
+
+                            const newRecipe = document.createElement('div');
+                            newRecipe.classList.add('recipe-item');
+
+                            newRecipe.innerHTML = `
+                                <h3>${name}</h3>
+                                <p><strong>Autorius:</strong> ${author}</p>
+                                <p><strong>Ingredientai:</strong> ${ingredients}</p>
+                                <p><strong>Gaminimo eiga:</strong> ${steps}</p>
+                                <img src="${e.target.result}" alt="${name}">
+                            `;
+
+                            recipeList.insertBefore(newRecipe, recipeList.firstChild);
+                        };
+
+                        if (photo) {
+                            reader.readAsDataURL(photo);
+                        }
+                    });
+                    // Show notification after adding a recipe
+                    const notification = document.createElement('div');
+                    notification.textContent = 'Receptas sėkmingai pridėtas!';
+                    notification.style.position = 'fixed';
+                    notification.style.bottom = '20px';
+                    notification.style.right = '20px';
+                    notification.style.backgroundColor = '#d84315';
+                    notification.style.color = '#fff';
+                    notification.style.padding = '10px 20px';
+                    notification.style.borderRadius = '5px';
+                    notification.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
+                    notification.style.zIndex = '1000';
+                    notification.style.display = 'none';
+                    document.body.appendChild(notification);
+
+                    function showNotification() {
+                        notification.style.display = 'block';
+                        setTimeout(() => {
+                            notification.style.display = 'none';
+                        }, 3000);
+                    }
+                    // Automatically save recipes after loading them
+                    window.addEventListener('load', saveRecipes);
+                    // Save recipes to localStorage
+                    function saveRecipes() {
+                        const recipes = document.getElementById('recipe-list').innerHTML;
+                        localStorage.setItem('recipes', recipes);
+                    }
+
+                    // Load recipes from localStorage
+                    function loadRecipes() {
+                        const savedRecipes = localStorage.getItem('recipes');
+                        if (savedRecipes) {
+                            document.getElementById('recipe-list').innerHTML = savedRecipes;
+                        }
+                    }
+
+                    // Call loadRecipes on page load
+                    window.addEventListener('load', loadRecipes);
+                    // Apply consistent styles to newly added recipe images
+                    document.getElementById('add-recipe-form').addEventListener('submit', function () {
+                        const newImages = document.querySelectorAll('.recipe-item img');
+                        newImages.forEach(img => {
+                            img.style.width = '100%';
+                            img.style.height = 'auto';
+                            img.style.maxHeight = '300px';
+                            img.style.objectFit = 'cover';
+                            img.style.marginBottom = '10px';
+                            img.style.borderRadius = '5px';
+                        });
+                    });
+
+                    // Save recipes after adding a new one
+                    document.getElementById('add-recipe-form').addEventListener('submit', function() {
+                        saveRecipes();
+                        showNotification();
+                    });
+                    // Add delete button to each recipe
+                    function addDeleteButtons() {
+                        const recipes = document.querySelectorAll('.recipe-item');
+                        recipes.forEach(recipe => {
+                            if (!recipe.querySelector('.delete-button')) {
+                                const deleteButton = document.createElement('button');
+                                deleteButton.textContent = 'Ištrinti';
+                                deleteButton.classList.add('delete-button');
+                                deleteButton.style.marginTop = '10px';
+                                deleteButton.style.padding = '5px 10px';
+                                deleteButton.style.backgroundColor = '#d84315';
+                                deleteButton.style.color = '#fff';
+                                deleteButton.style.border = 'none';
+                                deleteButton.style.borderRadius = '5px';
+                                deleteButton.style.cursor = 'pointer';
+
+                                deleteButton.addEventListener('click', function () {
+                                    if (confirm('Ar tikrai norite ištrinti šį receptą?')) {
+                                        recipe.remove();
+                                        saveRecipes(); // Update localStorage after deletion
+                                    }
+                                });
+
+                                recipe.appendChild(deleteButton);
+                            }
+                        });
+                    }
+
+                    // Call addDeleteButtons after loading recipes
+                    window.addEventListener('load', addDeleteButtons);
+
+                    // Call addDeleteButtons after adding a new recipe
+                    document.getElementById('add-recipe-form').addEventListener('submit', addDeleteButtons);
+
+                    // Center the "Show More" button
+                    const recipeListContainer = document.querySelector('.recipes');
+                    recipeListContainer.style.display = 'flex';
+                    recipeListContainer.style.flexDirection = 'column';
+                    recipeListContainer.style.alignItems = 'center';
+
+                    // Call addShowMoreButton after loading recipes
+                    window.addEventListener('load', addShowMoreButton);
+
+                    function addShowMoreButton() {
+                        const recipeList = document.getElementById('recipe-list');
+                        const recipes = Array.from(recipeList.children);
+                        const maxVisibleRecipes = 6;
+
+                        // Hide recipes beyond the initial visible count
+                        recipes.forEach((recipe, index) => {
+                            if (index >= maxVisibleRecipes) {
+                                recipe.style.display = 'none';
+                            }
+                        });
+
+                        // Create the "Show More" button
+                        const showMoreButton = document.createElement('button');
+                        showMoreButton.textContent = 'Rodyti daugiau';
+                        showMoreButton.style.marginTop = '20px';
+                        showMoreButton.style.padding = '15px 30px'; // Increased padding
+                        showMoreButton.style.fontSize = '18px'; // Increased font size
+                        showMoreButton.style.backgroundColor = '#ffcc80';
+                        showMoreButton.style.color = '#5d4037';
+                        showMoreButton.style.border = 'none';
+                        showMoreButton.style.borderRadius = '5px';
+                        showMoreButton.style.cursor = 'pointer';
+                        showMoreButton.style.display = recipes.length > maxVisibleRecipes ? 'block' : 'none';
+
+                        showMoreButton.addEventListener('click', function () {
+                            recipes.forEach(recipe => {
+                                recipe.style.display = 'block';
+                            });
+                            showMoreButton.style.display = 'none'; // Hide the button after showing all recipes
+                        });
+
+                        // Append the button to the recipe list container
+                        recipeListContainer.appendChild(showMoreButton);
+                    }
+
+                    // Call addShowMoreButton after loading recipes
+                    window.addEventListener('load', addShowMoreButton);
+                    // Function to add rating to each recipe
+                    function addRating() {
+                        const recipes = document.querySelectorAll('.recipe-item');
+                        recipes.forEach(recipe => {
+                            const ratingContainer = document.createElement('div');
+                            ratingContainer.classList.add('rating-container');
+                            ratingContainer.style.marginTop = '10px';
+
+                            const ratingLabel = document.createElement('span');
+                            ratingLabel.textContent = 'Įvertinimas: ';
+                            ratingLabel.style.marginRight = '5px';
+                            ratingContainer.appendChild(ratingLabel);
+
+                            const starContainer = document.createElement('div');
+                            starContainer.classList.add('star-container');
+                            starContainer.style.display = 'inline-block';
+
+                            for (let i = 1; i <= 5; i++) {
+                                const star = document.createElement('span');
+                                star.classList.add('star');
+                                star.textContent = '★';
+                                star.style.cursor = 'pointer';
+                                star.style.fontSize = '20px';
+                                star.style.color = 'lightgray'; // Default color
+
+                                star.addEventListener('click', function() {
+                                    // Change color of clicked star and previous stars
+                                    for (let j = 1; j <= 5; j++) {
+                                        const currentStar = starContainer.querySelector(`.star:nth-child(${j})`);
+                                        currentStar.style.color = j <= i ? 'gold' : 'lightgray';
+                                    }
+                                });
+
+                                starContainer.appendChild(star);
+                            }
+
+                            ratingContainer.appendChild(starContainer);
+                            recipe.appendChild(ratingContainer);
+                        });
+                    }
+
+                    // Call addRating after loading recipes
+                    window.addEventListener('load', addRating);
+
+                    // Call addRating after adding a new recipe
+                    document.getElementById('add-recipe-form').addEventListener('submit', addRating);
+                </script>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

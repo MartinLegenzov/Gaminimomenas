@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produktų Gidas</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            color: #5d4037;
+        }
+
+        header {
+            background-color: #ffffffe3;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #5d4037;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #d84315;
+        }
+
+        .hero {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .hero img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .info-blocks {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-block {
+            background-color: #ffffff;
+            border: 2px solid #044565;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .info-block:hover {
+            transform: scale(1.05);
+        }
+
+        .info-block h3 {
+            color: #d84315;
+            margin-bottom: 10px;
+        }
+
+        .info-block p {
+            display: none;
+            margin-top: 10px;
+            color: #5d4037;
+        }
+
+        .info-block.active p {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Produktų Gidas</h1>
+        <nav>
+            <ul>
+                <li><a href="main.html"><img src="home.png" alt="Pagrindinis" style="width: 50px; height: 50px; vertical-align: middle;"></a></li>
+                <li><a href="receptai.html">Receptai</a></li>
+                <li><a href="gidas.html">Produktų Gidas</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="hero">
+    </div>
+    <div class="content">
+        <h2>Kaip pasirinkti ir laikyti produktus</h2>
+        <div class="info-blocks">
+            <div class="info-block">
+            <h3>Kaip pasirinkti parduotuvėje</h3>
+            <img src="parduotuve.jpg" alt="Parduotuvė" class="uniform-image">
+            <p>Rinkitės šviežius vaisius ir daržoves, atkreipdami dėmesį į jų spalvą ir tekstūrą. Patikrinkite galiojimo datą ant pakuočių. Venkite produktų su pažeistomis pakuotėmis.</p>
+            </div>
+            <div class="info-block">
+            <h3>Kaip laikyti produktus</h3>
+            <img src="produktulaikymas.jpg" alt="Produktų laikymas" class="uniform-image">
+            <p>Laikykite šviežius produktus šaldytuve, kad jie ilgiau išliktų švieži. Sausus produktus laikykite sandariuose induose. Šaldykite mėsą ir žuvį, jei jų nesiruošiate naudoti per kelias dienas.</p>
+            </div>
+            <div class="info-block">
+            <h3>Sezoniški ingredientai</h3>
+            <img src="Sezoniški ingredientai.jpg" alt="Sezoniški ingredientai" class="uniform-image">
+            <p>Pavasarį: šparagai, ridikėliai, špinatai. Vasarą: braškės, pomidorai, cukinijos. Rudenį: moliūgai, obuoliai, grybai. Žiemą: kopūstai, burokėliai, citrusiniai vaisiai.</p>
+            </div>
+            <div class="info-block">
+            <h3>Kaip išvengti maisto švaistymo</h3>
+            <img src="svaistimas.jpg" alt="Maisto švaistymo išvengimas" class="uniform-image">
+            <p>Planuokite pirkinius iš anksto. Naudokite likučius naujiems patiekalams. Užšaldykite maistą, kurio nesuvalgysite iš karto.</p>
+            </div>
+            <div class="info-block">
+            <h3>Ekologiški produktai</h3>
+            <img src="ekologiskai.jpg" alt="Ekologiški produktai" class="uniform-image">
+            <p>Rinkitės ekologiškus produktus, kad sumažintumėte pesticidų poveikį. Ieškokite sertifikuotų ekologiškų ženklų ant pakuočių.</p>
+            </div>
+            <div class="info-block">
+            <h3>Kaip taupyti perkant maistą</h3>
+            <img src="taupyms.jpg" alt="Taupymas" class="uniform-image">
+            <p>Planuokite savaitės meniu ir pirkinių sąrašą. Pirkite didesniais kiekiais, jei tai ekonomiškai naudinga. Venkite impulsyvių pirkinių.</p>
+            </div>
+        </div>
+    </div>
+    <style>
+        .uniform-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+    <script>
+        const infoBlocks = document.querySelectorAll('.info-block');
+
+        infoBlocks.forEach(block => {
+            block.addEventListener('click', () => {
+                block.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
