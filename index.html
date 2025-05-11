@@ -1,4 +1,4 @@
-<!---->
+<!----> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -200,12 +200,131 @@ img {
         <button onclick="nextReview()">Kitas atsiliepimas</button>
     </div>
 
+
     <!-- Dienos receptas -->
-    <div id="dienosReceptas" style="text-align: center; width: 30%;">
-        <h2>Dienos receptas</h2>
-        <p>Šiandien siūlome išbandyti: <b>Šokoladinį pyragą</b></p>
-        <a href="dienos-receptas.html">Skaityti daugiau</a>
+    <style>
+      *{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+    flex-wrap:wrap;
+}
+
+
+
+#card-wrapper{
+background-image:url(https://sallysbakingaddiction.com/wp-content/uploads/2013/04/triple-chocolate-cake-4.jpg);
+  background-size:cover;
+  background-repeat:no-repeat;
+
+  min-width:500px;
+  min-height:750px;
+  color:rgb(0, 0, 0);
+  box-shadow: 5px 5px 15px; 
+  font-family: 'Abril Fatface', cursive;
+  order:2;
+  margin-top:50px;
+} 
+
+.inner-card{
+  padding:2em;
+}
+
+.more-info-btn{
+  display:flex;
+  justify-content:flex-end;
+}
+.btn-background{
+  background:rgb(255, 255, 255);
+  padding:.9em;
+  border-radius:50%;
+  font-size:20px;
+  color:black;
+}
+
+#title{
+  font-size:50px;
+  margin-top:25px;
+}
+
+#details{
+  display:flex;
+  justify-content:space-around;
+  margin-top:50px;
+  color:rgb(255, 255, 255)
+}
+
+.start-btn{
+  display:flex;
+  justify-content:center;
+  margin-top:290px;
+}
+.start-btn a{
+  background:rgb(255, 255, 255);
+  color:black;
+  padding:.6em;
+  width:200px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow: .5px 1px 5px;
+  text-decoration:none;
+}
+
+.start-btn .fas{
+  margin-left:10px;
+}
+
+
+
+    </style>
+    <!-- Dienos receptas -->
+    <div id="card-wrapper">
+    <div class="inner-card">
+    <!--top right btn-->
+    <div class="more-info-btn">
+      <div class="btn-background"><i class="fas fa-ellipsis-h"></i></div>
     </div>
+    
+    <!--title-->
+    <div id="title">
+      <header>Šokaladinis Pyragas</header>
+    </div>
+    
+    <!--details-->
+    <div id="details">
+      
+    <div class="Details">
+      <h3>Sunkumas</h3>
+      <p>Lengvas</p>
+    </div>
+      
+    <div class="Details">
+      <h3>Laikas</h3>
+      <p>40 min</p>
+    </div>
+      
+    </div>
+    
+   
+  </div>
+     <!--start btn-->
+    <div class="start-btn"><a href="receptai.html">Pradedam <i class="fas fa-long-arrow-alt-right"></i></a></div>
+  
+    </div>
+  
+  
+  
+  <!--card number 2 -->
+   <div id="card-wrapper1">
+    <div class="inner-card">
+    <!--top right btn-->
+    <div class="more-info-btn">
+      <div class="btn-background"><i class="fas fa-ellipsis-h"></i></div>
+    </div>
+    
+   
+  
+    </div>    </div>
     <script>
     const reviews = [
         '"Puikus receptai! Labai patiko!" - Jonas',

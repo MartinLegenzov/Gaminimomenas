@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaminimo menas</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff; /* Light cream background */
+            color: #5d4037; /* Brown text */
+        }
+
+        header {
+            background-color: #ffffffe3; /* Light orange header */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #5d4037; /* Brown text for links */
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #d84315; /* Darker orange on hover */
+        }
+
+        .content {
+            text-align: center;
+            padding: 50px;
+            color:rgb(#044565)
+        }
+
+        .content h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #044565; /* Dark orange for headings */
+        }
+
+        .content p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .heart-shape {
+        position: relative;
+        width: 270px;
+        height: 200px;
+        margin: 50px auto;
+        color: #044565;
+        text-align: center;
+        padding: 20px;
+        line-height: 1.4;
+        font-size: 1.1em; /* Increase font size */
+        left: 16%; /* Move to the right */
+        transform: translateX(-50%); /* Center horizontally */
+        top: -11px; /* Move the heart-shape upwards */
+    }
+    
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sveiki atvykę į „Gaminimo menas“ – vietą, kur kiekvienas patiekalas tampa tikru šedevru!</h1>
+        <nav>
+            <ul id="menu">
+                <!-- Dynamic menu will be inserted here -->
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+            <div class="heart-shape">
+                <b>Gaminimas – tai ne tik procesas, bet ir kūrybiškas menas, leidžiantis išsireikšti.
+                Mūsų tikslas – įkvėpti jus atrasti naujus skonius ir mėgautis kulinarija.
+                Čia rasite kūrybiškus receptus, patarimus ir gudrybes tiek pradedantiesiems, tiek patyrusiems.
+                Supažindinsime su ingredientų įvairove ir parodysime, kaip iš jų sukurti ypatingus patiekalus.
+                Atraskite „Gaminimo meną“ ir leiskite maistui tapti jūsų kūrybos dalimi!</b>
+            </div></p>
+        <div style="text-align: center; margin-top: 20px;">
+    <img src="waffle-hearts-2697904_1280.jpg" alt="Gaminimo menas" style="max-width: 100%; height: auto;">
+    <style>
+img {
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    width: 100%;
+    max-height: 600px; /* Adjust height as needed */
+    opacity: 0.8; /* Slightly transparent */
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    margin-top: 0;
+    top: 100px; /* Adjust this value to match the header's height */
+    filter: blur(5px); /* Apply blur effect */
+}   
+    </style>
+</div>
+
+        </p>
+    </div>
+    <script>
+        const menuItems = [
+            { name: "Receptai", link: "receptai.html" },
+            { name: "Gidas", link: "gidas.html" },
+        ];
+
+        const menu = document.getElementById('menu');
+
+        menuItems.forEach(item => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.textContent = item.name;
+            a.href = item.link;
+            li.appendChild(a);
+            menu.appendChild(li);
+        });
+    </script>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<style>
+    .daily-recipe {
+        text-align: center;
+        padding: 50px;
+        background-color: #ffffff;
+        border: 2px solid #044565; /* Add border */
+        border-radius: 10px; /* Slightly rounded corners */
+        width: 350px; /* Set a fixed width */
+        margin: 20px auto; /* Center horizontally */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    }
+
+    .daily-recipe a {
+        color: #d84315; 
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .daily-recipe a:hover {
+        text-decoration: underline;
+    }
+</style>
+<div class="daily-recipe">
+    <h2>Dienos receptas</h2>
+    <img src="sokaladinis pyragas.jfif" alt="Dienos receptas" style="width: 300px; border-radius: 10px;">
+    <p><strong>Recepto pavadinimas:</strong> Šokoladinis pyragas</p>
+    <p><a href="receptai.html">Žiūrėti receptą</a></p>
+</div>
+
+
+<style>
+    .testimonials-carousel {
+        text-align: center;
+        padding: 50px;
+        border: 2px solid #044565; /* Add border around the testimonials section */
+        border-radius: 10px; /* Rounded corners for the border */
+        width: 350px; /* Set a fixed width */
+        margin: 20px auto; /* Center horizontally */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    }
+
+    .carousel {
+        position: relative;
+        width: 300px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    .testimonial {
+        display: none;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 2px solid #044565;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .testimonial.active {
+        display: block;
+    }
+
+    .carousel-buttons {
+        margin-top: 20px;
+    }
+
+    .carousel-buttons button {
+        padding: 10px 20px;
+        background-color: #d84315;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .carousel-buttons button:hover {
+        background-color: #bf360c;
+    }
+    
+    .testimonial-rating {
+        margin-top: 10px;
+        color: #d84315;
+        font-weight: bold;
+    }
+
+</style>
+<div class="testimonials-carousel">
+    <h2>Atsiliepimai</h2>
+    <div class="carousel">
+        <div class="testimonial active">„Puikūs receptai! Ačiū!“ – Lina</div>
+        <div class="testimonial">„Labai patiko desertų idėjos.“ – Tomas</div>
+        <div class="testimonial">„Rekomenduoju visiems!“ – Greta</div>
+        <div class="testimonial">„Nuostabūs receptai, labai patiko!“ – Jonas</div>
+        <div class="testimonial">„Labai įdomūs patarimai, ačiū!“ – Monika</div>
+        <div class="testimonial">„Puikus puslapis, visada randu ką nors naujo.“ – Karolis</div>
+        <div class="testimonial">„Mano šeima dievina jūsų receptus!“ – Eglė</div>
+        <div class="testimonial">„Labai naudinga informacija pradedantiesiems.“ – Marius</div>
+        <div class="testimonial">„Jūsų desertai yra tiesiog tobuli!“ – Laura</div>
+        <div class="testimonial">„Ačiū už įkvėpimą gaminti!“ – Viktorija</div>
+        <div class="testimonial">„Jūsų patarimai padėjo man atrasti naujus skonius.“ – Tomas</div>
+        <div class="testimonial">„Puikus dizainas ir turinys, rekomenduoju!“ – Rūta</div>
+        <div class="testimonial">„Visada laukiu naujų receptų!“ – Andrius</div>
+    </div>
+    <div class="carousel-buttons">
+        <button id="prevButton">Ankstesnis</button>
+        <button id="nextButton">Kitas</button>
+    </div>
+    <script>
+        const testimonials = document.querySelectorAll('.testimonial');
+        let currentIndex = 0;
+
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.classList.toggle('active', i === index);
+            });
+        }
+
+        document.getElementById('prevButton').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+            showTestimonial(currentIndex);
+        });
+
+        document.getElementById('nextButton').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % testimonials.length;
+            showTestimonial(currentIndex);
+        });
+
+        // Initialize the first testimonial as active
+        showTestimonial(currentIndex);
+    </script>
+</div>
+
+<style>
+    .contact-form {
+        text-align: center;
+        padding: 30px;
+        background-color: #ffffff;
+        border: 2px solid #044565; /* Add border */
+        border-radius: 10px; /* Rounded corners */
+        width: 400px; /* Set a fixed width */
+        margin: 20px auto; /* Center horizontally */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    }
+
+    .contact-form input, .contact-form textarea {
+        width: 90%; /* Adjust width */
+        padding: 8px; /* Reduce padding */
+        margin: 8px 0; /* Reduce margin */
+        border: 1px solid #000000;
+        border-radius: 5px;
+    }
+
+    .contact-form button {
+        padding: 8px 16px; /* Reduce button size */
+        background-color: #d84315;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .contact-form button:hover {
+        background-color: #bf360c;
+    }
+</style>
+<div class="contact-form">
+    <h2>Susisiekite su mumis</h2>
+    <form>
+        <input type="text" placeholder="Jūsų vardas" required><br>
+        <input type="email" placeholder="Jūsų el. paštas" required><br>
+        <textarea placeholder="Jūsų žinutė" required></textarea><br>
+        <button type="submit">Siųsti</button>
+    </form>
+</div>
+</body>
+</html>
