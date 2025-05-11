@@ -413,11 +413,6 @@ input:hover:focus::-ms-placeholder, textarea:hover::focus:-ms-placeholder {
 }
 
 
-#form {
-  position: relative;
-  width: 500px;
-  margin: 50px auto 100px auto;
-}
 
 input {
   font-family: 'Lato', sans-serif;
@@ -493,14 +488,22 @@ textarea:hover {
 }
 </style>
 
-<form id="form" class="topBefore">
-		
-		  <input id="name" type="text" placeholder="Vardas">
-		  <input id="email" type="text" placeholder="E-MAIL">
-		  <textarea id="message" type="text" placeholder="Žinutė"></textarea>
-  <input id="submit" type="submit" value="GO!">
+<style>
+  #form {
+    position: relative;
+    width: 500px;
+    margin: 50px auto 100px auto;
+    transform: translateX(-650px); /* Move the form to the left */
+  }
+  </style>
   
-</form>
+  <form id="form" class="card-wrapper1">
+    <input id="name" type="text" placeholder="Vardas">
+    <input id="email" type="text" placeholder="E-MAIL">
+    <textarea id="message" type="text" placeholder="Žinutė"></textarea>
+    <input id="submit" type="submit" value="GO!">
+  </form>
+  
 
 </div>
 
