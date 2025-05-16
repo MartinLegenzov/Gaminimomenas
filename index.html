@@ -143,31 +143,6 @@ img {
 <br>
 <div style="text-align: center; margin-top: 20px;">
 <style>
-    #atsiliepimai {
-        background-color: #fff3e0; /* Light orange background */
-        border: 1px solid #d84315; /* Darker orange border */
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    #atsiliepimai h2 {
-        color: #d84315; /* Darker orange for heading */
-    }
-
-    #atsiliepimai button {
-        background-color: #d84315; /* Darker orange button */
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    #atsiliepimai button:hover {
-        background-color: #bf360c; /* Even darker orange on hover */
-    }
 
     #dienosReceptas {
         background-color: #e8f5e9; /* Light green background */
@@ -310,48 +285,9 @@ background-image:url(https://sallysbakingaddiction.com/wp-content/uploads/2013/0
   
   
   
-  <!--card number 2 -->
-   <div id="card-wrapper1">
-    <div class="inner-card">
-    <!--top right btn-->
-    <div class="more-info-btn">
-      <div class="btn-background"><i class="fas fa-ellipsis-h"></i></div>
-    </div>
-    </div>    
-    </div>
-<style>
-  .gallery {
-  --s: 150px; /* control the size */
-  display: grid;
-  grid: auto-flow var(--s) / repeat(2,var(--s));
-  gap: 10px;
-  place-items: center;
-  margin: calc(var(--s)/2);
-  transform: rotate(45deg);
-}
-.gallery > img {
-  width: 141%; /* sqrt(2)*100% */
-  aspect-ratio: 1;
-  object-fit: cover;
-  filter: grayscale(80%);
-  transform: scale(var(--_t,1)) rotate(-45deg);
-  clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%);
-  cursor: pointer;
-  transition: .2s linear;
-}
-.gallery > img:hover {
-  filter: grayscale(0);
-  --_t: 1.15;
-}
 
 
-</style>
-<div class="gallery">
-  <img src="https://picsum.photos/id/1040/300/300" alt="a house on a mountain">
-  <img src="https://picsum.photos/id/106/300/300" alt="sime pink flowers">
-  <img src="https://picsum.photos/id/136/300/300" alt="big rocks with some trees">
-  <img src="https://picsum.photos/id/110/300/300" alt="a cool landscape">
-</div>
+
 
     <script>
     const reviews = [
@@ -524,17 +460,99 @@ textarea:hover {
   #form {
     position: relative;
     width: 500px;
-    margin: 50px auto 100px auto;
-    transform: translateX(-480px); /* Move the form to the left */
+    transform: translateX(100px); /* Move the form to the left */
   }
   </style>
-  
+
   <form id="form" class="card-wrapper1">
     <input id="name" type="text" placeholder="Vardas">
     <input id="email" type="text" placeholder="E-MAIL">
     <textarea id="message" type="text" placeholder="Žinutė"></textarea>
     <input id="submit" type="submit" value="GO!">
   </form>
+
+  <div id="atsiliepimai">
+    <div class="atsiliepimai-header">
+      <i class="fas fa-comments"></i>
+      <h2>Atsiliepimai</h2>
+    </div>
+    <div class="atsiliepimai-body">
+      <p id="currentReview">"Puikus receptai! Labai patiko!" - Jonas</p>
+    </div>
+    <div class="atsiliepimai-footer">
+      <button onclick="nextReview()">
+        <i class="fas fa-arrow-right"></i> Kitas atsiliepimas
+      </button>
+    </div>
+  </div>
+  <style>
+  #atsiliepimai {
+      background: linear-gradient(135deg, #fffbe7 0%, #ffe0c3 100%);
+      border: none;
+      border-radius: 18px;
+      padding: 48px 38px 36px 38px;
+      box-shadow: 0 8px 32px rgba(216, 67, 21, 0.13), 0 1.5px 6px rgba(0,0,0,0.07);
+      max-width: 500px;
+      margin: 0 auto 30px auto;
+      font-family: 'Lato', sans-serif;
+      position: relative;
+      transition: box-shadow 0.3s;
+      font-size: 1.2em;
+  }
+  #atsiliepimai:hover {
+      box-shadow: 0 12px 40px rgba(216, 67, 21, 0.18), 0 2px 8px rgba(0,0,0,0.09);
+  }
+  .atsiliepimai-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+  }
+  .atsiliepimai-header i {
+      color: #d84315;
+      font-size: 2em;
+  }
+  #atsiliepimai h2 {
+      color: #d84315;
+      font-size: 1.5em;
+      margin: 0;
+      letter-spacing: 1px;
+  }
+  .atsiliepimai-body {
+      font-size: 1.2em;
+      color: #5d4037;
+      margin-bottom: 24px;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+  }
+  .atsiliepimai-footer {
+      display: flex;
+      justify-content: flex-end;
+  }
+  #atsiliepimai button {
+      background: linear-gradient(90deg, #d84315 60%, #ff7043 100%);
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 25px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(216,67,21,0.08);
+      transition: background 0.3s, box-shadow 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+  #atsiliepimai button:hover {
+      background: linear-gradient(90deg, #bf360c 60%, #ff7043 100%);
+      box-shadow: 0 4px 16px rgba(216,67,21,0.13);
+  }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   
 
 </div>
