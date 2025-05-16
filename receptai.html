@@ -186,549 +186,855 @@
             </ul>
         </nav>
     </header>
-    <div class="search-section">
-        <input type="text" id="searchTags" placeholder="Search by tags...">
-        <button onclick="searchByTags()">Search by Tags</button>
-    </div>
-    <script>
-        // Add dropdown menu functionality
-        document.addEventListener('DOMContentLoaded', function () {
-            const menuItem = document.createElement('li');
-            menuItem.style.position = 'relative';
 
-            const dropdownLink = document.createElement('a');
-            dropdownLink.href = '#';
-            dropdownLink.textContent = 'Receptų kategorijos';
-            dropdownLink.style.cursor = 'pointer';
 
-            const dropdownMenu = document.createElement('ul');
-            dropdownMenu.style.position = 'absolute';
-            dropdownMenu.style.top = '100%';
-            dropdownMenu.style.left = '0';
-            dropdownMenu.style.backgroundColor = '#fff8e1';
-            dropdownMenu.style.border = '1px solid #ddd';
-            dropdownMenu.style.borderRadius = '5px';
-            dropdownMenu.style.padding = '10px';
-            dropdownMenu.style.listStyle = 'none';
-            dropdownMenu.style.display = 'none';
-            dropdownMenu.style.zIndex = '1000';
+<script>
+    function salmon(evt, recipe) {
 
-            const categories = ['Pusryčiai', 'Pietūs', 'Vakarienė', 'Desertas'];
-            categories.forEach(category => {
-            const categoryItem = document.createElement('li');
-            const categoryLink = document.createElement('a');
-            categoryLink.href = '#';
-            categoryLink.textContent = category;
-            categoryLink.style.textDecoration = 'none';
-            categoryLink.style.color = '#5d4037';
-            categoryLink.style.display = 'block';
-            categoryLink.style.padding = '5px 10px';
+  var i, tabcontent, tablinks;
 
-            categoryLink.addEventListener('click', function () {
-                filterRecipesByCategory(category.toLowerCase());
-            });
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
 
-            categoryItem.appendChild(categoryLink);
-            dropdownMenu.appendChild(categoryItem);
-            });
 
-            dropdownLink.addEventListener('mouseover', function () {
-            dropdownMenu.style.display = 'block';
-            });
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
 
-            menuItem.addEventListener('mouseleave', function () {
-            dropdownMenu.style.display = 'none';
-            });
 
-            menuItem.appendChild(dropdownLink);
-            menuItem.appendChild(dropdownMenu);
+  document.getElementById(recipe).style.display = "block";
+  evt.currentTarget.className += " active";
 
-            const navList = document.querySelector('nav ul');
-            navList.appendChild(menuItem);
-        });
+}
+</script>
+<style>
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 100;
+}
+body p {
+  font-size: 14px;
+  line-height: 23px;
+}
+body li {
+  font-size: 14px;
+}
+h3 {
+  margin-left: 15px;
+}
+.wrapper {
+  padding-top: 25px;
+  margin: 0 10px;
+}
 
-        // Function to filter recipes by category
-        function filterRecipesByCategory(category) {
-            document.querySelectorAll('.recipe-item').forEach(recipe => {
-            const title = recipe.querySelector('h3').textContent;
-            const tags = recipeTags[title] || [];
-            const hasMatch = tags.includes(category);
-            recipe.style.display = hasMatch ? 'block' : 'none';
-            });
-        }      
-// Add tags in Lithuanian
-const recipeTags = {
-        'Šokoladinis pyragas': ['desertas', 'šokoladas', 'pyragas', 'saldus'],
-        'Obuolių pyragas': ['desertas', 'obuoliai', 'pyragas', 'vaisiai', 'saldus'],
-        'Vištienos salotos': ['salotos', 'vištiena', 'sveikas', 'pietūs'],
-        'Makaronai su sūriu': ['makaronai', 'sūris', 'vakarienė', 'sotus'],
-        'Blynai': ['pusryčiai', 'blynai', 'saldus'],
-        'Kreminė avižinė košė': ['pusryčiai', 'bananai', 'saldus', 'avižos'],
-        'Lašiša su daržovėmis': ['vakarienė', 'lašiša', 'daržovės', 'sveikas'],
-        'Varškėčiai': ['pusryčiai', 'varškė', 'saldus'],
-        'Troškinys su jautiena': [ 'vakarienė', 'jautiena', 'sotus'],
-        'Šalta agurkų sriuba': ['sriuba', 'agurkai', 'sveikas', 'pietūs'],
-        'Sumuštinis su avokadu ir kiaušiniu': ['pusryčiai', 'avokadas', 'sveikas', 'sotus'],
-        'Tiramisu': ['desertas', 'šokoladas', 'saldus', 'italų virtuvė'],
-        'Braškinis tortas': ['desertas', 'braškės', 'saldus'],
-        'Šokoladiniai keksiukai': ['desertas', 'šokoladas', 'saldus'],
-        'Ledai': ['desertas', 'saldus', 'vasara'],
-        'Omletas su sūriu ir daržovėmis': ['pusryčiai', 'sūris', 'daržovės', 'sveikas'],
-        'Bananų ir riešutų kokteilis': ['pusryčiai', 'bananai', 'sveikas', 'kokteilis'],
-        'Šaltibarščiai': ['sriuba', 'burokėliai', 'sveikas', 'vasara', 'pietūs'],
-        'Vištienos sriuba su daržovėmis': ['sriuba', 'vištiena', 'daržovės', 'sveikas', 'pietūs'],
-        'Makaronų apkepas su sūriu ir kumpiu': ['makaronai', 'sūris', 'kumpis', 'vakarienė'],
-        'Lašiša su keptomis bulvėmis ir šparagais': ['lašiša', 'bulvės', 'šparagai', 'vakarienė'],
-        'Vištienos kepsneliai su ryžiais ir salotomis': ['vištiena', 'ryžiai', 'salotos', 'sveikas', 'vakarienė'],
-        'Daržovių troškinys su avinžirniais': ['daržovės', 'avinžirniai', 'sveikas', 'vegetariškas', 'pietūs'],
-        'Lęšių sriuba': ['sriuba', 'lęšiai', 'daržovės', 'sveikas', 'pietūs'],
-    };
-    document.addEventListener('DOMContentLoaded', function () {
-        const recipeImages = document.querySelectorAll('.recipe-item img');
-        recipeImages.forEach(img => {
-            img.style.width = '100%';
-            img.style.height = '300px'; /* Set a fixed height */
-            img.style.objectFit = 'cover'; /* Ensure images cover the area */
-            img.style.marginBottom = '10px';
-            img.style.borderRadius = '5px';
-        });
-    });
-    document.addEventListener('DOMContentLoaded', function () {
-        const recipeImages = document.querySelectorAll('.recipe-item img');
-        recipeImages.forEach(img => {
-            img.style.width = '100%';
-            img.style.height = '300px'; /* Set a fixed height */
-            img.style.objectFit = 'cover'; /* Ensure images cover the area */
-            img.style.marginBottom = '10px';
-            img.style.borderRadius = '5px';
-        });
-    });
-    // Function to search by tags
-    function searchByTags() {
-        const searchText = document.getElementById('searchTags').value.toLowerCase();
-        document.querySelectorAll('.recipe-item').forEach(recipe => {
-            const title = recipe.querySelector('h3').textContent;
-            const tags = recipeTags[title] || [];
-            const hasMatch = tags.some(tag => tag.toLowerCase().includes(searchText));
-            recipe.style.display = hasMatch || searchText === '' ? 'block' : 'none';
-        });
-    }
 
-    // Function to filter recipes by category
-    function filterRecipesByCategory(category) {
-        document.querySelectorAll('.recipe-item').forEach(recipe => {
-            const title = recipe.querySelector('h3').textContent;
-            const tags = recipeTags[title] || [];
-            const hasMatch = tags.includes(category);
-            recipe.style.display = hasMatch ? 'block' : 'none';
-        });
-    }
+.img {
+  background-image: url('http://images.media-allrecipes.com/userphotos/560x315/998740.jpg');
+  image-rendering: auto;
+  width: 500px;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  margin: auto;
+}
+.title {
+  width: 500px;
+  height: 40px;
+  background-color: #E2E2E2;
+  margin: auto;
+}
+.title h4 {
+  margin: 0px;
+  padding-top: 7px;
+  padding-left: 30px;
+  font-weight: 300;
+}
+ul.tab {
+  list-style-type: none;
+  margin: auto;
+  padding: 0px 0px 20px 0px;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  width: 500px;
+  height: 55px;
+}
+ul.tab li {
+  float: left;
+}
+ul.tab li a {
+  display: inline-block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 17px;
+}
+ul.tab li a:focus, .active {
+  background-color: #ccc;
+}
+ul.tab li a:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  background-color: white;
+  border-top: none;
+  width: 476px;
+  margin: auto;
+}
+.tabcontent li {
+  list-style-type: none;
+  line-height: 23px;
+}
+.tabcontent p {
+  margin: 20px;
+}
+.eile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;   /* centers items horizontally /
+  gap: 1rem;                 / adds space between items */
 
-    // Remove the displayTags function to avoid showing tags
 
-        function searchByTags() {
-            const searchText = document.getElementById('searchTags').value.toLowerCase();
-            document.querySelectorAll('.recipe-item').forEach(recipe => {
-                const title = recipe.querySelector('h3').textContent;
-                const tags = recipeTags[title] || [];
-                const hasMatch = tags.some(tag => tag.toLowerCase().includes(searchText));
-                recipe.style.display = hasMatch || searchText === '' ? 'block' : 'none';
-            });
+}
+
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receptai</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 100;
+            margin: 0;
+        }
+        body p {
+            font-size: 14px;
+            line-height: 23px;
+        }
+        body li {
+            font-size: 14px;
+        }
+        h3 {
+            margin-left: 15px;
+        }
+        .eile {
+            display: flex;
+            flex-direction: row; /* Or column if you want them stacked vertically */
+            flex-wrap: wrap; /* Allow items to wrap */
+            justify-content: center;
+            gap: 1rem;
+            padding: 20px;
+        }
+        .wrapper {
+            padding-top: 25px;
+            margin: 0 10px 20px 10px; /* Added bottom margin */
+            width: 500px; /* Fixed width for each recipe card */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: add some shadow for better separation */
+            border-radius: 8px; /* Optional: rounded corners */
+            overflow: hidden; /* To contain floated elements and rounded corners */
+            background-color: #fff;
+        }
+        .img {
+            image-rendering: auto;
+            width: 100%; /* Make image responsive within the card */
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            /* margin: auto; No longer needed with width 100% */
+        }
+        .title {
+            width: 100%; /* Full width */
+            height: 40px;
+            background-color: #E2E2E2;
+            /* margin: auto; No longer needed */
+            box-sizing: border-box; /* Include padding in width */
+        }
+        .title h4 {
+            margin: 0px;
+            padding-top: 7px;
+            padding-left: 30px;
+            font-weight: 300;
+        }
+        ul.tab {
+            list-style-type: none;
+            /* margin: auto; No longer needed */
+            padding: 0px; /* Remove padding that might affect width */
+            overflow: hidden;
+            background-color: #f1f1f1;
+            width: 100%; /* Full width */
+            height: 55px;
+            display: flex; /* Use flexbox for even distribution */
+            justify-content: space-around; /* Distribute items evenly */
+            box-sizing: border-box;
+        }
+        ul.tab li {
+            /* float: left; No longer needed with flexbox */
+        }
+        ul.tab li a {
+            display: inline-block;
+            color: black;
+            text-align: center;
+            padding: 0; /* Adjust padding if SVGs are different sizes, or manage SVG size directly */
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 17px; /* This might be overridden by SVG styles */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px; /* Fixed width for each tab button to ensure SVGs fit */
+        }
+        ul.tab li a:focus,
+        ul.tab li a.active { /* Target .active class specifically */
+            background-color: #ccc;
+        }
+        ul.tab li a:hover {
+            background-color: #ddd;
+            cursor: pointer;
+        }
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            background-color: white;
+            border-top: none;
+            width: auto; /* Adjust width calculation */
+            margin: 0 12px; /* Match padding of .wrapper */
+            box-sizing: border-box;
+        }
+        .tabcontent li {
+            list-style-type: none;
+            line-height: 23px;
+        }
+        .tabcontent p {
+            margin: 20px;
         }
 
-        window.addEventListener('load', displayTags);
-    </script>
+        /* Styles for SVGs in tabs */
+        ul.tab li a svg {
+            width: 30px; /* Control SVG size */
+            height: 30px; /* Control SVG size */
+            vertical-align: middle;
+        }
+        .st0{fill:#000000;} /* Style for SVG paths */
 
-<div class="content">
-    <div class="recipes">
-        <h2>Receptai</h2>
-        <div id="recipe-list">
-            <div class="recipe-item">
-                <h3>Šokoladinis pyragas</h3>
-                <p><strong>Ingredientai:</strong> 200g miltų, 100g cukraus, 50g kakavos, 2 kiaušiniai, 100ml pieno</p>
-                <p><strong>Gaminimo eiga:</strong> Sumaišykite ingredientus, supilkite į formą ir kepkite 180°C temperatūroje 30 minučių.</p>
-                <img src="images/sokaladinis pyragas.jfif" alt="Šokoladinis pyragas">
-            </div>
-            <div class="recipe-item">
-                <h3>Obuolių pyragas</h3>
-                <p><strong>Ingredientai:</strong> 3 obuoliai, 200g miltų, 100g cukraus, 2 kiaušiniai, 100ml aliejaus</p>
-                <p><strong>Gaminimo eiga:</strong> Supjaustykite obuolius, sumaišykite ingredientus, supilkite į formą ir kepkite 180°C temperatūroje 40 minučių.</p>
-                <img src="images/obuoliu pyragas.jpg" alt="Obuolių pyragas">
-            </div>
-            <div class="recipe-item">
-                <h3>Vištienos salotos</h3>
-                <p><strong>Ingredientai:</strong> 200g vištienos, 100g salotų, 50g pomidorų, 50g agurkų, 2 šaukštai alyvuogių aliejaus</p>
-                <p><strong>Gaminimo eiga:</strong> Supjaustykite ingredientus, sumaišykite ir užpilkite alyvuogių aliejumi.</p>
-                <img src="images/vistienos salotos.jfif" alt="Vištienos salotos">
-            </div>
-            <div class="recipe-item">
-                <h3>Makaronai su sūriu</h3>
-                <p><strong>Ingredientai:</strong> 200g makaronų, 100g sūrio, 50g sviesto, 100ml pieno</p>
-                <p><strong>Gaminimo eiga:</strong> Išvirkite makaronus, sumaišykite su sūriu, sviestu ir pienu.</p>
-                <img src="images/makaronaisusuriu.jpg" alt="Makaronai su sūriu">
-            </div>
-            <div class="recipe-item">
-                <h3>Blynai</h3>
-                <p><strong>Ingredientai:</strong> 200g miltų, 2 kiaušiniai, 300ml pieno, 50g cukraus</p>
-                <p><strong>Gaminimo eiga:</strong> Sumaišykite ingredientus, kepkite keptuvėje iki auksinės spalvos.</p>
-                <img src="images/blynai.jpg" alt="Blynai">
-            </div>
-            <div class="recipe-item">
-                <h3>Kreminė avižinė košė</h3>
-                <p><strong>Ingredientai:</strong> 1 stiklinė avižinių dribsnių, 2 stiklinės pieno, banana, šaukštas medaus, Saujelė graikinių riešutų</p>
-                <p><strong>Gaminimo eiga:</strong> Avižas virti piene 5min, įmaišyti supjaustytą bananą, pagardinti medumi, riešutais</p>
-                <img src="images/Kreminė avižinė košė su bananais ir riešutais.jpg" alt="Kreminė avižinė košė">
-            </div>
-            <div class="recipe-item">
-                <h3>Lašiša su daržovėmis</h3>
-                <p><strong>Ingredientai:</strong> 200g lašišos, įvairios daržovės (brokoliai, morkos, paprika), alyvuogių aliejus, prieskoniai</p>
-                <p><strong>Gaminimo eiga:</strong> Lašišą ir daržoves apšlakstyti aliejumi, pagardinti prieskoniais ir kepti orkaitėje.</p>
-                <img src="images/lasisa.jpg" alt="Lašiša su daržovėmis">
-            </div>
-            <div class="recipe-item">
-                <h3>Varškėčiai</h3>
-                <p><strong>Ingredientai:</strong> 200g varškės, 1 kiaušinis, 2 šaukštai miltų, 2 šaukštai cukraus, aliejus kepimui</p>
-                <p><strong>Gaminimo eiga:</strong> Sumaišyti varškę, kiaušinį, miltus ir cukrų. Formuoti varškėčius ir kepti keptuvėje.</p>
-                <img src="images/varskeciai.jpg" alt="Varškėčiai">
-            </div>
-            <div class="recipe-item">
-                <h3>Troškinys su jautiena</h3>
-                <p><strong>Ingredientai:</strong> 300g jautienos, bulvės, morkos, svogūnai, pomidorų padažas, prieskoniai</p>
-                <p><strong>Gaminimo eiga:</strong> Jautieną supjaustyti kubeliais ir apkepti. Sudėti pjaustytas daržoves, pomidorų padažą, prieskonius ir troškinti, kol mėsa suminkštės.</p>
-                <img src="images/troskinis su jautiena.jpg" alt="Troškinys su jautiena">
-            </div>
-            <div class="recipe-item">
-                <h3>Šalta agurkų sriuba</h3>
-                <p><strong>Ingredientai:</strong> Agurkai, kefyras, krapai, svogūnų laiškai, kiaušiniai</p>
-                <p><strong>Gaminimo eiga:</strong> Supjaustykite agurkus ir kiaušinius, sumaišykite su kefyru ir žolelėmis. Atšaldykite ir patiekite.</p>
-                <img src="images/Šalta agurkų sriuba.jpg" alt="Šalta agurkų sriuba">
-            </div>
-            <div class="recipe-item">
-                <h3>Sumuštinis su avokadu ir kiaušiniu</h3>
-                <p><strong>Ingredientai:</strong> Duona, avokadas, kiaušinis, druska, pipirai</p>
-                <p><strong>Gaminimo eiga:</strong> Skrudinkite duoną, sutrinkite avokadą, uždėkite keptą kiaušinį. Pagardinkite druska ir pipirais.</p>
-                <img src="images/sumustinissuavokadu.jpg" alt="Sumuštinis su avokadu ir kiaušiniu">
-            </div>
-            <div class="recipe-item">
-                <h3>Tiramisu</h3>
-                <p><strong>Ingredientai:</strong> Sausainiai "Damų piršteliai", kava, maskarponės sūris, kiaušiniai, cukrus, kakava</p>
-                <p><strong>Gaminimo eiga:</strong> Pamirkykite sausainius kavoje, sluoksniuokite su maskarponės kremu. Pabarstykite kakava ir atšaldykite.</p>
-                <img src="images/tiramisu.webp" alt="Tiramisu">
-            </div>
-            <div class="recipe-item">
-                <h3>Braškinis tortas</h3>
-                <p><strong>Ingredientai:</strong> Biskvitas, grietinėlė, braškės, cukraus pudra</p>
-                <p><strong>Gaminimo eiga:</strong> Ištepkite biskvitą grietinėle, sudėkite braškes. Papuoškite ir atšaldykite.</p>
-                <img src="images/braskinistortas.jpg" alt="Braškinis tortas">
-            </div>
-            <div class="recipe-item">
-                <h3>Šokoladiniai keksiukai</h3>
-                <p><strong>Ingredientai:</strong> Miltai, kakava, cukrus, kiaušiniai, aliejus, kepimo milteliai</p>
-                <p><strong>Gaminimo eiga:</strong> Sumaišykite ingredientus, supilkite į formeles ir kepkite orkaitėje.</p>
-                <img src="images/sokaladiniskeksiukas.jpg" alt="Šokoladiniai keksiukai">
-            </div>
-            <div class="recipe-item">
-                <h3>Ledai</h3>
-                <p><strong>Ingredientai:</strong> Pienas, grietinėlė, cukrus, vanilė</p>
-                <p><strong>Gaminimo eiga:</strong> Sumaišykite ingredientus ir užšaldykite ledų gaminimo aparate arba šaldiklyje.</p>
-                <img src="images/ledai.jpg" alt="Ledai">
-            </div>
-            <div class="recipe-item">
-                <h3>Omletas su sūriu ir daržovėmis</h3>
-                <p><strong>Ingredientai:</strong> 2 kiaušiniai, 50g sūrio, įvairios daržovės (paprika, svogūnai, pomidorai), druska, pipirai</p>
-                <p><strong>Gaminimo eiga:</strong> Išplakite kiaušinius su druska ir pipirais, įmaišykite smulkintą sūrį ir daržoves. Kepkite keptuvėje ant nedidelės ugnies, kol omletas iškeps.</p>
-                <img src="images/omletas.jpg" alt="Omletas su sūriu ir daržovėmis">
-            </div>
-            <div class="recipe-item">
-                <h3>Bananų ir riešutų kokteilis</h3>
-                <p><strong>Ingredientai:</strong> 1 bananas, 200ml pieno arba jogurto, 1 šaukštas riešutų sviesto, saujelė riešutų, medus pagal skonį</p>
-                <p><strong>Gaminimo eiga:</strong> Sumaišykite visus ingredientus blenderiu iki vientisos masės. Patiekite iškart.</p>
-                <img src="images/bananukokteilis.jpg" alt="Bananų ir riešutų kokteilis">
-            </div>
-            <div class="recipe-item">
-                <h3>Šaltibarščiai</h3>
-                <p><strong>Ingredientai:</strong> 500ml kefyro, 2 virti burokėliai, 1 agurkas, krapai, svogūnų laiškai, 2 virti kiaušiniai, druska, pipirai</p>
-                <p><strong>Gaminimo eiga:</strong> Burokėlius ir agurką sutarkuokite, krapus ir svogūnų laiškus susmulkinkite, kiaušinius supjaustykite. Viską sumaišykite su kefyru, pagardinkite druska ir pipirais. Patiekite šaltus.</p>
-                <img src="images/saltekai.jpg" alt="Šaltibarščiai">
-            </div>
-            <div class="recipe-item">
-                <h3>Vištienos sriuba su daržovėmis</h3>
-                <p><strong>Ingredientai:</strong> 500g vištienos, 2 litrai vandens, 2 morkos, 1 svogūnas, 1 bulvė, petražolės, druska, pipirai</p>
-                <p><strong>Gaminimo eiga:</strong> Vištieną išvirkite vandenyje, nupjaukite putas. Sudėkite pjaustytas daržoves ir virkite, kol jos suminkštės. Pagardinkite druska, pipirais ir petražolėmis.</p>
-                <img src="images/vistienosriuba.jpg" alt="Vištienos sriuba su daržovėmis">
-            </div>
-            <div class="recipe-item">
-                <h3>Makaronų apkepas su sūriu ir kumpiu</h3>
-                <p><strong>Ingredientai:</strong> 200g makaronų, 100g kumpio, 100g sūrio, 2 kiaušiniai, 200ml pieno, druska, pipirai</p>
-                <p><strong>Gaminimo eiga:</strong> Makaronus išvirkite. Sumaišykite kiaušinius su pienu, druska ir pipirais. Sudėkite makaronus, pjaustytą kumpį ir tarkuotą sūrį. Kepkite orkaitėje, kol apkepas gražiai apskrus.</p>
-                <img src="images/makaronuapkepas.jpg" alt="Makaronų apkepas su sūriu ir kumpiu">
-            </div>
-            <div class="recipe-item">
-                <h3>Lašiša su keptomis bulvėmis ir šparagais</h3>
-                <p><strong>Ingredientai:</strong> 200g lašišos filė, 2 bulvės, 100g šparagų, alyvuogių aliejus, citrina, druska, pipirai</p>
-                <p><strong>Gaminimo eiga:</strong> Bulves supjaustykite skiltelėmis, šparagus nulupkite. Viską apšlakstykite alyvuogių aliejumi, pagardinkite druska ir pipirais. Kepkite orkaitėje kartu su lašiša, kol viskas iškeps. Patiekite su citrinos skiltele.</p>
-                <img src="images/lasisasubulvemis.jpg" alt="Lašiša su keptomis bulvėmis ir šparagais">
-            </div>
-            <div class="recipe-item">
-                <h3>Vištienos kepsneliai su ryžiais ir salotomis</h3>
-                <p><strong>Ingredientai:</strong> 200g vištienos filė, 100g ryžių, įvairios salotos, alyvuogių aliejus, prieskoniai</p>
-                <p><strong>Gaminimo eiga:</strong> Vištieną supjaustykite gabaliukais, apibarstykite prieskoniais ir iškepkite keptuvėje arba orkaitėje. Ryžius išvirkite. Patiekite su salotomis, apšlakstytomis alyvuogių aliejumi.</p>
-                <img src="images/vistienos kepsneliai.jpg" alt="Vištienos kepsneliai su ryžiais ir salotomis">
-            </div>
-            <div class="recipe-item">
-                <h3>Daržovių troškinys su avinžirniais</h3>
-                <p><strong>Ingredientai:</strong> 200g avinžirnių, 1 morka, 1 svogūnas, 1 paprika, 1 cukinija, pomidorų padažas, prieskoniai</p>
-                <p><strong>Gaminimo eiga:</strong> Avinžirnius išvirkite. Daržoves supjaustykite ir troškinkite keptuvėje su pomidorų padažu ir prieskoniais. Sudėkite avinžirnius ir patroškinkite dar kelias minutes.</p>
-                <img src="images/darzoviu troskinys.jpg" alt="Daržovių troškinys su avinžirniais">
-            </div>
-            <div class="recipe-item">
-                <h3>Lęšių sriuba</h3>
-                <p><strong>Ingredientai:</strong> 1 stiklinė lęšių, 1 morka, 1 svogūnas, 2 skiltelės česnako, 1 litras sultinio, prieskoniai</p>
-                <p><strong>Gaminimo eiga:</strong> Lęšius nuplaukite. Daržoves supjaustykite ir pakepinkite. Sudėkite lęšius, užpilkite sultiniu ir virkite, kol lęšiai suminkštės. Pagardinkite prieskoniais.</p>
-                <img src="images/lesiusriuba.jpg" alt="Lęšių sriuba">
-            </div>
-        </div>
+    </style>
+</head>
+<body>
+
+<div class="eile">
+
+    <!-- Recipe 1: Pan Seared Salmon (Original) -->
+    <div class="wrapper" id="salmonRecipeWrapper">
+      <div class="img" style="background-image: url('http://images.media-allrecipes.com/userphotos/560x315/998740.jpg');"></div>
+      <div class="title">
+        <h4>Pan Seared Salmon with Capers</h4>
+      </div>
+      <ul class="tab">
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'salmonIngredients', 'salmonRecipeWrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M24.6,12.2c1.5,0,2.9,0,4.4,0c0.7,0.3,1.3,0.6,1.4,1.4c0.1,0.6,0,1.3,0,1.9c0,0.2,0,0.4,0.1,0.6c1.6,1.9,2.1,4.1,1.8,6.5 c0,0.1,0.1,0.3,0.2,0.4c1,0.6,2.1,1.4,3.4,1.1c0,0,0,0,0,0c0.5,0,0.9,0.4,0.9,0.9c0,0.9,0,1.8,0,2.7c0,0.6-0.4,0.9-0.9,0.9 c-0.3,0-0.5,0-0.8,0c-0.2,0.7-0.3,1.3-0.5,1.9c-0.5,1.5-1,2.9-1.5,4.4c-0.3,0.9-0.5,1-1.4,1c-4.6,0-9.2,0-13.8,0 c-0.5,0-0.9-0.2-1.1-0.6c-0.1-0.2-0.2-0.4-0.3-0.7c-0.6-2-1.5-3.9-1.8-6c-0.7,0-1.4,0.1-1.8-0.7c0-1.1,0-2.2,0-3.3 c0.3-0.5,0.7-0.7,1.3-0.6c0.5,0,0.9,0,1.4,0c0-0.1,0-0.2,0-0.3c0.2-2.8,2.4-5.2,5.4-5.2c0.2,0,0.3-0.1,0.4-0.3 c0.4-0.8,0.8-1.5,1.3-2.2c0.2-0.3,0.3-0.5,0.3-0.8C23,13.9,23,12.8,24.6,12.2z M30.5,21.9c0-0.6,0.1-1,0-1.5 c-0.2-1.5-0.8-2.9-2.2-3.7c-0.6-0.3-0.7-1.3,0-1.5c0.6-0.2,0.5-0.6,0.4-1c-1.2,0-2.4,0-3.6,0c-0.1,0.5-0.1,0.8,0.4,1.1 c0.2,0.1,0.4,0.5,0.4,0.8c0,0.4-0.3,0.7-0.6,0.8c-1.1,0.4-1.5,1.3-1.8,2.2c0.6,0.4,1.2,0.8,1.8,1.2c0.6-0.8,1.3-0.6,2-0.1 C28.2,20.7,29.3,21.2,30.5,21.9z M17.7,24.1c0.7,0,1.4-0.1,2.1,0c0.8,0.1,1.4-0.2,1.9-0.8c0.6-0.7,1.3-1.3,2-1.9 c-0.9-1-2.5-1.3-3.8-0.7C18.6,21.2,17.7,22.6,17.7,24.1z M24,30.5c0,0.6,0,1.1,0,1.7c0,0.7,0.4,1,0.9,1c0.6,0,0.9-0.4,0.9-1.1 c0-1.1,0-2.2,0-3.3c0-0.7-0.4-1.1-0.9-1.1c-0.6,0-0.9,0.4-0.9,1.1C24,29.4,24,29.9,24,30.5z M20.4,30.5c0,0.6,0,1.1,0,1.7 c0,0,0,0.1,0,0.1c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1c0-1.2,0-2.4,0-3.5c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 C20.4,29.3,20.4,29.9,20.4,30.5z M29.5,30.5c0-0.5,0-1.1,0-1.6c0,0,0-0.1,0-0.1c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 c0,1.2,0,2.3,0,3.5c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1C29.5,31.6,29.5,31.1,29.5,30.5z M30.5,24.1C30.5,24.1,30.5,24,30.5,24.1 c-1.3-0.8-2.7-1.6-4-2.4c-0.1,0-0.3-0.1-0.3,0c-0.8,0.8-1.6,1.5-2.5,2.4C26,24.1,28.2,24.1,30.5,24.1z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'salmonDirections', 'salmonRecipeWrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M13.4,26.9c-0.8-0.3-1.5-0.5-2.2-0.8c-1-0.4-1.5-1.2-1.2-2c0.3-0.8,1.2-1.1,2.2-0.8c1.2,0.3,1.3,0.5,1,1.8 c-0.5-0.2-1.1-0.3-1.6-0.5c0,0.1,0,0.1-0.1,0.2c0.7,0.3,1.4,0.5,2.4,0.9c-0.1-0.9-0.2-1.6-0.3-2.3c0-0.2-0.3-0.3-0.5-0.4 c-0.2-0.2-0.3-0.4-0.5-0.6c0.2-0.2,0.5-0.4,0.7-0.5c0.2-0.1,0.4,0,0.6,0c7.6,0,15.1,0,22.7,0c0.2,0,0.5,0,0.7,0 c0.2,0.1,0.4,0.3,0.4,0.4c0,0.2-0.2,0.5-0.3,0.6c-1.3,0.2-0.9,1.2-1,2c0,0.2,0,0.4,0.1,0.8c0.7-0.3,1.4-0.5,2.1-0.8 c0-0.1,0-0.1,0-0.2c-0.5,0.1-1,0.3-1.5,0.4c-0.5-0.8-0.3-1.3,0.6-1.6c0.2-0.1,0.5-0.1,0.7-0.2c0.9-0.1,1.6,0.3,1.9,1 c0.2,0.7-0.2,1.4-1.1,1.8c-0.7,0.3-1.4,0.5-2.2,0.8c0.2,0.7,0.4,1.4,0.6,2.1c0.9,3,0.2,5-2.4,6.8c-0.3,0.2-0.7,0.3-1,0.3 c-5.9,0-11.8,0-17.8,0c-0.3,0-0.7-0.1-1-0.3C12.6,34,11.9,32,12.7,29C12.9,28.3,13.1,27.7,13.4,26.9z M16,23.4c0.3,2-0.5,3.9-1,5.9 c-0.5,1.9,0.1,3.5,1.5,4.8c0.5,0.5,1,0.5,1.7,0.3c-0.4-0.3-0.6-0.6-0.9-0.8c-1.2-1.2-1.5-2.6-1.1-4.3c0.2-0.7,0.4-1.3,0.5-2 c0.1-1.1,0.2-2.3,0.2-3.5C16.9,23.4,16.6,23.2,16,23.4z"/><path class="st0" d="M36.6,21.1c-7.7,0-15.4,0-23.1,0c0.3-1.2,1-2,1.9-2.7c1.6-1.2,3.4-1.7,5.3-2.1c0.9-0.2,1.8-0.4,2.8-0.6 c-0.2-0.6-0.4-1-0.5-1.4c-0.3-0.8-0.1-1.4,0.8-1.7c1.1-0.5,2.2-0.5,3.3,0c0.8,0.4,1.1,1,0.8,1.8c-0.1,0.4-0.3,0.8-0.5,1.3 c0.8,0.2,1.5,0.4,2.2,0.6c2,0.4,4,1,5.6,2.3C35.7,19.2,36.4,19.9,36.6,21.1z M21.6,17c-1.9-0.1-5.4,1.6-6,3.1 c0.7,0.2,1.1-0.1,1.6-0.6c0.5-0.6,1.2-1,1.8-1.4C19.9,17.7,20.8,17.4,21.6,17z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'salmonTime', 'salmonRecipeWrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M25,12.2c6.6,0,12,5.4,12,12c0,6.6-5.4,12-12,12c-6.6,0-12-5.4-12-12C13,17.6,18.4,12.2,25,12.2z M29.4,15.8 c-1.2-0.6-2.4-1-3.8-1.1c0,0.4,0,0.7,0,1.1c0,0.5-0.2,0.8-0.6,0.8c-0.4,0-0.6-0.3-0.6-0.8c0-0.4,0-0.7,0-1.1 c-1.4,0.1-2.6,0.4-3.8,1.1c0.2,0.3,0.4,0.6,0.5,0.9c0,0.1,0,0.3-0.1,0.4c-0.1,0.1-0.3,0-0.4,0c-0.1,0-0.1-0.2-0.2-0.3 c-0.1-0.2-0.3-0.4-0.4-0.6c-1.1,0.7-2.1,1.6-2.8,2.7c0.3,0.2,0.7,0.4,1,0.6c0.4,0.2,0.5,0.6,0.3,0.9c-0.2,0.3-0.5,0.4-0.9,0.2 c-0.3-0.2-0.7-0.4-1-0.6c-0.6,1.2-0.9,2.5-1,3.8c0.3,0,0.6,0,0.9,0c0.2,0,0.4,0.1,0.4,0.3c0,0.3-0.2,0.4-0.5,0.4 c-0.3,0-0.6,0-0.9,0c0.1,1.4,0.4,2.6,1,3.8c0.2-0.1,0.3-0.2,0.5-0.3c0.2-0.1,0.3-0.2,0.5-0.3c0.4-0.2,0.8-0.2,1,0.2 c0.2,0.3,0.1,0.7-0.3,0.9c-0.3,0.2-0.6,0.4-1,0.6c0.8,1.1,1.7,2,2.9,2.8c0.1-0.3,0.3-0.5,0.4-0.7c0.1-0.2,0.3-0.4,0.6-0.3 c0.3,0.1,0.2,0.4,0,0.6c-0.1,0.2-0.3,0.5-0.4,0.8c1.2,0.6,2.4,1,3.7,1.1c0,0,0-0.1,0-0.1c0-0.3,0-0.7,0-1c0-0.5,0.2-0.8,0.6-0.8 c0.4,0,0.6,0.3,0.6,0.8c0,0.4,0,0.7,0,1.1c1.4-0.1,2.6-0.5,3.8-1.1c-0.2-0.3-0.4-0.6-0.5-0.9c0-0.1,0-0.3,0.1-0.4 c0.1-0.1,0.3,0,0.4,0c0.1,0,0.1,0.2,0.2,0.3c0.1,0.2,0.3,0.4,0.4,0.6c1.1-0.7,2.1-1.6,2.8-2.7c-0.3-0.2-0.6-0.4-0.9-0.5 c-0.4-0.2-0.5-0.6-0.3-0.9c0.2-0.3,0.6-0.4,1-0.2c0.3,0.2,0.6,0.4,0.9,0.5c0.6-1.2,0.9-2.5,1-3.9c-0.3,0-0.6,0-0.9,0 c-0.3,0-0.5-0.1-0.5-0.3c0-0.3,0.2-0.4,0.5-0.3c0.3,0,0.6,0,0.9,0c-0.1-1.4-0.4-2.6-1-3.8c-0.3,0.2-0.6,0.4-1,0.5 c-0.4,0.2-0.8,0.2-1-0.2c-0.2-0.3-0.1-0.7,0.3-0.9c0.3-0.2,0.6-0.4,1-0.6c-0.8-1.1-1.7-2-2.8-2.8c-0.1,0.3-0.3,0.5-0.4,0.8 c-0.1,0.2-0.3,0.4-0.5,0.2c-0.2-0.1-0.2-0.3-0.1-0.5C29.1,16.3,29.3,16.1,29.4,15.8z"/><path d="M25,25.5c-0.5,0-1-0.3-1.2-0.8c-0.1-0.1-0.2-0.3-0.3-0.4c-1.2-0.7-2.5-1.4-3.7-2.1c-0.3-0.2-0.5-0.3-0.5-0.7 c-0.1-0.6,0.5-1,1-0.8c0.1,0,0.2,0.1,0.4,0.2c1.2,0.7,2.4,1.3,3.6,2c0.1,0.1,0.3,0.1,0.5,0.1c0.2,0,0.5,0,0.7,0 c0.2,0,0.3,0,0.5-0.1c1.2-0.7,2.4-1.4,3.7-2c0.2-0.1,0.3-0.2,0.5-0.2c0.4,0,0.7,0.2,0.8,0.6c0.1,0.3,0,0.7-0.4,0.9 c-0.7,0.4-1.4,0.8-2.1,1.1c-0.6,0.3-1.2,0.7-1.8,1c-0.1,0.1-0.2,0.2-0.3,0.4C26.1,25.2,25.6,25.5,25,25.5z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'salmonServing', 'salmonRecipeWrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M24.2,12.2c0.5,0,1.1,0,1.6,0c0.4,0.1,0.8,0.1,1.1,0.2c3.3,0.6,5.9,2.2,7.8,4.9c0.3,0.4,0.2,0.6-0.2,0.9 c-3.1,1.8-6.1,3.5-9.2,5.3c-0.3,0.1-0.5,0.2-0.8,0.2c-3,0-6,0-9,0c-0.6,0-1.3,0-1.9,0c-0.4,0-0.6-0.2-0.5-0.5 c0.2-2,0.8-3.9,1.9-5.6c1.9-2.8,4.5-4.5,7.8-5.1C23.3,12.3,23.7,12.3,24.2,12.2z"/><path d="M36.9,24.5c-0.1,3.1-1.3,5.8-3.6,8.1c-0.3,0.3-0.5,0.3-0.8,0c-2.2-2.6-4.4-5.3-6.6-7.9c-0.3-0.3-0.2-0.6,0.1-0.8 c3-1.7,5.9-3.4,8.9-5.1c0.4-0.2,0.6-0.1,0.8,0.3C36.5,20.7,36.9,22.5,36.9,24.5z"/><path d="M18.7,24.4c1.7,0,3.3,0,5,0c0.5,0,0.7,0.3,0.5,0.8c-1.2,3.1-2.3,6.3-3.4,9.4c-0.1,0.4-0.4,0.5-0.8,0.3 c-3.6-1.8-5.8-4.6-6.7-8.5c-0.1-0.4-0.1-0.9-0.2-1.4c0-0.4,0.1-0.6,0.6-0.6C15.3,24.4,17,24.4,18.7,24.4z"/><path d="M25,36c-1.1,0-2.1-0.2-3.2-0.4c-0.4-0.1-0.5-0.3-0.4-0.8c1.1-3,2.2-6.1,3.3-9.1c0.2-0.5,0.6-0.6,0.9-0.2 c1.6,2,3.3,3.9,4.9,5.9c0.4,0.5,0.9,1.1,1.3,1.6c0.3,0.3,0.2,0.6-0.1,0.8c-1.8,1.2-3.7,2-5.9,2.1C25.6,36,25.3,36,25,36z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'salmonNutrition', 'salmonRecipeWrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M28.3,36c-2.2,0-4.4,0-6.6,0c0-0.6,0-1.2,0-1.7c0-7,0-14,0-20.9c0-0.1,0-0.2,0-0.3c0-0.5,0.3-0.8,0.8-0.8 c1.7,0,3.4,0,5.1,0c0.5,0,0.8,0.3,0.8,0.9c0,1.6,0,3.3,0,4.9c0,5.9,0,11.7,0,17.6C28.3,35.7,28.3,35.8,28.3,36z"/><path d="M37.1,36c-0.1,0-0.2,0-0.3,0c-2,0-4,0-6,0c-0.3,0-0.4-0.1-0.4-0.4c0-4.6,0-9.2,0-13.9c0-0.7,0.3-1,0.9-1c1.6,0,3.2,0,4.8,0 c0.6,0,0.9,0.3,0.9,0.9c0,4.6,0,9.2,0,13.8C37.1,35.7,37.1,35.8,37.1,36z"/><path d="M12.9,36c0-0.9,0-1.8,0-2.7c0-2.3,0-4.6,0-6.9c0-0.7,0.3-0.9,0.9-0.9c1.6,0,3.2,0,4.9,0c0.6,0,0.9,0.3,0.9,0.9 c0,1.7,0,3.4,0,5.1c0,1.4,0,2.8,0,4.2c0,0.3,0,0.4-0.3,0.4c-2,0-4,0-6,0C13.1,36,13,36,12.9,36z"/></g></svg></a></li>
+      </ul>
+      <div id="salmonIngredients" class="tabcontent">
+        <h3>Ingredientai</h3>
+        <ul>
+          <li>4 (6 uncijos) lašišos filė</li>
+          <li>2 šaukštai alyvuogių aliejaus</li>
+          <li>2 šaukštai kaparėlių 1/8 arbatinio </li>
+          <li>šaukštelio druskos1/8 arbatinio </li>
+          <li>šaukštelio maltų juodųjų pipirų</li>
+          <li>4 griežinėliai citrinos</li>
+        </ul>
+      </div>
+      <div id="salmonDirections" class="tabcontent">
+        <h3>Paruošimas</h3>
+        <p> Didelę sunkią keptuvę įkaitinkite ant vidutinės ugnies 3 minutes <br><br>
+          Lašišą aptepkite alyvuogių aliejumi. Sudėkite į keptuvę ir padidinkite šilumą iki didelės. Virkite 3 minutes. Pabarstykite kaparėliais, druska ir pipirais. Apverskite lašišą ir kepkite 5 minutes arba kol paruduos. Lašiša gaminama tada, kai ji lengvai susmulkina šakute.<br><br>
+          Lašišą sudėkite į atskiras lėkštes ir papuoškite citrinos griežinėliais.</p>
+      </div>
+      <div id="salmonTime" class="tabcontent">
+        <h3>Gaminimo eiga</h3>
+        <ul>
+          <li>10m pasiruošimo laikas</li>
+          <li>10m kepimo laikas</li>
+          <li>Iš viso 20 m</li>
+        </ul>
+      </div>
+      <div id="salmonServing" class="tabcontent">
+        <h3>Porcijos</h3>
+        <p>Šis specialus receptas skirtas keturiems žmonėms. Atitinkamai sureguliuokite, kad atitiktų konkrečius jūsų vakarėlio poreikius.</p>
+      </div>
+      <div id="salmonNutrition" class="tabcontent">
+        <h3>Maistinė vertė</h3>
+        <p><i>Remiantis 2000 kalorijų dieta</i></p>
+        <ul>
+          <li>Kalorijos: 371 kcal 19%</li>
+          <li>Riebalai: 25,1 g 39 %</li>
+          <li>Angliavandeniai: 1,7 g 1%</li>
+          <li>Baltymai: 33,7 g 67%</li>
+          <li>Cholesterolis: 99 mg 33%</li>
+          <li>Natris: 300 mg 12%</li>
+        </ul>
+      </div>
     </div>
-</div>
-        <div class="add-recipe">
-            <h2>Pridėti savo receptą</h2>
-            <form id="add-recipe-form">
-                <label for="recipe-name">Pavadinimas:</label>
-                <input type="text" id="recipe-name" placeholder="Įveskite recepto pavadinimą" required>
-                
-                <label for="recipe-author">Kas sukūrė:</label>
-                <input type="text" id="recipe-author" placeholder="Įveskite savo vardą" required>
-                
-                <label for="recipe-photo">Nuotrauka:</label>
-                <input type="file" id="recipe-photo" accept="image/*" required>
-                
-                <label for="recipe-ingredients">Kokių ingredientų reikia:</label>
-                <textarea id="recipe-ingredients" placeholder="Įveskite ingredientus ir jų kiekį (pvz., 200g miltų)" rows="3" required></textarea>
-                
-                <label for="recipe-steps">Kaip darosi:</label>
-                <textarea id="recipe-steps" placeholder="Įveskite recepto aprašymą" rows="5" required></textarea>
-                
-                <button type="submit">Pridėti receptą</button>
-                <script>
-                    document.getElementById('add-recipe-form').addEventListener('submit', function(event) {
-                        event.preventDefault();
 
-                        const name = document.getElementById('recipe-name').value;
-                        const author = document.getElementById('recipe-author').value;
-                        const photo = document.getElementById('recipe-photo').files[0];
-                        const ingredients = document.getElementById('recipe-ingredients').value;
-                        const steps = document.getElementById('recipe-steps').value;
+    <!-- Recipe 2: Chicken Pasta -->
+    <div class="wrapper" id="chickenPastaWrapper">
+      <div class="img" style="background-image: url(https://www.lamaistas.lt/uploads/modules/recipes/thumb300x224/52191.jpg);"></div> <!-- CHANGE IMAGE -->
+      <div class="title">
+        <h4>Kepti avinžirniai su daržovėmis</h4> <!-- CHANGE TITLE -->
+      </div>
+      <ul class="tab">
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'chickenPastaIngredients', 'chickenPastaWrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M24.6,12.2c1.5,0,2.9,0,4.4,0c0.7,0.3,1.3,0.6,1.4,1.4c0.1,0.6,0,1.3,0,1.9c0,0.2,0,0.4,0.1,0.6c1.6,1.9,2.1,4.1,1.8,6.5 c0,0.1,0.1,0.3,0.2,0.4c1,0.6,2.1,1.4,3.4,1.1c0,0,0,0,0,0c0.5,0,0.9,0.4,0.9,0.9c0,0.9,0,1.8,0,2.7c0,0.6-0.4,0.9-0.9,0.9 c-0.3,0-0.5,0-0.8,0c-0.2,0.7-0.3,1.3-0.5,1.9c-0.5,1.5-1,2.9-1.5,4.4c-0.3,0.9-0.5,1-1.4,1c-4.6,0-9.2,0-13.8,0 c-0.5,0-0.9-0.2-1.1-0.6c-0.1-0.2-0.2-0.4-0.3-0.7c-0.6-2-1.5-3.9-1.8-6c-0.7,0-1.4,0.1-1.8-0.7c0-1.1,0-2.2,0-3.3 c0.3-0.5,0.7-0.7,1.3-0.6c0.5,0,0.9,0,1.4,0c0-0.1,0-0.2,0-0.3c0.2-2.8,2.4-5.2,5.4-5.2c0.2,0,0.3-0.1,0.4-0.3 c0.4-0.8,0.8-1.5,1.3-2.2c0.2-0.3,0.3-0.5,0.3-0.8C23,13.9,23,12.8,24.6,12.2z M30.5,21.9c0-0.6,0.1-1,0-1.5 c-0.2-1.5-0.8-2.9-2.2-3.7c-0.6-0.3-0.7-1.3,0-1.5c0.6-0.2,0.5-0.6,0.4-1c-1.2,0-2.4,0-3.6,0c-0.1,0.5-0.1,0.8,0.4,1.1 c0.2,0.1,0.4,0.5,0.4,0.8c0,0.4-0.3,0.7-0.6,0.8c-1.1,0.4-1.5,1.3-1.8,2.2c0.6,0.4,1.2,0.8,1.8,1.2c0.6-0.8,1.3-0.6,2-0.1 C28.2,20.7,29.3,21.2,30.5,21.9z M17.7,24.1c0.7,0,1.4-0.1,2.1,0c0.8,0.1,1.4-0.2,1.9-0.8c0.6-0.7,1.3-1.3,2-1.9 c-0.9-1-2.5-1.3-3.8-0.7C18.6,21.2,17.7,22.6,17.7,24.1z M24,30.5c0,0.6,0,1.1,0,1.7c0,0.7,0.4,1,0.9,1c0.6,0,0.9-0.4,0.9-1.1 c0-1.1,0-2.2,0-3.3c0-0.7-0.4-1.1-0.9-1.1c-0.6,0-0.9,0.4-0.9,1.1C24,29.4,24,29.9,24,30.5z M20.4,30.5c0,0.6,0,1.1,0,1.7 c0,0,0,0.1,0,0.1c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1c0-1.2,0-2.4,0-3.5c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 C20.4,29.3,20.4,29.9,20.4,30.5z M29.5,30.5c0-0.5,0-1.1,0-1.6c0,0,0-0.1,0-0.1c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 c0,1.2,0,2.3,0,3.5c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1C29.5,31.6,29.5,31.1,29.5,30.5z M30.5,24.1C30.5,24.1,30.5,24,30.5,24.1 c-1.3-0.8-2.7-1.6-4-2.4c-0.1,0-0.3-0.1-0.3,0c-0.8,0.8-1.6,1.5-2.5,2.4C26,24.1,28.2,24.1,30.5,24.1z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'chickenPastaDirections', 'chickenPastaWrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M13.4,26.9c-0.8-0.3-1.5-0.5-2.2-0.8c-1-0.4-1.5-1.2-1.2-2c0.3-0.8,1.2-1.1,2.2-0.8c1.2,0.3,1.3,0.5,1,1.8 c-0.5-0.2-1.1-0.3-1.6-0.5c0,0.1,0,0.1-0.1,0.2c0.7,0.3,1.4,0.5,2.4,0.9c-0.1-0.9-0.2-1.6-0.3-2.3c0-0.2-0.3-0.3-0.5-0.4 c-0.2-0.2-0.3-0.4-0.5-0.6c0.2-0.2,0.5-0.4,0.7-0.5c0.2-0.1,0.4,0,0.6,0c7.6,0,15.1,0,22.7,0c0.2,0,0.5,0,0.7,0 c0.2,0.1,0.4,0.3,0.4,0.4c0,0.2-0.2,0.5-0.3,0.6c-1.3,0.2-0.9,1.2-1,2c0,0.2,0,0.4,0.1,0.8c0.7-0.3,1.4-0.5,2.1-0.8 c0-0.1,0-0.1,0-0.2c-0.5,0.1-1,0.3-1.5,0.4c-0.5-0.8-0.3-1.3,0.6-1.6c0.2-0.1,0.5-0.1,0.7-0.2c0.9-0.1,1.6,0.3,1.9,1 c0.2,0.7-0.2,1.4-1.1,1.8c-0.7,0.3-1.4,0.5-2.2,0.8c0.2,0.7,0.4,1.4,0.6,2.1c0.9,3,0.2,5-2.4,6.8c-0.3,0.2-0.7,0.3-1,0.3 c-5.9,0-11.8,0-17.8,0c-0.3,0-0.7-0.1-1-0.3C12.6,34,11.9,32,12.7,29C12.9,28.3,13.1,27.7,13.4,26.9z M16,23.4c0.3,2-0.5,3.9-1,5.9 c-0.5,1.9,0.1,3.5,1.5,4.8c0.5,0.5,1,0.5,1.7,0.3c-0.4-0.3-0.6-0.6-0.9-0.8c-1.2-1.2-1.5-2.6-1.1-4.3c0.2-0.7,0.4-1.3,0.5-2 c0.1-1.1,0.2-2.3,0.2-3.5C16.9,23.4,16.6,23.2,16,23.4z"/><path class="st0" d="M36.6,21.1c-7.7,0-15.4,0-23.1,0c0.3-1.2,1-2,1.9-2.7c1.6-1.2,3.4-1.7,5.3-2.1c0.9-0.2,1.8-0.4,2.8-0.6 c-0.2-0.6-0.4-1-0.5-1.4c-0.3-0.8-0.1-1.4,0.8-1.7c1.1-0.5,2.2-0.5,3.3,0c0.8,0.4,1.1,1,0.8,1.8c-0.1,0.4-0.3,0.8-0.5,1.3 c0.8,0.2,1.5,0.4,2.2,0.6c2,0.4,4,1,5.6,2.3C35.7,19.2,36.4,19.9,36.6,21.1z M21.6,17c-1.9-0.1-5.4,1.6-6,3.1 c0.7,0.2,1.1-0.1,1.6-0.6c0.5-0.6,1.2-1,1.8-1.4C19.9,17.7,20.8,17.4,21.6,17z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'chickenPastaTime', 'chickenPastaWrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M25,12.2c6.6,0,12,5.4,12,12c0,6.6-5.4,12-12,12c-6.6,0-12-5.4-12-12C13,17.6,18.4,12.2,25,12.2z M29.4,15.8 c-1.2-0.6-2.4-1-3.8-1.1c0,0.4,0,0.7,0,1.1c0,0.5-0.2,0.8-0.6,0.8c-0.4,0-0.6-0.3-0.6-0.8c0-0.4,0-0.7,0-1.1 c-1.4,0.1-2.6,0.4-3.8,1.1c0.2,0.3,0.4,0.6,0.5,0.9c0,0.1,0,0.3-0.1,0.4c-0.1,0.1-0.3,0-0.4,0c-0.1,0-0.1-0.2-0.2-0.3 c-0.1-0.2-0.3-0.4-0.4-0.6c-1.1,0.7-2.1,1.6-2.8,2.7c0.3,0.2,0.7,0.4,1,0.6c0.4,0.2,0.5,0.6,0.3,0.9c-0.2,0.3-0.5,0.4-0.9,0.2 c-0.3-0.2-0.7-0.4-1-0.6c-0.6,1.2-0.9,2.5-1,3.8c0.3,0,0.6,0,0.9,0c0.2,0,0.4,0.1,0.4,0.3c0,0.3-0.2,0.4-0.5,0.4 c-0.3,0-0.6,0-0.9,0c0.1,1.4,0.4,2.6,1,3.8c0.2-0.1,0.3-0.2,0.5-0.3c0.2-0.1,0.3-0.2,0.5-0.3c0.4-0.2,0.8-0.2,1,0.2 c0.2,0.3,0.1,0.7-0.3,0.9c-0.3,0.2-0.6,0.4-1,0.6c0.8,1.1,1.7,2,2.9,2.8c0.1-0.3,0.3-0.5,0.4-0.7c0.1-0.2,0.3-0.4,0.6-0.3 c0.3,0.1,0.2,0.4,0,0.6c-0.1,0.2-0.3,0.5-0.4,0.8c1.2,0.6,2.4,1,3.7,1.1c0,0,0-0.1,0-0.1c0-0.3,0-0.7,0-1c0-0.5,0.2-0.8,0.6-0.8 c0.4,0,0.6,0.3,0.6,0.8c0,0.4,0,0.7,0,1.1c1.4-0.1,2.6-0.5,3.8-1.1c-0.2-0.3-0.4-0.6-0.5-0.9c0-0.1,0-0.3,0.1-0.4 c0.1-0.1,0.3,0,0.4,0c0.1,0,0.1,0.2,0.2,0.3c0.1,0.2,0.3,0.4,0.4,0.6c1.1-0.7,2.1-1.6,2.8-2.7c-0.3-0.2-0.6-0.4-0.9-0.5 c-0.4-0.2-0.5-0.6-0.3-0.9c0.2-0.3,0.6-0.4,1-0.2c0.3,0.2,0.6,0.4,0.9,0.5c0.6-1.2,0.9-2.5,1-3.9c-0.3,0-0.6,0-0.9,0 c-0.3,0-0.5-0.1-0.5-0.3c0-0.3,0.2-0.4,0.5-0.3c0.3,0,0.6,0,0.9,0c-0.1-1.4-0.4-2.6-1-3.8c-0.3,0.2-0.6,0.4-1,0.5 c-0.4,0.2-0.8,0.2-1-0.2c-0.2-0.3-0.1-0.7,0.3-0.9c0.3-0.2,0.6-0.4,1-0.6c-0.8-1.1-1.7-2-2.8-2.8c-0.1,0.3-0.3,0.5-0.4,0.8 c-0.1,0.2-0.3,0.4-0.5,0.2c-0.2-0.1-0.2-0.3-0.1-0.5C29.1,16.3,29.3,16.1,29.4,15.8z"/><path d="M25,25.5c-0.5,0-1-0.3-1.2-0.8c-0.1-0.1-0.2-0.3-0.3-0.4c-1.2-0.7-2.5-1.4-3.7-2.1c-0.3-0.2-0.5-0.3-0.5-0.7 c-0.1-0.6,0.5-1,1-0.8c0.1,0,0.2,0.1,0.4,0.2c1.2,0.7,2.4,1.3,3.6,2c0.1,0.1,0.3,0.1,0.5,0.1c0.2,0,0.5,0,0.7,0 c0.2,0,0.3,0,0.5-0.1c1.2-0.7,2.4-1.4,3.7-2c0.2-0.1,0.3-0.2,0.5-0.2c0.4,0,0.7,0.2,0.8,0.6c0.1,0.3,0,0.7-0.4,0.9 c-0.7,0.4-1.4,0.8-2.1,1.1c-0.6,0.3-1.2,0.7-1.8,1c-0.1,0.1-0.2,0.2-0.3,0.4C26.1,25.2,25.6,25.5,25,25.5z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'chickenPastaServing', 'chickenPastaWrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M24.2,12.2c0.5,0,1.1,0,1.6,0c0.4,0.1,0.8,0.1,1.1,0.2c3.3,0.6,5.9,2.2,7.8,4.9c0.3,0.4,0.2,0.6-0.2,0.9 c-3.1,1.8-6.1,3.5-9.2,5.3c-0.3,0.1-0.5,0.2-0.8,0.2c-3,0-6,0-9,0c-0.6,0-1.3,0-1.9,0c-0.4,0-0.6-0.2-0.5-0.5 c0.2-2,0.8-3.9,1.9-5.6c1.9-2.8,4.5-4.5,7.8-5.1C23.3,12.3,23.7,12.3,24.2,12.2z"/><path d="M36.9,24.5c-0.1,3.1-1.3,5.8-3.6,8.1c-0.3,0.3-0.5,0.3-0.8,0c-2.2-2.6-4.4-5.3-6.6-7.9c-0.3-0.3-0.2-0.6,0.1-0.8 c3-1.7,5.9-3.4,8.9-5.1c0.4-0.2,0.6-0.1,0.8,0.3C36.5,20.7,36.9,22.5,36.9,24.5z"/><path d="M18.7,24.4c1.7,0,3.3,0,5,0c0.5,0,0.7,0.3,0.5,0.8c-1.2,3.1-2.3,6.3-3.4,9.4c-0.1,0.4-0.4,0.5-0.8,0.3 c-3.6-1.8-5.8-4.6-6.7-8.5c-0.1-0.4-0.1-0.9-0.2-1.4c0-0.4,0.1-0.6,0.6-0.6C15.3,24.4,17,24.4,18.7,24.4z"/><path d="M25,36c-1.1,0-2.1-0.2-3.2-0.4c-0.4-0.1-0.5-0.3-0.4-0.8c1.1-3,2.2-6.1,3.3-9.1c0.2-0.5,0.6-0.6,0.9-0.2 c1.6,2,3.3,3.9,4.9,5.9c0.4,0.5,0.9,1.1,1.3,1.6c0.3,0.3,0.2,0.6-0.1,0.8c-1.8,1.2-3.7,2-5.9,2.1C25.6,36,25.3,36,25,36z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'chickenPastaNutrition', 'chickenPastaWrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M28.3,36c-2.2,0-4.4,0-6.6,0c0-0.6,0-1.2,0-1.7c0-7,0-14,0-20.9c0-0.1,0-0.2,0-0.3c0-0.5,0.3-0.8,0.8-0.8 c1.7,0,3.4,0,5.1,0c0.5,0,0.8,0.3,0.8,0.9c0,1.6,0,3.3,0,4.9c0,5.9,0,11.7,0,17.6C28.3,35.7,28.3,35.8,28.3,36z"/><path d="M37.1,36c-0.1,0-0.2,0-0.3,0c-2,0-4,0-6,0c-0.3,0-0.4-0.1-0.4-0.4c0-4.6,0-9.2,0-13.9c0-0.7,0.3-1,0.9-1c1.6,0,3.2,0,4.8,0 c0.6,0,0.9,0.3,0.9,0.9c0,4.6,0,9.2,0,13.8C37.1,35.7,37.1,35.8,37.1,36z"/><path d="M12.9,36c0-0.9,0-1.8,0-2.7c0-2.3,0-4.6,0-6.9c0-0.7,0.3-0.9,0.9-0.9c1.6,0,3.2,0,4.9,0c0.6,0,0.9,0.3,0.9,0.9 c0,1.7,0,3.4,0,5.1c0,1.4,0,2.8,0,4.2c0,0.3,0,0.4-0.3,0.4c-2,0-4,0-6,0C13.1,36,13,36,12.9,36z"/></g></svg></a></li>
+      </ul>
+      <div id="chickenPastaIngredients" class="tabcontent">
+        <h3>Ingredientai</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>1 skardinė (400 g) virtų avinžirnių/li>
+          <li>1 raudona paprika</li>
+          <li>1 cukinija</li>
+          <li>1 mažas svogūnas</li>
+          <li>2 šaukštai alyvuogių aliejaus</li>
+          <li>1 a. š. saldžiosios paprikos miltelių</li>
+          <li>Druskos ir pipirų pagal skonį</li>
+        </ul>
+      </div>
+      <div id="chickenPastaDirections" class="tabcontent">
+        <h3>Paruošimas</h3> <!-- CHANGE CONTENT -->
+        <p>Orkaitę įkaitinkite iki 200 °C.<br><br>
+          Daržoves supjaustykite juostelėmis, avinžirnius nusausinkite.<br><br>
+          Viską sumaišykite su alyvuogių aliejumi, prieskoniais.<br><br>
+          Dėkite į kepimo skardą ir kepkite 25 min., kartais pamaišydami.</p>
+      </div>
+      <div id="chickenPastaTime" class="tabcontent">
+        <h3>Laikas</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>Paruošimas: 10 min</li>
+          <li>Kepimas: 25 min</li>
+          <li>Iš viso: 35 min</li>
+        </ul>
+      </div>
+      <div id="chickenPastaServing" class="tabcontent">
+        <h3>Porcijos</h3> <!-- CHANGE CONTENT -->
+        <p>Šis receptas skirtas dviem žmonėms</p>
+      </div>
+      <div id="chickenPastaNutrition" class="tabcontent">
+        <h3>Maistinė vertė</h3> <!-- CHANGE CONTENT -->
+        <p><i>Maistinė vertė (1 porcija)</i></p>
+        <ul>
+          <li>Kalorijos: 285 kcal</li>
+          <li>Angliavandeniai: 34,5 g</li>
+          <li>Riebalai: 10,4 g</li>
+          <li>Baltymai: 10,2 g</li>
+          <li>Natris: 245 mg</li>
+        </ul>
+      </div>
+    </div>
 
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            const recipeList = document.getElementById('recipe-list');
-
-                            const newRecipe = document.createElement('div');
-                            newRecipe.classList.add('recipe-item');
-
-                            newRecipe.innerHTML = `
-                                <h3>${name}</h3>
-                                <p><strong>Autorius:</strong> ${author}</p>
-                                <p><strong>Ingredientai:</strong> ${ingredients}</p>
-                                <p><strong>Gaminimo eiga:</strong> ${steps}</p>
-                                <img src="${e.target.result}" alt="${name}">
-                            `;
-
-                            recipeList.insertBefore(newRecipe, recipeList.firstChild);
-                        };
-
-                        if (photo) {
-                            reader.readAsDataURL(photo);
-                        }
-                    });
-                    // Show notification after adding a recipe
-                    const notification = document.createElement('div');
-                    notification.textContent = 'Receptas sėkmingai pridėtas!';
-                    notification.style.position = 'fixed';
-                    notification.style.bottom = '20px';
-                    notification.style.right = '20px';
-                    notification.style.backgroundColor = '#d84315';
-                    notification.style.color = '#fff';
-                    notification.style.padding = '10px 20px';
-                    notification.style.borderRadius = '5px';
-                    notification.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.2)';
-                    notification.style.zIndex = '1000';
-                    notification.style.display = 'none';
-                    document.body.appendChild(notification);
-
-                    function showNotification() {
-                        notification.style.display = 'block';
-                        setTimeout(() => {
-                            notification.style.display = 'none';
-                        }, 3000);
-                    }
-                    // Automatically save recipes after loading them
-                    window.addEventListener('load', saveRecipes);
-                    // Save recipes to localStorage
-                    function saveRecipes() {
-                        const recipes = document.getElementById('recipe-list').innerHTML;
-                        localStorage.setItem('recipes', recipes);
-                    }
-
-                    // Load recipes from localStorage
-                    function loadRecipes() {
-                        const savedRecipes = localStorage.getItem('recipes');
-                        if (savedRecipes) {
-                            document.getElementById('recipe-list').innerHTML = savedRecipes;
-                        }
-                    }
-
-                    // Call loadRecipes on page load
-                    window.addEventListener('load', loadRecipes);
-                    // Apply consistent styles to newly added recipe images
-                    document.getElementById('add-recipe-form').addEventListener('submit', function () {
-                        const newImages = document.querySelectorAll('.recipe-item img');
-                        newImages.forEach(img => {
-                            img.style.width = '100%';
-                            img.style.height = 'auto';
-                            img.style.maxHeight = '300px';
-                            img.style.objectFit = 'cover';
-                            img.style.marginBottom = '10px';
-                            img.style.borderRadius = '5px';
-                        });
-                    });
-
-                    // Save recipes after adding a new one
-                    document.getElementById('add-recipe-form').addEventListener('submit', function() {
-                        saveRecipes();
-                        showNotification();
-                    });
-                    // Add delete button to each recipe
-                    function addDeleteButtons() {
-                        const recipes = document.querySelectorAll('.recipe-item');
-                        recipes.forEach(recipe => {
-                            if (!recipe.querySelector('.delete-button')) {
-                                const deleteButton = document.createElement('button');
-                                deleteButton.textContent = 'Ištrinti';
-                                deleteButton.classList.add('delete-button');
-                                deleteButton.style.marginTop = '10px';
-                                deleteButton.style.padding = '5px 10px';
-                                deleteButton.style.backgroundColor = '#d84315';
-                                deleteButton.style.color = '#fff';
-                                deleteButton.style.border = 'none';
-                                deleteButton.style.borderRadius = '5px';
-                                deleteButton.style.cursor = 'pointer';
-
-                                deleteButton.addEventListener('click', function () {
-                                    if (confirm('Ar tikrai norite ištrinti šį receptą?')) {
-                                        recipe.remove();
-                                        saveRecipes(); // Update localStorage after deletion
-                                    }
-                                });
-
-                                recipe.appendChild(deleteButton);
-                            }
-                        });
-                    }
-
-                    // Call addDeleteButtons after loading recipes
-                    window.addEventListener('load', addDeleteButtons);
-
-                    // Call addDeleteButtons after adding a new recipe
-                    document.getElementById('add-recipe-form').addEventListener('submit', addDeleteButtons);
-
-                    // Center the "Show More" button
-                    const recipeListContainer = document.querySelector('.recipes');
-                    recipeListContainer.style.display = 'flex';
-                    recipeListContainer.style.flexDirection = 'column';
-                    recipeListContainer.style.alignItems = 'center';
-
-                    // Call addShowMoreButton after loading recipes
-                    window.addEventListener('load', addShowMoreButton);
-
-                    function addShowMoreButton() {
-                        const recipeList = document.getElementById('recipe-list');
-                        const recipes = Array.from(recipeList.children);
-                        const maxVisibleRecipes = 6;
-
-                        // Hide recipes beyond the initial visible count
-                        recipes.forEach((recipe, index) => {
-                            if (index >= maxVisibleRecipes) {
-                                recipe.style.display = 'none';
-                            }
-                        });
-
-                        // Create the "Show More" button
-                        const showMoreButton = document.createElement('button');
-                        showMoreButton.textContent = 'Rodyti daugiau';
-                        showMoreButton.style.marginTop = '20px';
-                        showMoreButton.style.padding = '15px 30px'; // Increased padding
-                        showMoreButton.style.fontSize = '18px'; // Increased font size
-                        showMoreButton.style.backgroundColor = '#ffcc80';
-                        showMoreButton.style.color = '#5d4037';
-                        showMoreButton.style.border = 'none';
-                        showMoreButton.style.borderRadius = '5px';
-                        showMoreButton.style.cursor = 'pointer';
-                        showMoreButton.style.display = recipes.length > maxVisibleRecipes ? 'block' : 'none';
-
-                        showMoreButton.addEventListener('click', function () {
-                            recipes.forEach(recipe => {
-                                recipe.style.display = 'block';
-                            });
-                            showMoreButton.style.display = 'none'; // Hide the button after showing all recipes
-                        });
-
-                        // Append the button to the recipe list container
-                        recipeListContainer.appendChild(showMoreButton);
-                    }
-
-                    // Call addShowMoreButton after loading recipes
-                    window.addEventListener('load', addShowMoreButton);
-                    // Function to add rating to each recipe
-                    function addRating() {
-                        const recipes = document.querySelectorAll('.recipe-item');
-                        recipes.forEach(recipe => {
-                            const ratingContainer = document.createElement('div');
-                            ratingContainer.classList.add('rating-container');
-                            ratingContainer.style.marginTop = '10px';
-
-                            const ratingLabel = document.createElement('span');
-                            ratingLabel.textContent = 'Įvertinimas: ';
-                            ratingLabel.style.marginRight = '5px';
-                            ratingContainer.appendChild(ratingLabel);
-
-                            const starContainer = document.createElement('div');
-                            starContainer.classList.add('star-container');
-                            starContainer.style.display = 'inline-block';
-
-                            for (let i = 1; i <= 5; i++) {
-                                const star = document.createElement('span');
-                                star.classList.add('star');
-                                star.textContent = '★';
-                                star.style.cursor = 'pointer';
-                                star.style.fontSize = '20px';
-                                star.style.color = 'lightgray'; // Default color
-
-                                star.addEventListener('click', function() {
-                                    // Change color of clicked star and previous stars
-                                    for (let j = 1; j <= 5; j++) {
-                                        const currentStar = starContainer.querySelector(`.star:nth-child(${j})`);
-                                        currentStar.style.color = j <= i ? 'gold' : 'lightgray';
-                                    }
-                                });
-
-                                starContainer.appendChild(star);
-                            }
-
-                            ratingContainer.appendChild(starContainer);
-                            recipe.appendChild(ratingContainer);
-                        });
-                    }
-
-                    // Call addRating after loading recipes
-                    window.addEventListener('load', addRating);
-
-                    // Call addRating after adding a new recipe
-                    document.getElementById('add-recipe-form').addEventListener('submit', addRating);
-                </script>
-            </form>
-        </div>
+    <!-- Recipe 3: Vegetable Stir-fry -->
+    <div class="wrapper" id="recipe3Wrapper">
+      <div class="img" style="background-image: url(https://www.lamaistas.lt/uploads/modules/recipes/thumb920x573/19056.jpg);"></div> <!-- CHANGE IMAGE -->
+      <div class="title">
+        <h4>Vištienos krūtinėlė su česnakiniu sviestu</h4> <!-- CHANGE TITLE -->
+      </div>
+      <ul class="tab">
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe3Ingredients', 'recipe3Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M24.6,12.2c1.5,0,2.9,0,4.4,0c0.7,0.3,1.3,0.6,1.4,1.4c0.1,0.6,0,1.3,0,1.9c0,0.2,0,0.4,0.1,0.6c1.6,1.9,2.1,4.1,1.8,6.5 c0,0.1,0.1,0.3,0.2,0.4c1,0.6,2.1,1.4,3.4,1.1c0,0,0,0,0,0c0.5,0,0.9,0.4,0.9,0.9c0,0.9,0,1.8,0,2.7c0,0.6-0.4,0.9-0.9,0.9 c-0.3,0-0.5,0-0.8,0c-0.2,0.7-0.3,1.3-0.5,1.9c-0.5,1.5-1,2.9-1.5,4.4c-0.3,0.9-0.5,1-1.4,1c-4.6,0-9.2,0-13.8,0 c-0.5,0-0.9-0.2-1.1-0.6c-0.1-0.2-0.2-0.4-0.3-0.7c-0.6-2-1.5-3.9-1.8-6c-0.7,0-1.4,0.1-1.8-0.7c0-1.1,0-2.2,0-3.3 c0.3-0.5,0.7-0.7,1.3-0.6c0.5,0,0.9,0,1.4,0c0-0.1,0-0.2,0-0.3c0.2-2.8,2.4-5.2,5.4-5.2c0.2,0,0.3-0.1,0.4-0.3 c0.4-0.8,0.8-1.5,1.3-2.2c0.2-0.3,0.3-0.5,0.3-0.8C23,13.9,23,12.8,24.6,12.2z M30.5,21.9c0-0.6,0.1-1,0-1.5 c-0.2-1.5-0.8-2.9-2.2-3.7c-0.6-0.3-0.7-1.3,0-1.5c0.6-0.2,0.5-0.6,0.4-1c-1.2,0-2.4,0-3.6,0c-0.1,0.5-0.1,0.8,0.4,1.1 c0.2,0.1,0.4,0.5,0.4,0.8c0,0.4-0.3,0.7-0.6,0.8c-1.1,0.4-1.5,1.3-1.8,2.2c0.6,0.4,1.2,0.8,1.8,1.2c0.6-0.8,1.3-0.6,2-0.1 C28.2,20.7,29.3,21.2,30.5,21.9z M17.7,24.1c0.7,0,1.4-0.1,2.1,0c0.8,0.1,1.4-0.2,1.9-0.8c0.6-0.7,1.3-1.3,2-1.9 c-0.9-1-2.5-1.3-3.8-0.7C18.6,21.2,17.7,22.6,17.7,24.1z M24,30.5c0,0.6,0,1.1,0,1.7c0,0.7,0.4,1,0.9,1c0.6,0,0.9-0.4,0.9-1.1 c0-1.1,0-2.2,0-3.3c0-0.7-0.4-1.1-0.9-1.1c-0.6,0-0.9,0.4-0.9,1.1C24,29.4,24,29.9,24,30.5z M20.4,30.5c0,0.6,0,1.1,0,1.7 c0,0,0,0.1,0,0.1c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1c0-1.2,0-2.4,0-3.5c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 C20.4,29.3,20.4,29.9,20.4,30.5z M29.5,30.5c0-0.5,0-1.1,0-1.6c0,0,0-0.1,0-0.1c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 c0,1.2,0,2.3,0,3.5c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1C29.5,31.6,29.5,31.1,29.5,30.5z M30.5,24.1C30.5,24.1,30.5,24,30.5,24.1 c-1.3-0.8-2.7-1.6-4-2.4c-0.1,0-0.3-0.1-0.3,0c-0.8,0.8-1.6,1.5-2.5,2.4C26,24.1,28.2,24.1,30.5,24.1z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe3Directions', 'recipe3Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M13.4,26.9c-0.8-0.3-1.5-0.5-2.2-0.8c-1-0.4-1.5-1.2-1.2-2c0.3-0.8,1.2-1.1,2.2-0.8c1.2,0.3,1.3,0.5,1,1.8 c-0.5-0.2-1.1-0.3-1.6-0.5c0,0.1,0,0.1-0.1,0.2c0.7,0.3,1.4,0.5,2.4,0.9c-0.1-0.9-0.2-1.6-0.3-2.3c0-0.2-0.3-0.3-0.5-0.4 c-0.2-0.2-0.3-0.4-0.5-0.6c0.2-0.2,0.5-0.4,0.7-0.5c0.2-0.1,0.4,0,0.6,0c7.6,0,15.1,0,22.7,0c0.2,0,0.5,0,0.7,0 c0.2,0.1,0.4,0.3,0.4,0.4c0,0.2-0.2,0.5-0.3,0.6c-1.3,0.2-0.9,1.2-1,2c0,0.2,0,0.4,0.1,0.8c0.7-0.3,1.4-0.5,2.1-0.8 c0-0.1,0-0.1,0-0.2c-0.5,0.1-1,0.3-1.5,0.4c-0.5-0.8-0.3-1.3,0.6-1.6c0.2-0.1,0.5-0.1,0.7-0.2c0.9-0.1,1.6,0.3,1.9,1 c0.2,0.7-0.2,1.4-1.1,1.8c-0.7,0.3-1.4,0.5-2.2,0.8c0.2,0.7,0.4,1.4,0.6,2.1c0.9,3,0.2,5-2.4,6.8c-0.3,0.2-0.7,0.3-1,0.3 c-5.9,0-11.8,0-17.8,0c-0.3,0-0.7-0.1-1-0.3C12.6,34,11.9,32,12.7,29C12.9,28.3,13.1,27.7,13.4,26.9z M16,23.4c0.3,2-0.5,3.9-1,5.9 c-0.5,1.9,0.1,3.5,1.5,4.8c0.5,0.5,1,0.5,1.7,0.3c-0.4-0.3-0.6-0.6-0.9-0.8c-1.2-1.2-1.5-2.6-1.1-4.3c0.2-0.7,0.4-1.3,0.5-2 c0.1-1.1,0.2-2.3,0.2-3.5C16.9,23.4,16.6,23.2,16,23.4z"/><path class="st0" d="M36.6,21.1c-7.7,0-15.4,0-23.1,0c0.3-1.2,1-2,1.9-2.7c1.6-1.2,3.4-1.7,5.3-2.1c0.9-0.2,1.8-0.4,2.8-0.6 c-0.2-0.6-0.4-1-0.5-1.4c-0.3-0.8-0.1-1.4,0.8-1.7c1.1-0.5,2.2-0.5,3.3,0c0.8,0.4,1.1,1,0.8,1.8c-0.1,0.4-0.3,0.8-0.5,1.3 c0.8,0.2,1.5,0.4,2.2,0.6c2,0.4,4,1,5.6,2.3C35.7,19.2,36.4,19.9,36.6,21.1z M21.6,17c-1.9-0.1-5.4,1.6-6,3.1 c0.7,0.2,1.1-0.1,1.6-0.6c0.5-0.6,1.2-1,1.8-1.4C19.9,17.7,20.8,17.4,21.6,17z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe3Time', 'recipe3Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M25,12.2c6.6,0,12,5.4,12,12c0,6.6-5.4,12-12,12c-6.6,0-12-5.4-12-12C13,17.6,18.4,12.2,25,12.2z M29.4,15.8 c-1.2-0.6-2.4-1-3.8-1.1c0,0.4,0,0.7,0,1.1c0,0.5-0.2,0.8-0.6,0.8c-0.4,0-0.6-0.3-0.6-0.8c0-0.4,0-0.7,0-1.1 c-1.4,0.1-2.6,0.4-3.8,1.1c0.2,0.3,0.4,0.6,0.5,0.9c0,0.1,0,0.3-0.1,0.4c-0.1,0.1-0.3,0-0.4,0c-0.1,0-0.1-0.2-0.2-0.3 c-0.1-0.2-0.3-0.4-0.4-0.6c-1.1,0.7-2.1,1.6-2.8,2.7c0.3,0.2,0.7,0.4,1,0.6c0.4,0.2,0.5,0.6,0.3,0.9c-0.2,0.3-0.5,0.4-0.9,0.2 c-0.3-0.2-0.7-0.4-1-0.6c-0.6,1.2-0.9,2.5-1,3.8c0.3,0,0.6,0,0.9,0c0.2,0,0.4,0.1,0.4,0.3c0,0.3-0.2,0.4-0.5,0.4 c-0.3,0-0.6,0-0.9,0c0.1,1.4,0.4,2.6,1,3.8c0.2-0.1,0.3-0.2,0.5-0.3c0.2-0.1,0.3-0.2,0.5-0.3c0.4-0.2,0.8-0.2,1,0.2 c0.2,0.3,0.1,0.7-0.3,0.9c-0.3,0.2-0.6,0.4-1,0.6c0.8,1.1,1.7,2,2.9,2.8c0.1-0.3,0.3-0.5,0.4-0.7c0.1-0.2,0.3-0.4,0.6-0.3 c0.3,0.1,0.2,0.4,0,0.6c-0.1,0.2-0.3,0.5-0.4,0.8c1.2,0.6,2.4,1,3.7,1.1c0,0,0-0.1,0-0.1c0-0.3,0-0.7,0-1c0-0.5,0.2-0.8,0.6-0.8 c0.4,0,0.6,0.3,0.6,0.8c0,0.4,0,0.7,0,1.1c1.4-0.1,2.6-0.5,3.8-1.1c-0.2-0.3-0.4-0.6-0.5-0.9c0-0.1,0-0.3,0.1-0.4 c0.1-0.1,0.3,0,0.4,0c0.1,0,0.1,0.2,0.2,0.3c0.1,0.2,0.3,0.4,0.4,0.6c1.1-0.7,2.1-1.6,2.8-2.7c-0.3-0.2-0.6-0.4-0.9-0.5 c-0.4-0.2-0.5-0.6-0.3-0.9c0.2-0.3,0.6-0.4,1-0.2c0.3,0.2,0.6,0.4,0.9,0.5c0.6-1.2,0.9-2.5,1-3.9c-0.3,0-0.6,0-0.9,0 c-0.3,0-0.5-0.1-0.5-0.3c0-0.3,0.2-0.4,0.5-0.3c0.3,0,0.6,0,0.9,0c-0.1-1.4-0.4-2.6-1-3.8c-0.3,0.2-0.6,0.4-1,0.5 c-0.4,0.2-0.8,0.2-1-0.2c-0.2-0.3-0.1-0.7,0.3-0.9c0.3-0.2,0.6-0.4,1-0.6c-0.8-1.1-1.7-2-2.8-2.8c-0.1,0.3-0.3,0.5-0.4,0.8 c-0.1,0.2-0.3,0.4-0.5,0.2c-0.2-0.1-0.2-0.3-0.1-0.5C29.1,16.3,29.3,16.1,29.4,15.8z"/><path d="M25,25.5c-0.5,0-1-0.3-1.2-0.8c-0.1-0.1-0.2-0.3-0.3-0.4c-1.2-0.7-2.5-1.4-3.7-2.1c-0.3-0.2-0.5-0.3-0.5-0.7 c-0.1-0.6,0.5-1,1-0.8c0.1,0,0.2,0.1,0.4,0.2c1.2,0.7,2.4,1.3,3.6,2c0.1,0.1,0.3,0.1,0.5,0.1c0.2,0,0.5,0,0.7,0 c0.2,0,0.3,0,0.5-0.1c1.2-0.7,2.4-1.4,3.7-2c0.2-0.1,0.3-0.2,0.5-0.2c0.4,0,0.7,0.2,0.8,0.6c0.1,0.3,0,0.7-0.4,0.9 c-0.7,0.4-1.4,0.8-2.1,1.1c-0.6,0.3-1.2,0.7-1.8,1c-0.1,0.1-0.2,0.2-0.3,0.4C26.1,25.2,25.6,25.5,25,25.5z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe3Serving', 'recipe3Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M24.2,12.2c0.5,0,1.1,0,1.6,0c0.4,0.1,0.8,0.1,1.1,0.2c3.3,0.6,5.9,2.2,7.8,4.9c0.3,0.4,0.2,0.6-0.2,0.9 c-3.1,1.8-6.1,3.5-9.2,5.3c-0.3,0.1-0.5,0.2-0.8,0.2c-3,0-6,0-9,0c-0.6,0-1.3,0-1.9,0c-0.4,0-0.6-0.2-0.5-0.5 c0.2-2,0.8-3.9,1.9-5.6c1.9-2.8,4.5-4.5,7.8-5.1C23.3,12.3,23.7,12.3,24.2,12.2z"/><path d="M36.9,24.5c-0.1,3.1-1.3,5.8-3.6,8.1c-0.3,0.3-0.5,0.3-0.8,0c-2.2-2.6-4.4-5.3-6.6-7.9c-0.3-0.3-0.2-0.6,0.1-0.8 c3-1.7,5.9-3.4,8.9-5.1c0.4-0.2,0.6-0.1,0.8,0.3C36.5,20.7,36.9,22.5,36.9,24.5z"/><path d="M18.7,24.4c1.7,0,3.3,0,5,0c0.5,0,0.7,0.3,0.5,0.8c-1.2,3.1-2.3,6.3-3.4,9.4c-0.1,0.4-0.4,0.5-0.8,0.3 c-3.6-1.8-5.8-4.6-6.7-8.5c-0.1-0.4-0.1-0.9-0.2-1.4c0-0.4,0.1-0.6,0.6-0.6C15.3,24.4,17,24.4,18.7,24.4z"/><path d="M25,36c-1.1,0-2.1-0.2-3.2-0.4c-0.4-0.1-0.5-0.3-0.4-0.8c1.1-3,2.2-6.1,3.3-9.1c0.2-0.5,0.6-0.6,0.9-0.2 c1.6,2,3.3,3.9,4.9,5.9c0.4,0.5,0.9,1.1,1.3,1.6c0.3,0.3,0.2,0.6-0.1,0.8c-1.8,1.2-3.7,2-5.9,2.1C25.6,36,25.3,36,25,36z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event,  'recipe3Nutrition', 'recipe3Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M28.3,36c-2.2,0-4.4,0-6.6,0c0-0.6,0-1.2,0-1.7c0-7,0-14,0-20.9c0-0.1,0-0.2,0-0.3c0-0.5,0.3-0.8,0.8-0.8 c1.7,0,3.4,0,5.1,0c0.5,0,0.8,0.3,0.8,0.9c0,1.6,0,3.3,0,4.9c0,5.9,0,11.7,0,17.6C28.3,35.7,28.3,35.8,28.3,36z"/><path d="M37.1,36c-0.1,0-0.2,0-0.3,0c-2,0-4,0-6,0c-0.3,0-0.4-0.1-0.4-0.4c0-4.6,0-9.2,0-13.9c0-0.7,0.3-1,0.9-1c1.6,0,3.2,0,4.8,0 c0.6,0,0.9,0.3,0.9,0.9c0,4.6,0,9.2,0,13.8C37.1,35.7,37.1,35.8,37.1,36z"/><path d="M12.9,36c0-0.9,0-1.8,0-2.7c0-2.3,0-4.6,0-6.9c0-0.7,0.3-0.9,0.9-0.9c1.6,0,3.2,0,4.9,0c0.6,0,0.9,0.3,0.9,0.9 c0,1.7,0,3.4,0,5.1c0,1.4,0,2.8,0,4.2c0,0.3,0,0.4-0.3,0.4c-2,0-4,0-6,0C13.1,36,13,36,12.9,36z"/></g></svg></a></li>
+      </ul>
+      <div id="recipe3Ingredients" class="tabcontent">
+        <h3>Ingredientai</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>4 vištienos krūtinėlės (apie 150 g kiekviena)</li>
+          <li>3 šaukštai sviesto</li>
+          <li>2 skiltelės česnako</li>
+          <li>1 a. š. džiovinto raudonėlio</li>
+          <li>Druskos ir pipirų pagal skonį</li>
+        </ul>
+      </div>
+      <div id="recipe3Directions" class="tabcontent">
+        <h3>Paruošimas</h3> <!-- CHANGE CONTENT -->
+        <p>Įkaitinkite keptuvę, ištirpinkite sviestą.<br><br>
+       Suberkite smulkintą česnaką, trumpai pakepinkite.<br><br>
+       Dėkite vištieną, pabarstykite prieskoniais.<br><br>
+       Kepkite po 6-7 min. iš kiekvienos pusės arba iki pilno iškepimo.</p>
+      </div>
+      <div id="recipe3Time" class="tabcontent">
+        <h3>Laikas</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>Paruošimas: 10 min</li>
+          <li>Kepimas: 15 min</li>
+          <li>Iš viso: 25 min</li>
+        </ul>
+      </div>
+      <div id="recipe3Serving" class="tabcontent">
+        <h3>Porcijos</h3> <!-- CHANGE CONTENT -->
+        <p>Šis receptas skirtas keturiems žmonėms</p>
+      </div>
+      <div id="recipe3Nutrition" class="tabcontent">
+        <h3>Maistinė vertė</h3> <!-- CHANGE CONTENT -->
+        <p><i>Maistinė vertė (1 porcija)</i></p>
+        <ul>
+          <li>Kalorijos: 290 kcal </li>
+          <li>Riebalai: 13,8 g </li>
+          <li>Angliavandeniai: 1,2 g</li>
+          <li>Baltymai: 39,7 g</li>
+          <li>Cholesterolis: 108 mg </li>
+          <li>Natris: 180 mg </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Recipe 4 -->
+    <div class="wrapper" id="recipe4Wrapper">
+      <div class="img" style="background-image: url(https://honestbite.lt/wp-content/uploads/2022/10/sriuba-768x878.jpg);"></div> <!-- CHANGE IMAGE -->
+      <div class="title">
+        <h4>Kreminė moliūgų sriuba</h4> <!-- CHANGE TITLE -->
+      </div>
+      <ul class="tab">
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe4Ingredients', 'recipe4Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M24.6,12.2c1.5,0,2.9,0,4.4,0c0.7,0.3,1.3,0.6,1.4,1.4c0.1,0.6,0,1.3,0,1.9c0,0.2,0,0.4,0.1,0.6c1.6,1.9,2.1,4.1,1.8,6.5 c0,0.1,0.1,0.3,0.2,0.4c1,0.6,2.1,1.4,3.4,1.1c0,0,0,0,0,0c0.5,0,0.9,0.4,0.9,0.9c0,0.9,0,1.8,0,2.7c0,0.6-0.4,0.9-0.9,0.9 c-0.3,0-0.5,0-0.8,0c-0.2,0.7-0.3,1.3-0.5,1.9c-0.5,1.5-1,2.9-1.5,4.4c-0.3,0.9-0.5,1-1.4,1c-4.6,0-9.2,0-13.8,0 c-0.5,0-0.9-0.2-1.1-0.6c-0.1-0.2-0.2-0.4-0.3-0.7c-0.6-2-1.5-3.9-1.8-6c-0.7,0-1.4,0.1-1.8-0.7c0-1.1,0-2.2,0-3.3 c0.3-0.5,0.7-0.7,1.3-0.6c0.5,0,0.9,0,1.4,0c0-0.1,0-0.2,0-0.3c0.2-2.8,2.4-5.2,5.4-5.2c0.2,0,0.3-0.1,0.4-0.3 c0.4-0.8,0.8-1.5,1.3-2.2c0.2-0.3,0.3-0.5,0.3-0.8C23,13.9,23,12.8,24.6,12.2z M30.5,21.9c0-0.6,0.1-1,0-1.5 c-0.2-1.5-0.8-2.9-2.2-3.7c-0.6-0.3-0.7-1.3,0-1.5c0.6-0.2,0.5-0.6,0.4-1c-1.2,0-2.4,0-3.6,0c-0.1,0.5-0.1,0.8,0.4,1.1 c0.2,0.1,0.4,0.5,0.4,0.8c0,0.4-0.3,0.7-0.6,0.8c-1.1,0.4-1.5,1.3-1.8,2.2c0.6,0.4,1.2,0.8,1.8,1.2c0.6-0.8,1.3-0.6,2-0.1 C28.2,20.7,29.3,21.2,30.5,21.9z M17.7,24.1c0.7,0,1.4-0.1,2.1,0c0.8,0.1,1.4-0.2,1.9-0.8c0.6-0.7,1.3-1.3,2-1.9 c-0.9-1-2.5-1.3-3.8-0.7C18.6,21.2,17.7,22.6,17.7,24.1z M24,30.5c0,0.6,0,1.1,0,1.7c0,0.7,0.4,1,0.9,1c0.6,0,0.9-0.4,0.9-1.1 c0-1.1,0-2.2,0-3.3c0-0.7-0.4-1.1-0.9-1.1c-0.6,0-0.9,0.4-0.9,1.1C24,29.4,24,29.9,24,30.5z M20.4,30.5c0,0.6,0,1.1,0,1.7 c0,0,0,0.1,0,0.1c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1c0-1.2,0-2.4,0-3.5c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 C20.4,29.3,20.4,29.9,20.4,30.5z M29.5,30.5c0-0.5,0-1.1,0-1.6c0,0,0-0.1,0-0.1c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 c0,1.2,0,2.3,0,3.5c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1C29.5,31.6,29.5,31.1,29.5,30.5z M30.5,24.1C30.5,24.1,30.5,24,30.5,24.1 c-1.3-0.8-2.7-1.6-4-2.4c-0.1,0-0.3-0.1-0.3,0c-0.8,0.8-1.6,1.5-2.5,2.4C26,24.1,28.2,24.1,30.5,24.1z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe4Directions', 'recipe4Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M13.4,26.9c-0.8-0.3-1.5-0.5-2.2-0.8c-1-0.4-1.5-1.2-1.2-2c0.3-0.8,1.2-1.1,2.2-0.8c1.2,0.3,1.3,0.5,1,1.8 c-0.5-0.2-1.1-0.3-1.6-0.5c0,0.1,0,0.1-0.1,0.2c0.7,0.3,1.4,0.5,2.4,0.9c-0.1-0.9-0.2-1.6-0.3-2.3c0-0.2-0.3-0.3-0.5-0.4 c-0.2-0.2-0.3-0.4-0.5-0.6c0.2-0.2,0.5-0.4,0.7-0.5c0.2-0.1,0.4,0,0.6,0c7.6,0,15.1,0,22.7,0c0.2,0,0.5,0,0.7,0 c0.2,0.1,0.4,0.3,0.4,0.4c0,0.2-0.2,0.5-0.3,0.6c-1.3,0.2-0.9,1.2-1,2c0,0.2,0,0.4,0.1,0.8c0.7-0.3,1.4-0.5,2.1-0.8 c0-0.1,0-0.1,0-0.2c-0.5,0.1-1,0.3-1.5,0.4c-0.5-0.8-0.3-1.3,0.6-1.6c0.2-0.1,0.5-0.1,0.7-0.2c0.9-0.1,1.6,0.3,1.9,1 c0.2,0.7-0.2,1.4-1.1,1.8c-0.7,0.3-1.4,0.5-2.2,0.8c0.2,0.7,0.4,1.4,0.6,2.1c0.9,3,0.2,5-2.4,6.8c-0.3,0.2-0.7,0.3-1,0.3 c-5.9,0-11.8,0-17.8,0c-0.3,0-0.7-0.1-1-0.3C12.6,34,11.9,32,12.7,29C12.9,28.3,13.1,27.7,13.4,26.9z M16,23.4c0.3,2-0.5,3.9-1,5.9 c-0.5,1.9,0.1,3.5,1.5,4.8c0.5,0.5,1,0.5,1.7,0.3c-0.4-0.3-0.6-0.6-0.9-0.8c-1.2-1.2-1.5-2.6-1.1-4.3c0.2-0.7,0.4-1.3,0.5-2 c0.1-1.1,0.2-2.3,0.2-3.5C16.9,23.4,16.6,23.2,16,23.4z"/><path class="st0" d="M36.6,21.1c-7.7,0-15.4,0-23.1,0c0.3-1.2,1-2,1.9-2.7c1.6-1.2,3.4-1.7,5.3-2.1c0.9-0.2,1.8-0.4,2.8-0.6 c-0.2-0.6-0.4-1-0.5-1.4c-0.3-0.8-0.1-1.4,0.8-1.7c1.1-0.5,2.2-0.5,3.3,0c0.8,0.4,1.1,1,0.8,1.8c-0.1,0.4-0.3,0.8-0.5,1.3 c0.8,0.2,1.5,0.4,2.2,0.6c2,0.4,4,1,5.6,2.3C35.7,19.2,36.4,19.9,36.6,21.1z M21.6,17c-1.9-0.1-5.4,1.6-6,3.1 c0.7,0.2,1.1-0.1,1.6-0.6c0.5-0.6,1.2-1,1.8-1.4C19.9,17.7,20.8,17.4,21.6,17z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe4Time', 'recipe4Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M25,12.2c6.6,0,12,5.4,12,12c0,6.6-5.4,12-12,12c-6.6,0-12-5.4-12-12C13,17.6,18.4,12.2,25,12.2z M29.4,15.8 c-1.2-0.6-2.4-1-3.8-1.1c0,0.4,0,0.7,0,1.1c0,0.5-0.2,0.8-0.6,0.8c-0.4,0-0.6-0.3-0.6-0.8c0-0.4,0-0.7,0-1.1 c-1.4,0.1-2.6,0.4-3.8,1.1c0.2,0.3,0.4,0.6,0.5,0.9c0,0.1,0,0.3-0.1,0.4c-0.1,0.1-0.3,0-0.4,0c-0.1,0-0.1-0.2-0.2-0.3 c-0.1-0.2-0.3-0.4-0.4-0.6c-1.1,0.7-2.1,1.6-2.8,2.7c0.3,0.2,0.7,0.4,1,0.6c0.4,0.2,0.5,0.6,0.3,0.9c-0.2,0.3-0.5,0.4-0.9,0.2 c-0.3-0.2-0.7-0.4-1-0.6c-0.6,1.2-0.9,2.5-1,3.8c0.3,0,0.6,0,0.9,0c0.2,0,0.4,0.1,0.4,0.3c0,0.3-0.2,0.4-0.5,0.4 c-0.3,0-0.6,0-0.9,0c0.1,1.4,0.4,2.6,1,3.8c0.2-0.1,0.3-0.2,0.5-0.3c0.2-0.1,0.3-0.2,0.5-0.3c0.4-0.2,0.8-0.2,1,0.2 c0.2,0.3,0.1,0.7-0.3,0.9c-0.3,0.2-0.6,0.4-1,0.6c0.8,1.1,1.7,2,2.9,2.8c0.1-0.3,0.3-0.5,0.4-0.7c0.1-0.2,0.3-0.4,0.6-0.3 c0.3,0.1,0.2,0.4,0,0.6c-0.1,0.2-0.3,0.5-0.4,0.8c1.2,0.6,2.4,1,3.7,1.1c0,0,0-0.1,0-0.1c0-0.3,0-0.7,0-1c0-0.5,0.2-0.8,0.6-0.8 c0.4,0,0.6,0.3,0.6,0.8c0,0.4,0,0.7,0,1.1c1.4-0.1,2.6-0.5,3.8-1.1c-0.2-0.3-0.4-0.6-0.5-0.9c0-0.1,0-0.3,0.1-0.4 c0.1-0.1,0.3,0,0.4,0c0.1,0,0.1,0.2,0.2,0.3c0.1,0.2,0.3,0.4,0.4,0.6c1.1-0.7,2.1-1.6,2.8-2.7c-0.3-0.2-0.6-0.4-0.9-0.5 c-0.4-0.2-0.5-0.6-0.3-0.9c0.2-0.3,0.6-0.4,1-0.2c0.3,0.2,0.6,0.4,0.9,0.5c0.6-1.2,0.9-2.5,1-3.9c-0.3,0-0.6,0-0.9,0 c-0.3,0-0.5-0.1-0.5-0.3c0-0.3,0.2-0.4,0.5-0.3c0.3,0,0.6,0,0.9,0c-0.1-1.4-0.4-2.6-1-3.8c-0.3,0.2-0.6,0.4-1,0.5 c-0.4,0.2-0.8,0.2-1-0.2c-0.2-0.3-0.1-0.7,0.3-0.9c0.3-0.2,0.6-0.4,1-0.6c-0.8-1.1-1.7-2-2.8-2.8c-0.1,0.3-0.3,0.5-0.4,0.8 c-0.1,0.2-0.3,0.4-0.5,0.2c-0.2-0.1-0.2-0.3-0.1-0.5C29.1,16.3,29.3,16.1,29.4,15.8z"/><path d="M25,25.5c-0.5,0-1-0.3-1.2-0.8c-0.1-0.1-0.2-0.3-0.3-0.4c-1.2-0.7-2.5-1.4-3.7-2.1c-0.3-0.2-0.5-0.3-0.5-0.7 c-0.1-0.6,0.5-1,1-0.8c0.1,0,0.2,0.1,0.4,0.2c1.2,0.7,2.4,1.3,3.6,2c0.1,0.1,0.3,0.1,0.5,0.1c0.2,0,0.5,0,0.7,0 c0.2,0,0.3,0,0.5-0.1c1.2-0.7,2.4-1.4,3.7-2c0.2-0.1,0.3-0.2,0.5-0.2c0.4,0,0.7,0.2,0.8,0.6c0.1,0.3,0,0.7-0.4,0.9 c-0.7,0.4-1.4,0.8-2.1,1.1c-0.6,0.3-1.2,0.7-1.8,1c-0.1,0.1-0.2,0.2-0.3,0.4C26.1,25.2,25.6,25.5,25,25.5z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe4Serving', 'recipe4Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M24.2,12.2c0.5,0,1.1,0,1.6,0c0.4,0.1,0.8,0.1,1.1,0.2c3.3,0.6,5.9,2.2,7.8,4.9c0.3,0.4,0.2,0.6-0.2,0.9 c-3.1,1.8-6.1,3.5-9.2,5.3c-0.3,0.1-0.5,0.2-0.8,0.2c-3,0-6,0-9,0c-0.6,0-1.3,0-1.9,0c-0.4,0-0.6-0.2-0.5-0.5 c0.2-2,0.8-3.9,1.9-5.6c1.9-2.8,4.5-4.5,7.8-5.1C23.3,12.3,23.7,12.3,24.2,12.2z"/><path d="M36.9,24.5c-0.1,3.1-1.3,5.8-3.6,8.1c-0.3,0.3-0.5,0.3-0.8,0c-2.2-2.6-4.4-5.3-6.6-7.9c-0.3-0.3-0.2-0.6,0.1-0.8 c3-1.7,5.9-3.4,8.9-5.1c0.4-0.2,0.6-0.1,0.8,0.3C36.5,20.7,36.9,22.5,36.9,24.5z"/><path d="M18.7,24.4c1.7,0,3.3,0,5,0c0.5,0,0.7,0.3,0.5,0.8c-1.2,3.1-2.3,6.3-3.4,9.4c-0.1,0.4-0.4,0.5-0.8,0.3 c-3.6-1.8-5.8-4.6-6.7-8.5c-0.1-0.4-0.1-0.9-0.2-1.4c0-0.4,0.1-0.6,0.6-0.6C15.3,24.4,17,24.4,18.7,24.4z"/><path d="M25,36c-1.1,0-2.1-0.2-3.2-0.4c-0.4-0.1-0.5-0.3-0.4-0.8c1.1-3,2.2-6.1,3.3-9.1c0.2-0.5,0.6-0.6,0.9-0.2 c1.6,2,3.3,3.9,4.9,5.9c0.4,0.5,0.9,1.1,1.3,1.6c0.3,0.3,0.2,0.6-0.1,0.8c-1.8,1.2-3.7,2-5.9,2.1C25.6,36,25.3,36,25,36z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event,  'recipe4Nutrition', 'recipe4Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M28.3,36c-2.2,0-4.4,0-6.6,0c0-0.6,0-1.2,0-1.7c0-7,0-14,0-20.9c0-0.1,0-0.2,0-0.3c0-0.5,0.3-0.8,0.8-0.8 c1.7,0,3.4,0,5.1,0c0.5,0,0.8,0.3,0.8,0.9c0,1.6,0,3.3,0,4.9c0,5.9,0,11.7,0,17.6C28.3,35.7,28.3,35.8,28.3,36z"/><path d="M37.1,36c-0.1,0-0.2,0-0.3,0c-2,0-4,0-6,0c-0.3,0-0.4-0.1-0.4-0.4c0-4.6,0-9.2,0-13.9c0-0.7,0.3-1,0.9-1c1.6,0,3.2,0,4.8,0 c0.6,0,0.9,0.3,0.9,0.9c0,4.6,0,9.2,0,13.8C37.1,35.7,37.1,35.8,37.1,36z"/><path d="M12.9,36c0-0.9,0-1.8,0-2.7c0-2.3,0-4.6,0-6.9c0-0.7,0.3-0.9,0.9-0.9c1.6,0,3.2,0,4.9,0c0.6,0,0.9,0.3,0.9,0.9 c0,1.7,0,3.4,0,5.1c0,1.4,0,2.8,0,4.2c0,0.3,0,0.4-0.3,0.4c-2,0-4,0-6,0C13.1,36,13,36,12.9,36z"/></g></svg></a></li>
+      </ul>
+      <div id="recipe4Ingredients" class="tabcontent">
+        <h3>Ingredientai</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>500 g moliūgo</li>
+          <li>1 morka</li>
+          <li>1 mažas svogūnas</li>
+          <li>1 šaukštas sviesto</li>
+          <li>500 ml daržovių sultinio</li>
+          <li>100 ml grietinėlės (12%)</li>
+          <li>Druskos, pipirų</li>
+        </ul>
+      </div>
+      <div id="recipe4Directions" class="tabcontent">
+        <h3>Paruošimas</h3> <!-- CHANGE CONTENT -->
+        <p>Supjaustykite moliūgą, morką, svogūną.<br><br>
+       Svieste pakepinkite svogūną, sudėkite daržoves.<br><br>
+       Supilkite sultinį, virkite 20 min.<br><br>
+      Sutrinkite blenderiu, įmaišykite grietinėlę ir pakaitinkite.</p>
+      </div>
+      <div id="recipe4Time" class="tabcontent">
+        <h3>Laikas</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>Paruošimas: 10 min</li>
+          <li>Kepimas: 20 min</li>
+          <li>Iš viso: 30 min</li>
+        </ul>
+      </div>
+      <div id="recipe4Serving" class="tabcontent">
+        <h3>Porcijos</h3> <!-- CHANGE CONTENT -->
+        <p>Šis receptas skirtas keturiems žmonėms</p>
+      </div>
+      <div id="recipe4Nutrition" class="tabcontent">
+        <h3>Maistinė vertė</h3> <!-- CHANGE CONTENT -->
+        <p><i>Maistinė vertė (1 porcija)</i></p>
+        <ul>
+          <li>Kalorijos: 198 kcal </li>
+          <li>Riebalai: 11,3 g </li>
+          <li>Angliavandeniai: 18,2 g</li>
+          <li>Baltymai: 3,7 g</li>
+          <li>Cholesterolis: 22 mg </li>
+          <li>Natris: 320 mg </li>
+        </ul>
+      </div>
+    </div>
+    <!-- RECIPE 5 -->
+        <div class="wrapper" id="recipe5Wrapper">
+      <div class="img" style="background-image: url(https://www.valgis.lt/images/items/1354/makaronai-su-dziovintais-pomidorais-558c04858fa09-0.jpg);"></div> <!-- CHANGE IMAGE -->
+      <div class="title">
+        <h4>Makaronai su pesto ir saulėje džiovintais pomidorais</h4> <!-- CHANGE TITLE -->
+      </div>
+      <ul class="tab">
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe5Ingredients', 'recipe5Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M24.6,12.2c1.5,0,2.9,0,4.4,0c0.7,0.3,1.3,0.6,1.4,1.4c0.1,0.6,0,1.3,0,1.9c0,0.2,0,0.4,0.1,0.6c1.6,1.9,2.1,4.1,1.8,6.5 c0,0.1,0.1,0.3,0.2,0.4c1,0.6,2.1,1.4,3.4,1.1c0,0,0,0,0,0c0.5,0,0.9,0.4,0.9,0.9c0,0.9,0,1.8,0,2.7c0,0.6-0.4,0.9-0.9,0.9 c-0.3,0-0.5,0-0.8,0c-0.2,0.7-0.3,1.3-0.5,1.9c-0.5,1.5-1,2.9-1.5,4.4c-0.3,0.9-0.5,1-1.4,1c-4.6,0-9.2,0-13.8,0 c-0.5,0-0.9-0.2-1.1-0.6c-0.1-0.2-0.2-0.4-0.3-0.7c-0.6-2-1.5-3.9-1.8-6c-0.7,0-1.4,0.1-1.8-0.7c0-1.1,0-2.2,0-3.3 c0.3-0.5,0.7-0.7,1.3-0.6c0.5,0,0.9,0,1.4,0c0-0.1,0-0.2,0-0.3c0.2-2.8,2.4-5.2,5.4-5.2c0.2,0,0.3-0.1,0.4-0.3 c0.4-0.8,0.8-1.5,1.3-2.2c0.2-0.3,0.3-0.5,0.3-0.8C23,13.9,23,12.8,24.6,12.2z M30.5,21.9c0-0.6,0.1-1,0-1.5 c-0.2-1.5-0.8-2.9-2.2-3.7c-0.6-0.3-0.7-1.3,0-1.5c0.6-0.2,0.5-0.6,0.4-1c-1.2,0-2.4,0-3.6,0c-0.1,0.5-0.1,0.8,0.4,1.1 c0.2,0.1,0.4,0.5,0.4,0.8c0,0.4-0.3,0.7-0.6,0.8c-1.1,0.4-1.5,1.3-1.8,2.2c0.6,0.4,1.2,0.8,1.8,1.2c0.6-0.8,1.3-0.6,2-0.1 C28.2,20.7,29.3,21.2,30.5,21.9z M17.7,24.1c0.7,0,1.4-0.1,2.1,0c0.8,0.1,1.4-0.2,1.9-0.8c0.6-0.7,1.3-1.3,2-1.9 c-0.9-1-2.5-1.3-3.8-0.7C18.6,21.2,17.7,22.6,17.7,24.1z M24,30.5c0,0.6,0,1.1,0,1.7c0,0.7,0.4,1,0.9,1c0.6,0,0.9-0.4,0.9-1.1 c0-1.1,0-2.2,0-3.3c0-0.7-0.4-1.1-0.9-1.1c-0.6,0-0.9,0.4-0.9,1.1C24,29.4,24,29.9,24,30.5z M20.4,30.5c0,0.6,0,1.1,0,1.7 c0,0,0,0.1,0,0.1c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1c0-1.2,0-2.4,0-3.5c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 C20.4,29.3,20.4,29.9,20.4,30.5z M29.5,30.5c0-0.5,0-1.1,0-1.6c0,0,0-0.1,0-0.1c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 c0,1.2,0,2.3,0,3.5c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1C29.5,31.6,29.5,31.1,29.5,30.5z M30.5,24.1C30.5,24.1,30.5,24,30.5,24.1 c-1.3-0.8-2.7-1.6-4-2.4c-0.1,0-0.3-0.1-0.3,0c-0.8,0.8-1.6,1.5-2.5,2.4C26,24.1,28.2,24.1,30.5,24.1z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe5Directions', 'recipe5Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M13.4,26.9c-0.8-0.3-1.5-0.5-2.2-0.8c-1-0.4-1.5-1.2-1.2-2c0.3-0.8,1.2-1.1,2.2-0.8c1.2,0.3,1.3,0.5,1,1.8 c-0.5-0.2-1.1-0.3-1.6-0.5c0,0.1,0,0.1-0.1,0.2c0.7,0.3,1.4,0.5,2.4,0.9c-0.1-0.9-0.2-1.6-0.3-2.3c0-0.2-0.3-0.3-0.5-0.4 c-0.2-0.2-0.3-0.4-0.5-0.6c0.2-0.2,0.5-0.4,0.7-0.5c0.2-0.1,0.4,0,0.6,0c7.6,0,15.1,0,22.7,0c0.2,0,0.5,0,0.7,0 c0.2,0.1,0.4,0.3,0.4,0.4c0,0.2-0.2,0.5-0.3,0.6c-1.3,0.2-0.9,1.2-1,2c0,0.2,0,0.4,0.1,0.8c0.7-0.3,1.4-0.5,2.1-0.8 c0-0.1,0-0.1,0-0.2c-0.5,0.1-1,0.3-1.5,0.4c-0.5-0.8-0.3-1.3,0.6-1.6c0.2-0.1,0.5-0.1,0.7-0.2c0.9-0.1,1.6,0.3,1.9,1 c0.2,0.7-0.2,1.4-1.1,1.8c-0.7,0.3-1.4,0.5-2.2,0.8c0.2,0.7,0.4,1.4,0.6,2.1c0.9,3,0.2,5-2.4,6.8c-0.3,0.2-0.7,0.3-1,0.3 c-5.9,0-11.8,0-17.8,0c-0.3,0-0.7-0.1-1-0.3C12.6,34,11.9,32,12.7,29C12.9,28.3,13.1,27.7,13.4,26.9z M16,23.4c0.3,2-0.5,3.9-1,5.9 c-0.5,1.9,0.1,3.5,1.5,4.8c0.5,0.5,1,0.5,1.7,0.3c-0.4-0.3-0.6-0.6-0.9-0.8c-1.2-1.2-1.5-2.6-1.1-4.3c0.2-0.7,0.4-1.3,0.5-2 c0.1-1.1,0.2-2.3,0.2-3.5C16.9,23.4,16.6,23.2,16,23.4z"/><path class="st0" d="M36.6,21.1c-7.7,0-15.4,0-23.1,0c0.3-1.2,1-2,1.9-2.7c1.6-1.2,3.4-1.7,5.3-2.1c0.9-0.2,1.8-0.4,2.8-0.6 c-0.2-0.6-0.4-1-0.5-1.4c-0.3-0.8-0.1-1.4,0.8-1.7c1.1-0.5,2.2-0.5,3.3,0c0.8,0.4,1.1,1,0.8,1.8c-0.1,0.4-0.3,0.8-0.5,1.3 c0.8,0.2,1.5,0.4,2.2,0.6c2,0.4,4,1,5.6,2.3C35.7,19.2,36.4,19.9,36.6,21.1z M21.6,17c-1.9-0.1-5.4,1.6-6,3.1 c0.7,0.2,1.1-0.1,1.6-0.6c0.5-0.6,1.2-1,1.8-1.4C19.9,17.7,20.8,17.4,21.6,17z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe5Time', 'recipe5Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M25,12.2c6.6,0,12,5.4,12,12c0,6.6-5.4,12-12,12c-6.6,0-12-5.4-12-12C13,17.6,18.4,12.2,25,12.2z M29.4,15.8 c-1.2-0.6-2.4-1-3.8-1.1c0,0.4,0,0.7,0,1.1c0,0.5-0.2,0.8-0.6,0.8c-0.4,0-0.6-0.3-0.6-0.8c0-0.4,0-0.7,0-1.1 c-1.4,0.1-2.6,0.4-3.8,1.1c0.2,0.3,0.4,0.6,0.5,0.9c0,0.1,0,0.3-0.1,0.4c-0.1,0.1-0.3,0-0.4,0c-0.1,0-0.1-0.2-0.2-0.3 c-0.1-0.2-0.3-0.4-0.4-0.6c-1.1,0.7-2.1,1.6-2.8,2.7c0.3,0.2,0.7,0.4,1,0.6c0.4,0.2,0.5,0.6,0.3,0.9c-0.2,0.3-0.5,0.4-0.9,0.2 c-0.3-0.2-0.7-0.4-1-0.6c-0.6,1.2-0.9,2.5-1,3.8c0.3,0,0.6,0,0.9,0c0.2,0,0.4,0.1,0.4,0.3c0,0.3-0.2,0.4-0.5,0.4 c-0.3,0-0.6,0-0.9,0c0.1,1.4,0.4,2.6,1,3.8c0.2-0.1,0.3-0.2,0.5-0.3c0.2-0.1,0.3-0.2,0.5-0.3c0.4-0.2,0.8-0.2,1,0.2 c0.2,0.3,0.1,0.7-0.3,0.9c-0.3,0.2-0.6,0.4-1,0.6c0.8,1.1,1.7,2,2.9,2.8c0.1-0.3,0.3-0.5,0.4-0.7c0.1-0.2,0.3-0.4,0.6-0.3 c0.3,0.1,0.2,0.4,0,0.6c-0.1,0.2-0.3,0.5-0.4,0.8c1.2,0.6,2.4,1,3.7,1.1c0,0,0-0.1,0-0.1c0-0.3,0-0.7,0-1c0-0.5,0.2-0.8,0.6-0.8 c0.4,0,0.6,0.3,0.6,0.8c0,0.4,0,0.7,0,1.1c1.4-0.1,2.6-0.5,3.8-1.1c-0.2-0.3-0.4-0.6-0.5-0.9c0-0.1,0-0.3,0.1-0.4 c0.1-0.1,0.3,0,0.4,0c0.1,0,0.1,0.2,0.2,0.3c0.1,0.2,0.3,0.4,0.4,0.6c1.1-0.7,2.1-1.6,2.8-2.7c-0.3-0.2-0.6-0.4-0.9-0.5 c-0.4-0.2-0.5-0.6-0.3-0.9c0.2-0.3,0.6-0.4,1-0.2c0.3,0.2,0.6,0.4,0.9,0.5c0.6-1.2,0.9-2.5,1-3.9c-0.3,0-0.6,0-0.9,0 c-0.3,0-0.5-0.1-0.5-0.3c0-0.3,0.2-0.4,0.5-0.3c0.3,0,0.6,0,0.9,0c-0.1-1.4-0.4-2.6-1-3.8c-0.3,0.2-0.6,0.4-1,0.5 c-0.4,0.2-0.8,0.2-1-0.2c-0.2-0.3-0.1-0.7,0.3-0.9c0.3-0.2,0.6-0.4,1-0.6c-0.8-1.1-1.7-2-2.8-2.8c-0.1,0.3-0.3,0.5-0.4,0.8 c-0.1,0.2-0.3,0.4-0.5,0.2c-0.2-0.1-0.2-0.3-0.1-0.5C29.1,16.3,29.3,16.1,29.4,15.8z"/><path d="M25,25.5c-0.5,0-1-0.3-1.2-0.8c-0.1-0.1-0.2-0.3-0.3-0.4c-1.2-0.7-2.5-1.4-3.7-2.1c-0.3-0.2-0.5-0.3-0.5-0.7 c-0.1-0.6,0.5-1,1-0.8c0.1,0,0.2,0.1,0.4,0.2c1.2,0.7,2.4,1.3,3.6,2c0.1,0.1,0.3,0.1,0.5,0.1c0.2,0,0.5,0,0.7,0 c0.2,0,0.3,0,0.5-0.1c1.2-0.7,2.4-1.4,3.7-2c0.2-0.1,0.3-0.2,0.5-0.2c0.4,0,0.7,0.2,0.8,0.6c0.1,0.3,0,0.7-0.4,0.9 c-0.7,0.4-1.4,0.8-2.1,1.1c-0.6,0.3-1.2,0.7-1.8,1c-0.1,0.1-0.2,0.2-0.3,0.4C26.1,25.2,25.6,25.5,25,25.5z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe5Serving', 'recipe5Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M24.2,12.2c0.5,0,1.1,0,1.6,0c0.4,0.1,0.8,0.1,1.1,0.2c3.3,0.6,5.9,2.2,7.8,4.9c0.3,0.4,0.2,0.6-0.2,0.9 c-3.1,1.8-6.1,3.5-9.2,5.3c-0.3,0.1-0.5,0.2-0.8,0.2c-3,0-6,0-9,0c-0.6,0-1.3,0-1.9,0c-0.4,0-0.6-0.2-0.5-0.5 c0.2-2,0.8-3.9,1.9-5.6c1.9-2.8,4.5-4.5,7.8-5.1C23.3,12.3,23.7,12.3,24.2,12.2z"/><path d="M36.9,24.5c-0.1,3.1-1.3,5.8-3.6,8.1c-0.3,0.3-0.5,0.3-0.8,0c-2.2-2.6-4.4-5.3-6.6-7.9c-0.3-0.3-0.2-0.6,0.1-0.8 c3-1.7,5.9-3.4,8.9-5.1c0.4-0.2,0.6-0.1,0.8,0.3C36.5,20.7,36.9,22.5,36.9,24.5z"/><path d="M18.7,24.4c1.7,0,3.3,0,5,0c0.5,0,0.7,0.3,0.5,0.8c-1.2,3.1-2.3,6.3-3.4,9.4c-0.1,0.4-0.4,0.5-0.8,0.3 c-3.6-1.8-5.8-4.6-6.7-8.5c-0.1-0.4-0.1-0.9-0.2-1.4c0-0.4,0.1-0.6,0.6-0.6C15.3,24.4,17,24.4,18.7,24.4z"/><path d="M25,36c-1.1,0-2.1-0.2-3.2-0.4c-0.4-0.1-0.5-0.3-0.4-0.8c1.1-3,2.2-6.1,3.3-9.1c0.2-0.5,0.6-0.6,0.9-0.2 c1.6,2,3.3,3.9,4.9,5.9c0.4,0.5,0.9,1.1,1.3,1.6c0.3,0.3,0.2,0.6-0.1,0.8c-1.8,1.2-3.7,2-5.9,2.1C25.6,36,25.3,36,25,36z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event,  'recipe5Nutrition', 'recipe5Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M28.3,36c-2.2,0-4.4,0-6.6,0c0-0.6,0-1.2,0-1.7c0-7,0-14,0-20.9c0-0.1,0-0.2,0-0.3c0-0.5,0.3-0.8,0.8-0.8 c1.7,0,3.4,0,5.1,0c0.5,0,0.8,0.3,0.8,0.9c0,1.6,0,3.3,0,4.9c0,5.9,0,11.7,0,17.6C28.3,35.7,28.3,35.8,28.3,36z"/><path d="M37.1,36c-0.1,0-0.2,0-0.3,0c-2,0-4,0-6,0c-0.3,0-0.4-0.1-0.4-0.4c0-4.6,0-9.2,0-13.9c0-0.7,0.3-1,0.9-1c1.6,0,3.2,0,4.8,0 c0.6,0,0.9,0.3,0.9,0.9c0,4.6,0,9.2,0,13.8C37.1,35.7,37.1,35.8,37.1,36z"/><path d="M12.9,36c0-0.9,0-1.8,0-2.7c0-2.3,0-4.6,0-6.9c0-0.7,0.3-0.9,0.9-0.9c1.6,0,3.2,0,4.9,0c0.6,0,0.9,0.3,0.9,0.9 c0,1.7,0,3.4,0,5.1c0,1.4,0,2.8,0,4.2c0,0.3,0,0.4-0.3,0.4c-2,0-4,0-6,0C13.1,36,13,36,12.9,36z"/></g></svg></a></li>
+      </ul>
+      <div id="recipe5Ingredients" class="tabcontent">
+        <h3>Ingredientai</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>250 g mėgstamų makaronų</li>
+          <li>2 šaukštai pesto padažo</li>
+          <li>6-8 saulėje džiovinti pomidorai (aliejuje)</li>
+          <li>2 šaukštai tarkuoto parmezano</li>
+          <li>Druska pagal skonį</li>
+        </ul>
+      </div>
+      <div id="recipe5Directions" class="tabcontent">
+        <h3>Paruošimas</h3> <!-- CHANGE CONTENT -->
+        <p>Išvirkite makaronus sūriame vandenyje pagal instrukciją.<br><br>
+           Nusausinkite, įmaišykite pesto ir supjaustytus pomidorus.<br><br>
+           Patiekite pabarstę parmezanu.</p>
+      </div>
+      <div id="recipe5Time" class="tabcontent">
+        <h3>Laikas</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>Paruošimas: 5 min</li>
+          <li>Kepimas: 10 min</li>
+          <li>Iš viso: 15 min</li>
+        </ul>
+      </div>
+      <div id="recipe5Serving" class="tabcontent">
+        <h3>Porcijos</h3> <!-- CHANGE CONTENT -->
+        <p>Šis receptas skirtas dviems žmonėms</p>
+      </div>
+      <div id="recipe5Nutrition" class="tabcontent">
+        <h3>Maistinė vertė</h3> <!-- CHANGE CONTENT -->
+        <p><i>Maistinė vertė (1 porcija)</i></p>
+        <ul>
+          <li>Kalorijos: 425 kcal </li>
+          <li>Riebalai: 18,5 g </li>
+          <li>Angliavandeniai: 49,2 g</li>
+          <li>Baltymai: 13,7 g</li>
+          <li>Cholesterolis: 9 mg </li>
+          <li>Natris: 315 mg </li>
+        </ul>
+      </div>
+    </div>
+        <!-- RECIPE 6 -->
+        <div class="wrapper" id="recipe6Wrapper">
+      <div class="img" style="background-image: url(https://s1.15min.lt/static/cache/OTcweDU4MCwxMTMweDU4MCwxMTc5MTg0LG9yaWdpbmFsLCxpZD05OTQzODA2JmRhdGU9MjAyNSUyRjAxJTJGMjIsMzc0NDE4MDExNQ==/pusryciu-takas-su-feta-kiausiniais-ir-spinatais-6790a6bbb816a.jpg);"></div> <!-- CHANGE IMAGE -->
+      <div class="title">
+        <h4>Kiaušinienė su špinatais ir feta</h4> <!-- CHANGE TITLE -->
+      </div>
+      <ul class="tab">
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe6Ingredients', 'recipe6Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M24.6,12.2c1.5,0,2.9,0,4.4,0c0.7,0.3,1.3,0.6,1.4,1.4c0.1,0.6,0,1.3,0,1.9c0,0.2,0,0.4,0.1,0.6c1.6,1.9,2.1,4.1,1.8,6.5 c0,0.1,0.1,0.3,0.2,0.4c1,0.6,2.1,1.4,3.4,1.1c0,0,0,0,0,0c0.5,0,0.9,0.4,0.9,0.9c0,0.9,0,1.8,0,2.7c0,0.6-0.4,0.9-0.9,0.9 c-0.3,0-0.5,0-0.8,0c-0.2,0.7-0.3,1.3-0.5,1.9c-0.5,1.5-1,2.9-1.5,4.4c-0.3,0.9-0.5,1-1.4,1c-4.6,0-9.2,0-13.8,0 c-0.5,0-0.9-0.2-1.1-0.6c-0.1-0.2-0.2-0.4-0.3-0.7c-0.6-2-1.5-3.9-1.8-6c-0.7,0-1.4,0.1-1.8-0.7c0-1.1,0-2.2,0-3.3 c0.3-0.5,0.7-0.7,1.3-0.6c0.5,0,0.9,0,1.4,0c0-0.1,0-0.2,0-0.3c0.2-2.8,2.4-5.2,5.4-5.2c0.2,0,0.3-0.1,0.4-0.3 c0.4-0.8,0.8-1.5,1.3-2.2c0.2-0.3,0.3-0.5,0.3-0.8C23,13.9,23,12.8,24.6,12.2z M30.5,21.9c0-0.6,0.1-1,0-1.5 c-0.2-1.5-0.8-2.9-2.2-3.7c-0.6-0.3-0.7-1.3,0-1.5c0.6-0.2,0.5-0.6,0.4-1c-1.2,0-2.4,0-3.6,0c-0.1,0.5-0.1,0.8,0.4,1.1 c0.2,0.1,0.4,0.5,0.4,0.8c0,0.4-0.3,0.7-0.6,0.8c-1.1,0.4-1.5,1.3-1.8,2.2c0.6,0.4,1.2,0.8,1.8,1.2c0.6-0.8,1.3-0.6,2-0.1 C28.2,20.7,29.3,21.2,30.5,21.9z M17.7,24.1c0.7,0,1.4-0.1,2.1,0c0.8,0.1,1.4-0.2,1.9-0.8c0.6-0.7,1.3-1.3,2-1.9 c-0.9-1-2.5-1.3-3.8-0.7C18.6,21.2,17.7,22.6,17.7,24.1z M24,30.5c0,0.6,0,1.1,0,1.7c0,0.7,0.4,1,0.9,1c0.6,0,0.9-0.4,0.9-1.1 c0-1.1,0-2.2,0-3.3c0-0.7-0.4-1.1-0.9-1.1c-0.6,0-0.9,0.4-0.9,1.1C24,29.4,24,29.9,24,30.5z M20.4,30.5c0,0.6,0,1.1,0,1.7 c0,0,0,0.1,0,0.1c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1c0-1.2,0-2.4,0-3.5c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 C20.4,29.3,20.4,29.9,20.4,30.5z M29.5,30.5c0-0.5,0-1.1,0-1.6c0,0,0-0.1,0-0.1c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 c0,1.2,0,2.3,0,3.5c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1C29.5,31.6,29.5,31.1,29.5,30.5z M30.5,24.1C30.5,24.1,30.5,24,30.5,24.1 c-1.3-0.8-2.7-1.6-4-2.4c-0.1,0-0.3-0.1-0.3,0c-0.8,0.8-1.6,1.5-2.5,2.4C26,24.1,28.2,24.1,30.5,24.1z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe6Directions', 'recipe6Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M13.4,26.9c-0.8-0.3-1.5-0.5-2.2-0.8c-1-0.4-1.5-1.2-1.2-2c0.3-0.8,1.2-1.1,2.2-0.8c1.2,0.3,1.3,0.5,1,1.8 c-0.5-0.2-1.1-0.3-1.6-0.5c0,0.1,0,0.1-0.1,0.2c0.7,0.3,1.4,0.5,2.4,0.9c-0.1-0.9-0.2-1.6-0.3-2.3c0-0.2-0.3-0.3-0.5-0.4 c-0.2-0.2-0.3-0.4-0.5-0.6c0.2-0.2,0.5-0.4,0.7-0.5c0.2-0.1,0.4,0,0.6,0c7.6,0,15.1,0,22.7,0c0.2,0,0.5,0,0.7,0 c0.2,0.1,0.4,0.3,0.4,0.4c0,0.2-0.2,0.5-0.3,0.6c-1.3,0.2-0.9,1.2-1,2c0,0.2,0,0.4,0.1,0.8c0.7-0.3,1.4-0.5,2.1-0.8 c0-0.1,0-0.1,0-0.2c-0.5,0.1-1,0.3-1.5,0.4c-0.5-0.8-0.3-1.3,0.6-1.6c0.2-0.1,0.5-0.1,0.7-0.2c0.9-0.1,1.6,0.3,1.9,1 c0.2,0.7-0.2,1.4-1.1,1.8c-0.7,0.3-1.4,0.5-2.2,0.8c0.2,0.7,0.4,1.4,0.6,2.1c0.9,3,0.2,5-2.4,6.8c-0.3,0.2-0.7,0.3-1,0.3 c-5.9,0-11.8,0-17.8,0c-0.3,0-0.7-0.1-1-0.3C12.6,34,11.9,32,12.7,29C12.9,28.3,13.1,27.7,13.4,26.9z M16,23.4c0.3,2-0.5,3.9-1,5.9 c-0.5,1.9,0.1,3.5,1.5,4.8c0.5,0.5,1,0.5,1.7,0.3c-0.4-0.3-0.6-0.6-0.9-0.8c-1.2-1.2-1.5-2.6-1.1-4.3c0.2-0.7,0.4-1.3,0.5-2 c0.1-1.1,0.2-2.3,0.2-3.5C16.9,23.4,16.6,23.2,16,23.4z"/><path class="st0" d="M36.6,21.1c-7.7,0-15.4,0-23.1,0c0.3-1.2,1-2,1.9-2.7c1.6-1.2,3.4-1.7,5.3-2.1c0.9-0.2,1.8-0.4,2.8-0.6 c-0.2-0.6-0.4-1-0.5-1.4c-0.3-0.8-0.1-1.4,0.8-1.7c1.1-0.5,2.2-0.5,3.3,0c0.8,0.4,1.1,1,0.8,1.8c-0.1,0.4-0.3,0.8-0.5,1.3 c0.8,0.2,1.5,0.4,2.2,0.6c2,0.4,4,1,5.6,2.3C35.7,19.2,36.4,19.9,36.6,21.1z M21.6,17c-1.9-0.1-5.4,1.6-6,3.1 c0.7,0.2,1.1-0.1,1.6-0.6c0.5-0.6,1.2-1,1.8-1.4C19.9,17.7,20.8,17.4,21.6,17z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe6Time', 'recipe6Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M25,12.2c6.6,0,12,5.4,12,12c0,6.6-5.4,12-12,12c-6.6,0-12-5.4-12-12C13,17.6,18.4,12.2,25,12.2z M29.4,15.8 c-1.2-0.6-2.4-1-3.8-1.1c0,0.4,0,0.7,0,1.1c0,0.5-0.2,0.8-0.6,0.8c-0.4,0-0.6-0.3-0.6-0.8c0-0.4,0-0.7,0-1.1 c-1.4,0.1-2.6,0.4-3.8,1.1c0.2,0.3,0.4,0.6,0.5,0.9c0,0.1,0,0.3-0.1,0.4c-0.1,0.1-0.3,0-0.4,0c-0.1,0-0.1-0.2-0.2-0.3 c-0.1-0.2-0.3-0.4-0.4-0.6c-1.1,0.7-2.1,1.6-2.8,2.7c0.3,0.2,0.7,0.4,1,0.6c0.4,0.2,0.5,0.6,0.3,0.9c-0.2,0.3-0.5,0.4-0.9,0.2 c-0.3-0.2-0.7-0.4-1-0.6c-0.6,1.2-0.9,2.5-1,3.8c0.3,0,0.6,0,0.9,0c0.2,0,0.4,0.1,0.4,0.3c0,0.3-0.2,0.4-0.5,0.4 c-0.3,0-0.6,0-0.9,0c0.1,1.4,0.4,2.6,1,3.8c0.2-0.1,0.3-0.2,0.5-0.3c0.2-0.1,0.3-0.2,0.5-0.3c0.4-0.2,0.8-0.2,1,0.2 c0.2,0.3,0.1,0.7-0.3,0.9c-0.3,0.2-0.6,0.4-1,0.6c0.8,1.1,1.7,2,2.9,2.8c0.1-0.3,0.3-0.5,0.4-0.7c0.1-0.2,0.3-0.4,0.6-0.3 c0.3,0.1,0.2,0.4,0,0.6c-0.1,0.2-0.3,0.5-0.4,0.8c1.2,0.6,2.4,1,3.7,1.1c0,0,0-0.1,0-0.1c0-0.3,0-0.7,0-1c0-0.5,0.2-0.8,0.6-0.8 c0.4,0,0.6,0.3,0.6,0.8c0,0.4,0,0.7,0,1.1c1.4-0.1,2.6-0.5,3.8-1.1c-0.2-0.3-0.4-0.6-0.5-0.9c0-0.1,0-0.3,0.1-0.4 c0.1-0.1,0.3,0,0.4,0c0.1,0,0.1,0.2,0.2,0.3c0.1,0.2,0.3,0.4,0.4,0.6c1.1-0.7,2.1-1.6,2.8-2.7c-0.3-0.2-0.6-0.4-0.9-0.5 c-0.4-0.2-0.5-0.6-0.3-0.9c0.2-0.3,0.6-0.4,1-0.2c0.3,0.2,0.6,0.4,0.9,0.5c0.6-1.2,0.9-2.5,1-3.9c-0.3,0-0.6,0-0.9,0 c-0.3,0-0.5-0.1-0.5-0.3c0-0.3,0.2-0.4,0.5-0.3c0.3,0,0.6,0,0.9,0c-0.1-1.4-0.4-2.6-1-3.8c-0.3,0.2-0.6,0.4-1,0.5 c-0.4,0.2-0.8,0.2-1-0.2c-0.2-0.3-0.1-0.7,0.3-0.9c0.3-0.2,0.6-0.4,1-0.6c-0.8-1.1-1.7-2-2.8-2.8c-0.1,0.3-0.3,0.5-0.4,0.8 c-0.1,0.2-0.3,0.4-0.5,0.2c-0.2-0.1-0.2-0.3-0.1-0.5C29.1,16.3,29.3,16.1,29.4,15.8z"/><path d="M25,25.5c-0.5,0-1-0.3-1.2-0.8c-0.1-0.1-0.2-0.3-0.3-0.4c-1.2-0.7-2.5-1.4-3.7-2.1c-0.3-0.2-0.5-0.3-0.5-0.7 c-0.1-0.6,0.5-1,1-0.8c0.1,0,0.2,0.1,0.4,0.2c1.2,0.7,2.4,1.3,3.6,2c0.1,0.1,0.3,0.1,0.5,0.1c0.2,0,0.5,0,0.7,0 c0.2,0,0.3,0,0.5-0.1c1.2-0.7,2.4-1.4,3.7-2c0.2-0.1,0.3-0.2,0.5-0.2c0.4,0,0.7,0.2,0.8,0.6c0.1,0.3,0,0.7-0.4,0.9 c-0.7,0.4-1.4,0.8-2.1,1.1c-0.6,0.3-1.2,0.7-1.8,1c-0.1,0.1-0.2,0.2-0.3,0.4C26.1,25.2,25.6,25.5,25,25.5z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe6Serving', 'recipe6Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M24.2,12.2c0.5,0,1.1,0,1.6,0c0.4,0.1,0.8,0.1,1.1,0.2c3.3,0.6,5.9,2.2,7.8,4.9c0.3,0.4,0.2,0.6-0.2,0.9 c-3.1,1.8-6.1,3.5-9.2,5.3c-0.3,0.1-0.5,0.2-0.8,0.2c-3,0-6,0-9,0c-0.6,0-1.3,0-1.9,0c-0.4,0-0.6-0.2-0.5-0.5 c0.2-2,0.8-3.9,1.9-5.6c1.9-2.8,4.5-4.5,7.8-5.1C23.3,12.3,23.7,12.3,24.2,12.2z"/><path d="M36.9,24.5c-0.1,3.1-1.3,5.8-3.6,8.1c-0.3,0.3-0.5,0.3-0.8,0c-2.2-2.6-4.4-5.3-6.6-7.9c-0.3-0.3-0.2-0.6,0.1-0.8 c3-1.7,5.9-3.4,8.9-5.1c0.4-0.2,0.6-0.1,0.8,0.3C36.5,20.7,36.9,22.5,36.9,24.5z"/><path d="M18.7,24.4c1.7,0,3.3,0,5,0c0.5,0,0.7,0.3,0.5,0.8c-1.2,3.1-2.3,6.3-3.4,9.4c-0.1,0.4-0.4,0.5-0.8,0.3 c-3.6-1.8-5.8-4.6-6.7-8.5c-0.1-0.4-0.1-0.9-0.2-1.4c0-0.4,0.1-0.6,0.6-0.6C15.3,24.4,17,24.4,18.7,24.4z"/><path d="M25,36c-1.1,0-2.1-0.2-3.2-0.4c-0.4-0.1-0.5-0.3-0.4-0.8c1.1-3,2.2-6.1,3.3-9.1c0.2-0.5,0.6-0.6,0.9-0.2 c1.6,2,3.3,3.9,4.9,5.9c0.4,0.5,0.9,1.1,1.3,1.6c0.3,0.3,0.2,0.6-0.1,0.8c-1.8,1.2-3.7,2-5.9,2.1C25.6,36,25.3,36,25,36z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event,  'recipe6Nutrition', 'recipe6Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M28.3,36c-2.2,0-4.4,0-6.6,0c0-0.6,0-1.2,0-1.7c0-7,0-14,0-20.9c0-0.1,0-0.2,0-0.3c0-0.5,0.3-0.8,0.8-0.8 c1.7,0,3.4,0,5.1,0c0.5,0,0.8,0.3,0.8,0.9c0,1.6,0,3.3,0,4.9c0,5.9,0,11.7,0,17.6C28.3,35.7,28.3,35.8,28.3,36z"/><path d="M37.1,36c-0.1,0-0.2,0-0.3,0c-2,0-4,0-6,0c-0.3,0-0.4-0.1-0.4-0.4c0-4.6,0-9.2,0-13.9c0-0.7,0.3-1,0.9-1c1.6,0,3.2,0,4.8,0 c0.6,0,0.9,0.3,0.9,0.9c0,4.6,0,9.2,0,13.8C37.1,35.7,37.1,35.8,37.1,36z"/><path d="M12.9,36c0-0.9,0-1.8,0-2.7c0-2.3,0-4.6,0-6.9c0-0.7,0.3-0.9,0.9-0.9c1.6,0,3.2,0,4.9,0c0.6,0,0.9,0.3,0.9,0.9 c0,1.7,0,3.4,0,5.1c0,1.4,0,2.8,0,4.2c0,0.3,0,0.4-0.3,0.4c-2,0-4,0-6,0C13.1,36,13,36,12.9,36z"/></g></svg></a></li>
+      </ul>
+      <div id="recipe6Ingredients" class="tabcontent">
+        <h3>Ingredientai</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>3 kiaušiniai</li>
+          <li>1 sauja šviežių špinatų</li>
+          <li>30 g fetos sūrio</li>
+          <li>1 šaukštelis alyvuogių aliejaus</li>
+          <li>Druska, pipirai</li>
+        </ul>
+      </div>
+      <div id="recipe6Directions" class="tabcontent">
+        <h3>Paruošimas</h3> <!-- CHANGE CONTENT -->
+        <p>Įkaitinkite keptuvę su aliejumi, suberkite špinatus.<br><br>
+           Plakite kiaušinius, įpilkite į keptuvę.<br><br>
+           Pabarstykite fetos gabaliukais ir prieskoniais.<br><br>
+           Kepkite 4–5 minutes.</p>
+      </div>
+      <div id="recipe6Time" class="tabcontent">
+        <h3>Laikas</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>Paruošimas: 5 min</li>
+          <li>Kepimas: 5 min</li>
+          <li>Iš viso: 10 min</li>
+        </ul>
+      </div>
+      <div id="recipe6Serving" class="tabcontent">
+        <h3>Porcijos</h3> <!-- CHANGE CONTENT -->
+        <p>Šis receptas skirtas vienam žmogui</p>
+      </div>
+      <div id="recipe6Nutrition" class="tabcontent">
+        <h3>Maistinė vertė</h3> <!-- CHANGE CONTENT -->
+        <p><i>Maistinė vertė (1 porcija)</i></p>
+        <ul>
+          <li>Kalorijos: 256 kcal </li>
+          <li>Riebalai: 21,3 g </li>
+          <li>Angliavandeniai: 1,9 g</li>
+          <li>Baltymai: 17,6 g</li>
+          <li>Cholesterolis: 380 mg </li>
+          <li>Natris: 430 mg </li>
+        </ul>
+      </div>
+    </div>
+       <!-- RECIPE 7 -->
+        <div class="wrapper" id="recipe7Wrapper">
+      <div class="img" style="background-image: url(https://media.lrytas.lt/images/2022/03/02/052453274-22d72da2-0507-4594-94f6-9afac1c6875a.jpg);"></div> <!-- CHANGE IMAGE -->
+      <div class="title">
+        <h4> Tuno salotos su pupelėmis</h4> <!-- CHANGE TITLE -->
+      </div>
+      <ul class="tab">
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe7Ingredients', 'recipe7Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M24.6,12.2c1.5,0,2.9,0,4.4,0c0.7,0.3,1.3,0.6,1.4,1.4c0.1,0.6,0,1.3,0,1.9c0,0.2,0,0.4,0.1,0.6c1.6,1.9,2.1,4.1,1.8,6.5 c0,0.1,0.1,0.3,0.2,0.4c1,0.6,2.1,1.4,3.4,1.1c0,0,0,0,0,0c0.5,0,0.9,0.4,0.9,0.9c0,0.9,0,1.8,0,2.7c0,0.6-0.4,0.9-0.9,0.9 c-0.3,0-0.5,0-0.8,0c-0.2,0.7-0.3,1.3-0.5,1.9c-0.5,1.5-1,2.9-1.5,4.4c-0.3,0.9-0.5,1-1.4,1c-4.6,0-9.2,0-13.8,0 c-0.5,0-0.9-0.2-1.1-0.6c-0.1-0.2-0.2-0.4-0.3-0.7c-0.6-2-1.5-3.9-1.8-6c-0.7,0-1.4,0.1-1.8-0.7c0-1.1,0-2.2,0-3.3 c0.3-0.5,0.7-0.7,1.3-0.6c0.5,0,0.9,0,1.4,0c0-0.1,0-0.2,0-0.3c0.2-2.8,2.4-5.2,5.4-5.2c0.2,0,0.3-0.1,0.4-0.3 c0.4-0.8,0.8-1.5,1.3-2.2c0.2-0.3,0.3-0.5,0.3-0.8C23,13.9,23,12.8,24.6,12.2z M30.5,21.9c0-0.6,0.1-1,0-1.5 c-0.2-1.5-0.8-2.9-2.2-3.7c-0.6-0.3-0.7-1.3,0-1.5c0.6-0.2,0.5-0.6,0.4-1c-1.2,0-2.4,0-3.6,0c-0.1,0.5-0.1,0.8,0.4,1.1 c0.2,0.1,0.4,0.5,0.4,0.8c0,0.4-0.3,0.7-0.6,0.8c-1.1,0.4-1.5,1.3-1.8,2.2c0.6,0.4,1.2,0.8,1.8,1.2c0.6-0.8,1.3-0.6,2-0.1 C28.2,20.7,29.3,21.2,30.5,21.9z M17.7,24.1c0.7,0,1.4-0.1,2.1,0c0.8,0.1,1.4-0.2,1.9-0.8c0.6-0.7,1.3-1.3,2-1.9 c-0.9-1-2.5-1.3-3.8-0.7C18.6,21.2,17.7,22.6,17.7,24.1z M24,30.5c0,0.6,0,1.1,0,1.7c0,0.7,0.4,1,0.9,1c0.6,0,0.9-0.4,0.9-1.1 c0-1.1,0-2.2,0-3.3c0-0.7-0.4-1.1-0.9-1.1c-0.6,0-0.9,0.4-0.9,1.1C24,29.4,24,29.9,24,30.5z M20.4,30.5c0,0.6,0,1.1,0,1.7 c0,0,0,0.1,0,0.1c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1c0-1.2,0-2.4,0-3.5c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 C20.4,29.3,20.4,29.9,20.4,30.5z M29.5,30.5c0-0.5,0-1.1,0-1.6c0,0,0-0.1,0-0.1c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 c0,1.2,0,2.3,0,3.5c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1C29.5,31.6,29.5,31.1,29.5,30.5z M30.5,24.1C30.5,24.1,30.5,24,30.5,24.1 c-1.3-0.8-2.7-1.6-4-2.4c-0.1,0-0.3-0.1-0.3,0c-0.8,0.8-1.6,1.5-2.5,2.4C26,24.1,28.2,24.1,30.5,24.1z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe7Directions', 'recipe7Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M13.4,26.9c-0.8-0.3-1.5-0.5-2.2-0.8c-1-0.4-1.5-1.2-1.2-2c0.3-0.8,1.2-1.1,2.2-0.8c1.2,0.3,1.3,0.5,1,1.8 c-0.5-0.2-1.1-0.3-1.6-0.5c0,0.1,0,0.1-0.1,0.2c0.7,0.3,1.4,0.5,2.4,0.9c-0.1-0.9-0.2-1.6-0.3-2.3c0-0.2-0.3-0.3-0.5-0.4 c-0.2-0.2-0.3-0.4-0.5-0.6c0.2-0.2,0.5-0.4,0.7-0.5c0.2-0.1,0.4,0,0.6,0c7.6,0,15.1,0,22.7,0c0.2,0,0.5,0,0.7,0 c0.2,0.1,0.4,0.3,0.4,0.4c0,0.2-0.2,0.5-0.3,0.6c-1.3,0.2-0.9,1.2-1,2c0,0.2,0,0.4,0.1,0.8c0.7-0.3,1.4-0.5,2.1-0.8 c0-0.1,0-0.1,0-0.2c-0.5,0.1-1,0.3-1.5,0.4c-0.5-0.8-0.3-1.3,0.6-1.6c0.2-0.1,0.5-0.1,0.7-0.2c0.9-0.1,1.6,0.3,1.9,1 c0.2,0.7-0.2,1.4-1.1,1.8c-0.7,0.3-1.4,0.5-2.2,0.8c0.2,0.7,0.4,1.4,0.6,2.1c0.9,3,0.2,5-2.4,6.8c-0.3,0.2-0.7,0.3-1,0.3 c-5.9,0-11.8,0-17.8,0c-0.3,0-0.7-0.1-1-0.3C12.6,34,11.9,32,12.7,29C12.9,28.3,13.1,27.7,13.4,26.9z M16,23.4c0.3,2-0.5,3.9-1,5.9 c-0.5,1.9,0.1,3.5,1.5,4.8c0.5,0.5,1,0.5,1.7,0.3c-0.4-0.3-0.6-0.6-0.9-0.8c-1.2-1.2-1.5-2.6-1.1-4.3c0.2-0.7,0.4-1.3,0.5-2 c0.1-1.1,0.2-2.3,0.2-3.5C16.9,23.4,16.6,23.2,16,23.4z"/><path class="st0" d="M36.6,21.1c-7.7,0-15.4,0-23.1,0c0.3-1.2,1-2,1.9-2.7c1.6-1.2,3.4-1.7,5.3-2.1c0.9-0.2,1.8-0.4,2.8-0.6 c-0.2-0.6-0.4-1-0.5-1.4c-0.3-0.8-0.1-1.4,0.8-1.7c1.1-0.5,2.2-0.5,3.3,0c0.8,0.4,1.1,1,0.8,1.8c-0.1,0.4-0.3,0.8-0.5,1.3 c0.8,0.2,1.5,0.4,2.2,0.6c2,0.4,4,1,5.6,2.3C35.7,19.2,36.4,19.9,36.6,21.1z M21.6,17c-1.9-0.1-5.4,1.6-6,3.1 c0.7,0.2,1.1-0.1,1.6-0.6c0.5-0.6,1.2-1,1.8-1.4C19.9,17.7,20.8,17.4,21.6,17z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe7Time', 'recipe7Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M25,12.2c6.6,0,12,5.4,12,12c0,6.6-5.4,12-12,12c-6.6,0-12-5.4-12-12C13,17.6,18.4,12.2,25,12.2z M29.4,15.8 c-1.2-0.6-2.4-1-3.8-1.1c0,0.4,0,0.7,0,1.1c0,0.5-0.2,0.8-0.6,0.8c-0.4,0-0.6-0.3-0.6-0.8c0-0.4,0-0.7,0-1.1 c-1.4,0.1-2.6,0.4-3.8,1.1c0.2,0.3,0.4,0.6,0.5,0.9c0,0.1,0,0.3-0.1,0.4c-0.1,0.1-0.3,0-0.4,0c-0.1,0-0.1-0.2-0.2-0.3 c-0.1-0.2-0.3-0.4-0.4-0.6c-1.1,0.7-2.1,1.6-2.8,2.7c0.3,0.2,0.7,0.4,1,0.6c0.4,0.2,0.5,0.6,0.3,0.9c-0.2,0.3-0.5,0.4-0.9,0.2 c-0.3-0.2-0.7-0.4-1-0.6c-0.6,1.2-0.9,2.5-1,3.8c0.3,0,0.6,0,0.9,0c0.2,0,0.4,0.1,0.4,0.3c0,0.3-0.2,0.4-0.5,0.4 c-0.3,0-0.6,0-0.9,0c0.1,1.4,0.4,2.6,1,3.8c0.2-0.1,0.3-0.2,0.5-0.3c0.2-0.1,0.3-0.2,0.5-0.3c0.4-0.2,0.8-0.2,1,0.2 c0.2,0.3,0.1,0.7-0.3,0.9c-0.3,0.2-0.6,0.4-1,0.6c0.8,1.1,1.7,2,2.9,2.8c0.1-0.3,0.3-0.5,0.4-0.7c0.1-0.2,0.3-0.4,0.6-0.3 c0.3,0.1,0.2,0.4,0,0.6c-0.1,0.2-0.3,0.5-0.4,0.8c1.2,0.6,2.4,1,3.7,1.1c0,0,0-0.1,0-0.1c0-0.3,0-0.7,0-1c0-0.5,0.2-0.8,0.6-0.8 c0.4,0,0.6,0.3,0.6,0.8c0,0.4,0,0.7,0,1.1c1.4-0.1,2.6-0.5,3.8-1.1c-0.2-0.3-0.4-0.6-0.5-0.9c0-0.1,0-0.3,0.1-0.4 c0.1-0.1,0.3,0,0.4,0c0.1,0,0.1,0.2,0.2,0.3c0.1,0.2,0.3,0.4,0.4,0.6c1.1-0.7,2.1-1.6,2.8-2.7c-0.3-0.2-0.6-0.4-0.9-0.5 c-0.4-0.2-0.5-0.6-0.3-0.9c0.2-0.3,0.6-0.4,1-0.2c0.3,0.2,0.6,0.4,0.9,0.5c0.6-1.2,0.9-2.5,1-3.9c-0.3,0-0.6,0-0.9,0 c-0.3,0-0.5-0.1-0.5-0.3c0-0.3,0.2-0.4,0.5-0.3c0.3,0,0.6,0,0.9,0c-0.1-1.4-0.4-2.6-1-3.8c-0.3,0.2-0.6,0.4-1,0.5 c-0.4,0.2-0.8,0.2-1-0.2c-0.2-0.3-0.1-0.7,0.3-0.9c0.3-0.2,0.6-0.4,1-0.6c-0.8-1.1-1.7-2-2.8-2.8c-0.1,0.3-0.3,0.5-0.4,0.8 c-0.1,0.2-0.3,0.4-0.5,0.2c-0.2-0.1-0.2-0.3-0.1-0.5C29.1,16.3,29.3,16.1,29.4,15.8z"/><path d="M25,25.5c-0.5,0-1-0.3-1.2-0.8c-0.1-0.1-0.2-0.3-0.3-0.4c-1.2-0.7-2.5-1.4-3.7-2.1c-0.3-0.2-0.5-0.3-0.5-0.7 c-0.1-0.6,0.5-1,1-0.8c0.1,0,0.2,0.1,0.4,0.2c1.2,0.7,2.4,1.3,3.6,2c0.1,0.1,0.3,0.1,0.5,0.1c0.2,0,0.5,0,0.7,0 c0.2,0,0.3,0,0.5-0.1c1.2-0.7,2.4-1.4,3.7-2c0.2-0.1,0.3-0.2,0.5-0.2c0.4,0,0.7,0.2,0.8,0.6c0.1,0.3,0,0.7-0.4,0.9 c-0.7,0.4-1.4,0.8-2.1,1.1c-0.6,0.3-1.2,0.7-1.8,1c-0.1,0.1-0.2,0.2-0.3,0.4C26.1,25.2,25.6,25.5,25,25.5z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe7Serving', 'recipe7Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M24.2,12.2c0.5,0,1.1,0,1.6,0c0.4,0.1,0.8,0.1,1.1,0.2c3.3,0.6,5.9,2.2,7.8,4.9c0.3,0.4,0.2,0.6-0.2,0.9 c-3.1,1.8-6.1,3.5-9.2,5.3c-0.3,0.1-0.5,0.2-0.8,0.2c-3,0-6,0-9,0c-0.6,0-1.3,0-1.9,0c-0.4,0-0.6-0.2-0.5-0.5 c0.2-2,0.8-3.9,1.9-5.6c1.9-2.8,4.5-4.5,7.8-5.1C23.3,12.3,23.7,12.3,24.2,12.2z"/><path d="M36.9,24.5c-0.1,3.1-1.3,5.8-3.6,8.1c-0.3,0.3-0.5,0.3-0.8,0c-2.2-2.6-4.4-5.3-6.6-7.9c-0.3-0.3-0.2-0.6,0.1-0.8 c3-1.7,5.9-3.4,8.9-5.1c0.4-0.2,0.6-0.1,0.8,0.3C36.5,20.7,36.9,22.5,36.9,24.5z"/><path d="M18.7,24.4c1.7,0,3.3,0,5,0c0.5,0,0.7,0.3,0.5,0.8c-1.2,3.1-2.3,6.3-3.4,9.4c-0.1,0.4-0.4,0.5-0.8,0.3 c-3.6-1.8-5.8-4.6-6.7-8.5c-0.1-0.4-0.1-0.9-0.2-1.4c0-0.4,0.1-0.6,0.6-0.6C15.3,24.4,17,24.4,18.7,24.4z"/><path d="M25,36c-1.1,0-2.1-0.2-3.2-0.4c-0.4-0.1-0.5-0.3-0.4-0.8c1.1-3,2.2-6.1,3.3-9.1c0.2-0.5,0.6-0.6,0.9-0.2 c1.6,2,3.3,3.9,4.9,5.9c0.4,0.5,0.9,1.1,1.3,1.6c0.3,0.3,0.2,0.6-0.1,0.8c-1.8,1.2-3.7,2-5.9,2.1C25.6,36,25.3,36,25,36z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event,  'recipe7Nutrition', 'recipe7Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M28.3,36c-2.2,0-4.4,0-6.6,0c0-0.6,0-1.2,0-1.7c0-7,0-14,0-20.9c0-0.1,0-0.2,0-0.3c0-0.5,0.3-0.8,0.8-0.8 c1.7,0,3.4,0,5.1,0c0.5,0,0.8,0.3,0.8,0.9c0,1.6,0,3.3,0,4.9c0,5.9,0,11.7,0,17.6C28.3,35.7,28.3,35.8,28.3,36z"/><path d="M37.1,36c-0.1,0-0.2,0-0.3,0c-2,0-4,0-6,0c-0.3,0-0.4-0.1-0.4-0.4c0-4.6,0-9.2,0-13.9c0-0.7,0.3-1,0.9-1c1.6,0,3.2,0,4.8,0 c0.6,0,0.9,0.3,0.9,0.9c0,4.6,0,9.2,0,13.8C37.1,35.7,37.1,35.8,37.1,36z"/><path d="M12.9,36c0-0.9,0-1.8,0-2.7c0-2.3,0-4.6,0-6.9c0-0.7,0.3-0.9,0.9-0.9c1.6,0,3.2,0,4.9,0c0.6,0,0.9,0.3,0.9,0.9 c0,1.7,0,3.4,0,5.1c0,1.4,0,2.8,0,4.2c0,0.3,0,0.4-0.3,0.4c-2,0-4,0-6,0C13.1,36,13,36,12.9,36z"/></g></svg></a></li>
+      </ul>
+      <div id="recipe7Ingredients" class="tabcontent">
+        <h3>Ingredientai</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>1 skardinė tuno (aliejuje)</li>
+          <li>1/2 skardinės raudonųjų pupelių</li>
+          <li>1 mažas raudonas svogūnas</li>
+          <li>1 šaukštas alyvuogių aliejaus</li>
+          <li>1 šaukštelis citrinos sulčių</li>
+          <li>Druska, pipirai</li>
+        </ul>
+      </div>
+      <div id="recipe7Directions" class="tabcontent">
+        <h3>Paruošimas</h3> <!-- CHANGE CONTENT -->
+        <p>Pupeles nuplaukite, sumaišykite su tunu.<br><br>
+           Sudėkite smulkintą svogūną, pagardinkite aliejumi, citrina.<br><br>
+           Išmaišykite ir patiekite.<p>
+      </div>
+      <div id="recipe7Time" class="tabcontent">
+        <h3>Laikas</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>Paruošimas: 10 min</li>
+          <li>Iš viso: 10 min</li>
+        </ul>
+      </div>
+      <div id="recipe7Serving" class="tabcontent">
+        <h3>Porcijos</h3> <!-- CHANGE CONTENT -->
+        <p>Šis receptas skirtas dviem žmonėms</p>
+      </div>
+      <div id="recipe7Nutrition" class="tabcontent">
+        <h3>Maistinė vertė</h3> <!-- CHANGE CONTENT -->
+        <p><i>Maistinė vertė (1 porcija)</i></p>
+        <ul>
+          <li>Kalorijos: 295 kcal </li>
+          <li>Riebalai: 15.2 g </li>
+          <li>Angliavandeniai: 13,4 g</li>
+          <li>Baltymai: 23,1 g</li>
+          <li>Cholesterolis: 25 mg </li>
+          <li>Natris: 310 mg </li>
+        </ul>
+      </div>
+    </div>
+       <!-- RECIPE 8 -->
+        <div class="wrapper" id="recipe8Wrapper">
+      <div class="img" style="background-image: url(https://www.lamaistas.lt/uploads/modules/recipes/thumb600x315/25142.jpg);"></div> <!-- CHANGE IMAGE -->
+      <div class="title">
+        <h4>Bananų blyneliai be cukraus</h4> <!-- CHANGE TITLE -->
+      </div>
+      <ul class="tab">
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe8Ingredients', 'recipe8Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M24.6,12.2c1.5,0,2.9,0,4.4,0c0.7,0.3,1.3,0.6,1.4,1.4c0.1,0.6,0,1.3,0,1.9c0,0.2,0,0.4,0.1,0.6c1.6,1.9,2.1,4.1,1.8,6.5 c0,0.1,0.1,0.3,0.2,0.4c1,0.6,2.1,1.4,3.4,1.1c0,0,0,0,0,0c0.5,0,0.9,0.4,0.9,0.9c0,0.9,0,1.8,0,2.7c0,0.6-0.4,0.9-0.9,0.9 c-0.3,0-0.5,0-0.8,0c-0.2,0.7-0.3,1.3-0.5,1.9c-0.5,1.5-1,2.9-1.5,4.4c-0.3,0.9-0.5,1-1.4,1c-4.6,0-9.2,0-13.8,0 c-0.5,0-0.9-0.2-1.1-0.6c-0.1-0.2-0.2-0.4-0.3-0.7c-0.6-2-1.5-3.9-1.8-6c-0.7,0-1.4,0.1-1.8-0.7c0-1.1,0-2.2,0-3.3 c0.3-0.5,0.7-0.7,1.3-0.6c0.5,0,0.9,0,1.4,0c0-0.1,0-0.2,0-0.3c0.2-2.8,2.4-5.2,5.4-5.2c0.2,0,0.3-0.1,0.4-0.3 c0.4-0.8,0.8-1.5,1.3-2.2c0.2-0.3,0.3-0.5,0.3-0.8C23,13.9,23,12.8,24.6,12.2z M30.5,21.9c0-0.6,0.1-1,0-1.5 c-0.2-1.5-0.8-2.9-2.2-3.7c-0.6-0.3-0.7-1.3,0-1.5c0.6-0.2,0.5-0.6,0.4-1c-1.2,0-2.4,0-3.6,0c-0.1,0.5-0.1,0.8,0.4,1.1 c0.2,0.1,0.4,0.5,0.4,0.8c0,0.4-0.3,0.7-0.6,0.8c-1.1,0.4-1.5,1.3-1.8,2.2c0.6,0.4,1.2,0.8,1.8,1.2c0.6-0.8,1.3-0.6,2-0.1 C28.2,20.7,29.3,21.2,30.5,21.9z M17.7,24.1c0.7,0,1.4-0.1,2.1,0c0.8,0.1,1.4-0.2,1.9-0.8c0.6-0.7,1.3-1.3,2-1.9 c-0.9-1-2.5-1.3-3.8-0.7C18.6,21.2,17.7,22.6,17.7,24.1z M24,30.5c0,0.6,0,1.1,0,1.7c0,0.7,0.4,1,0.9,1c0.6,0,0.9-0.4,0.9-1.1 c0-1.1,0-2.2,0-3.3c0-0.7-0.4-1.1-0.9-1.1c-0.6,0-0.9,0.4-0.9,1.1C24,29.4,24,29.9,24,30.5z M20.4,30.5c0,0.6,0,1.1,0,1.7 c0,0,0,0.1,0,0.1c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1c0-1.2,0-2.4,0-3.5c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 C20.4,29.3,20.4,29.9,20.4,30.5z M29.5,30.5c0-0.5,0-1.1,0-1.6c0,0,0-0.1,0-0.1c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 c0,1.2,0,2.3,0,3.5c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1C29.5,31.6,29.5,31.1,29.5,30.5z M30.5,24.1C30.5,24.1,30.5,24,30.5,24.1 c-1.3-0.8-2.7-1.6-4-2.4c-0.1,0-0.3-0.1-0.3,0c-0.8,0.8-1.6,1.5-2.5,2.4C26,24.1,28.2,24.1,30.5,24.1z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe8Directions', 'recipe8Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M13.4,26.9c-0.8-0.3-1.5-0.5-2.2-0.8c-1-0.4-1.5-1.2-1.2-2c0.3-0.8,1.2-1.1,2.2-0.8c1.2,0.3,1.3,0.5,1,1.8 c-0.5-0.2-1.1-0.3-1.6-0.5c0,0.1,0,0.1-0.1,0.2c0.7,0.3,1.4,0.5,2.4,0.9c-0.1-0.9-0.2-1.6-0.3-2.3c0-0.2-0.3-0.3-0.5-0.4 c-0.2-0.2-0.3-0.4-0.5-0.6c0.2-0.2,0.5-0.4,0.7-0.5c0.2-0.1,0.4,0,0.6,0c7.6,0,15.1,0,22.7,0c0.2,0,0.5,0,0.7,0 c0.2,0.1,0.4,0.3,0.4,0.4c0,0.2-0.2,0.5-0.3,0.6c-1.3,0.2-0.9,1.2-1,2c0,0.2,0,0.4,0.1,0.8c0.7-0.3,1.4-0.5,2.1-0.8 c0-0.1,0-0.1,0-0.2c-0.5,0.1-1,0.3-1.5,0.4c-0.5-0.8-0.3-1.3,0.6-1.6c0.2-0.1,0.5-0.1,0.7-0.2c0.9-0.1,1.6,0.3,1.9,1 c0.2,0.7-0.2,1.4-1.1,1.8c-0.7,0.3-1.4,0.5-2.2,0.8c0.2,0.7,0.4,1.4,0.6,2.1c0.9,3,0.2,5-2.4,6.8c-0.3,0.2-0.7,0.3-1,0.3 c-5.9,0-11.8,0-17.8,0c-0.3,0-0.7-0.1-1-0.3C12.6,34,11.9,32,12.7,29C12.9,28.3,13.1,27.7,13.4,26.9z M16,23.4c0.3,2-0.5,3.9-1,5.9 c-0.5,1.9,0.1,3.5,1.5,4.8c0.5,0.5,1,0.5,1.7,0.3c-0.4-0.3-0.6-0.6-0.9-0.8c-1.2-1.2-1.5-2.6-1.1-4.3c0.2-0.7,0.4-1.3,0.5-2 c0.1-1.1,0.2-2.3,0.2-3.5C16.9,23.4,16.6,23.2,16,23.4z"/><path class="st0" d="M36.6,21.1c-7.7,0-15.4,0-23.1,0c0.3-1.2,1-2,1.9-2.7c1.6-1.2,3.4-1.7,5.3-2.1c0.9-0.2,1.8-0.4,2.8-0.6 c-0.2-0.6-0.4-1-0.5-1.4c-0.3-0.8-0.1-1.4,0.8-1.7c1.1-0.5,2.2-0.5,3.3,0c0.8,0.4,1.1,1,0.8,1.8c-0.1,0.4-0.3,0.8-0.5,1.3 c0.8,0.2,1.5,0.4,2.2,0.6c2,0.4,4,1,5.6,2.3C35.7,19.2,36.4,19.9,36.6,21.1z M21.6,17c-1.9-0.1-5.4,1.6-6,3.1 c0.7,0.2,1.1-0.1,1.6-0.6c0.5-0.6,1.2-1,1.8-1.4C19.9,17.7,20.8,17.4,21.6,17z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe8Time', 'recipe8Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M25,12.2c6.6,0,12,5.4,12,12c0,6.6-5.4,12-12,12c-6.6,0-12-5.4-12-12C13,17.6,18.4,12.2,25,12.2z M29.4,15.8 c-1.2-0.6-2.4-1-3.8-1.1c0,0.4,0,0.7,0,1.1c0,0.5-0.2,0.8-0.6,0.8c-0.4,0-0.6-0.3-0.6-0.8c0-0.4,0-0.7,0-1.1 c-1.4,0.1-2.6,0.4-3.8,1.1c0.2,0.3,0.4,0.6,0.5,0.9c0,0.1,0,0.3-0.1,0.4c-0.1,0.1-0.3,0-0.4,0c-0.1,0-0.1-0.2-0.2-0.3 c-0.1-0.2-0.3-0.4-0.4-0.6c-1.1,0.7-2.1,1.6-2.8,2.7c0.3,0.2,0.7,0.4,1,0.6c0.4,0.2,0.5,0.6,0.3,0.9c-0.2,0.3-0.5,0.4-0.9,0.2 c-0.3-0.2-0.7-0.4-1-0.6c-0.6,1.2-0.9,2.5-1,3.8c0.3,0,0.6,0,0.9,0c0.2,0,0.4,0.1,0.4,0.3c0,0.3-0.2,0.4-0.5,0.4 c-0.3,0-0.6,0-0.9,0c0.1,1.4,0.4,2.6,1,3.8c0.2-0.1,0.3-0.2,0.5-0.3c0.2-0.1,0.3-0.2,0.5-0.3c0.4-0.2,0.8-0.2,1,0.2 c0.2,0.3,0.1,0.7-0.3,0.9c-0.3,0.2-0.6,0.4-1,0.6c0.8,1.1,1.7,2,2.9,2.8c0.1-0.3,0.3-0.5,0.4-0.7c0.1-0.2,0.3-0.4,0.6-0.3 c0.3,0.1,0.2,0.4,0,0.6c-0.1,0.2-0.3,0.5-0.4,0.8c1.2,0.6,2.4,1,3.7,1.1c0,0,0-0.1,0-0.1c0-0.3,0-0.7,0-1c0-0.5,0.2-0.8,0.6-0.8 c0.4,0,0.6,0.3,0.6,0.8c0,0.4,0,0.7,0,1.1c1.4-0.1,2.6-0.5,3.8-1.1c-0.2-0.3-0.4-0.6-0.5-0.9c0-0.1,0-0.3,0.1-0.4 c0.1-0.1,0.3,0,0.4,0c0.1,0,0.1,0.2,0.2,0.3c0.1,0.2,0.3,0.4,0.4,0.6c1.1-0.7,2.1-1.6,2.8-2.7c-0.3-0.2-0.6-0.4-0.9-0.5 c-0.4-0.2-0.5-0.6-0.3-0.9c0.2-0.3,0.6-0.4,1-0.2c0.3,0.2,0.6,0.4,0.9,0.5c0.6-1.2,0.9-2.5,1-3.9c-0.3,0-0.6,0-0.9,0 c-0.3,0-0.5-0.1-0.5-0.3c0-0.3,0.2-0.4,0.5-0.3c0.3,0,0.6,0,0.9,0c-0.1-1.4-0.4-2.6-1-3.8c-0.3,0.2-0.6,0.4-1,0.5 c-0.4,0.2-0.8,0.2-1-0.2c-0.2-0.3-0.1-0.7,0.3-0.9c0.3-0.2,0.6-0.4,1-0.6c-0.8-1.1-1.7-2-2.8-2.8c-0.1,0.3-0.3,0.5-0.4,0.8 c-0.1,0.2-0.3,0.4-0.5,0.2c-0.2-0.1-0.2-0.3-0.1-0.5C29.1,16.3,29.3,16.1,29.4,15.8z"/><path d="M25,25.5c-0.5,0-1-0.3-1.2-0.8c-0.1-0.1-0.2-0.3-0.3-0.4c-1.2-0.7-2.5-1.4-3.7-2.1c-0.3-0.2-0.5-0.3-0.5-0.7 c-0.1-0.6,0.5-1,1-0.8c0.1,0,0.2,0.1,0.4,0.2c1.2,0.7,2.4,1.3,3.6,2c0.1,0.1,0.3,0.1,0.5,0.1c0.2,0,0.5,0,0.7,0 c0.2,0,0.3,0,0.5-0.1c1.2-0.7,2.4-1.4,3.7-2c0.2-0.1,0.3-0.2,0.5-0.2c0.4,0,0.7,0.2,0.8,0.6c0.1,0.3,0,0.7-0.4,0.9 c-0.7,0.4-1.4,0.8-2.1,1.1c-0.6,0.3-1.2,0.7-1.8,1c-0.1,0.1-0.2,0.2-0.3,0.4C26.1,25.2,25.6,25.5,25,25.5z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe8Serving', 'recipe8Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M24.2,12.2c0.5,0,1.1,0,1.6,0c0.4,0.1,0.8,0.1,1.1,0.2c3.3,0.6,5.9,2.2,7.8,4.9c0.3,0.4,0.2,0.6-0.2,0.9 c-3.1,1.8-6.1,3.5-9.2,5.3c-0.3,0.1-0.5,0.2-0.8,0.2c-3,0-6,0-9,0c-0.6,0-1.3,0-1.9,0c-0.4,0-0.6-0.2-0.5-0.5 c0.2-2,0.8-3.9,1.9-5.6c1.9-2.8,4.5-4.5,7.8-5.1C23.3,12.3,23.7,12.3,24.2,12.2z"/><path d="M36.9,24.5c-0.1,3.1-1.3,5.8-3.6,8.1c-0.3,0.3-0.5,0.3-0.8,0c-2.2-2.6-4.4-5.3-6.6-7.9c-0.3-0.3-0.2-0.6,0.1-0.8 c3-1.7,5.9-3.4,8.9-5.1c0.4-0.2,0.6-0.1,0.8,0.3C36.5,20.7,36.9,22.5,36.9,24.5z"/><path d="M18.7,24.4c1.7,0,3.3,0,5,0c0.5,0,0.7,0.3,0.5,0.8c-1.2,3.1-2.3,6.3-3.4,9.4c-0.1,0.4-0.4,0.5-0.8,0.3 c-3.6-1.8-5.8-4.6-6.7-8.5c-0.1-0.4-0.1-0.9-0.2-1.4c0-0.4,0.1-0.6,0.6-0.6C15.3,24.4,17,24.4,18.7,24.4z"/><path d="M25,36c-1.1,0-2.1-0.2-3.2-0.4c-0.4-0.1-0.5-0.3-0.4-0.8c1.1-3,2.2-6.1,3.3-9.1c0.2-0.5,0.6-0.6,0.9-0.2 c1.6,2,3.3,3.9,4.9,5.9c0.4,0.5,0.9,1.1,1.3,1.6c0.3,0.3,0.2,0.6-0.1,0.8c-1.8,1.2-3.7,2-5.9,2.1C25.6,36,25.3,36,25,36z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event,  'recipe8Nutrition', 'recipe8Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M28.3,36c-2.2,0-4.4,0-6.6,0c0-0.6,0-1.2,0-1.7c0-7,0-14,0-20.9c0-0.1,0-0.2,0-0.3c0-0.5,0.3-0.8,0.8-0.8 c1.7,0,3.4,0,5.1,0c0.5,0,0.8,0.3,0.8,0.9c0,1.6,0,3.3,0,4.9c0,5.9,0,11.7,0,17.6C28.3,35.7,28.3,35.8,28.3,36z"/><path d="M37.1,36c-0.1,0-0.2,0-0.3,0c-2,0-4,0-6,0c-0.3,0-0.4-0.1-0.4-0.4c0-4.6,0-9.2,0-13.9c0-0.7,0.3-1,0.9-1c1.6,0,3.2,0,4.8,0 c0.6,0,0.9,0.3,0.9,0.9c0,4.6,0,9.2,0,13.8C37.1,35.7,37.1,35.8,37.1,36z"/><path d="M12.9,36c0-0.9,0-1.8,0-2.7c0-2.3,0-4.6,0-6.9c0-0.7,0.3-0.9,0.9-0.9c1.6,0,3.2,0,4.9,0c0.6,0,0.9,0.3,0.9,0.9 c0,1.7,0,3.4,0,5.1c0,1.4,0,2.8,0,4.2c0,0.3,0,0.4-0.3,0.4c-2,0-4,0-6,0C13.1,36,13,36,12.9,36z"/></g></svg></a></li>
+      </ul>
+      <div id="recipe8Ingredients" class="tabcontent">
+        <h3>Ingredientai</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>1 prinokęs bananas</li>
+          <li>2 kiaušiniai</li>
+          <li>1/2 a. š. kepimo miltelių</li>
+          <li>1/4 a. š. cinamono</li>
+          <li>Aliejus kepimui</li>
+        </ul>
+      </div>
+      <div id="recipe8Directions" class="tabcontent">
+        <h3>Paruošimas</h3> <!-- CHANGE CONTENT -->
+        <p>Sutrinkite bananą, įmaišykite kiaušinius, prieskonius.<br><br>
+           Kepkite mažus blynelius keptuvėje 1–2 min. iš kiekvienos pusės.<p>
+      </div>
+      <div id="recipe8Time" class="tabcontent">
+        <h3>Laikas</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>Paruošimas: 5min</li>
+          <li>Kepimas: 10</li>
+          <li>Iš viso: 15 min</li>
+        </ul>
+      </div>
+      <div id="recipe8Serving" class="tabcontent">
+        <h3>Porcijos</h3> <!-- CHANGE CONTENT -->
+        <p>Šis receptas skirtas dviem žmonėms</p>
+      </div>
+      <div id="recipe8Nutrition" class="tabcontent">
+        <h3>Maistinė vertė</h3> <!-- CHANGE CONTENT -->
+        <p><i>Maistinė vertė (1 porcija)</i></p>
+        <ul>
+          <li>Kalorijos: 190 kcal </li>
+          <li>Riebalai: 7,6 g </li>
+          <li>Angliavandeniai: 20,1 g</li>
+          <li>Baltymai: 9,2 g</li>
+          <li>Cholesterolis: 186 mg </li>
+          <li>Natris: 110 mg </li>
+        </ul>
+      </div>
+    </div>
+       <!-- RECIPE 9 -->
+        <div class="wrapper" id="recipe9Wrapper">
+      <div class="img" style="background-image: url(https://i0.wp.com/www.skaniaisveikai.lt/wp-content/uploads/2020/01/DSC_0278-22-scaled.jpg?fit=1200%2C800&ssl=1);"></div> <!-- CHANGE IMAGE -->
+      <div class="title">
+        <h4>Lęšių troškinys su daržovėmis</h4> <!-- CHANGE TITLE -->
+      </div>
+      <ul class="tab">
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe9Ingredients', 'recipe9Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M24.6,12.2c1.5,0,2.9,0,4.4,0c0.7,0.3,1.3,0.6,1.4,1.4c0.1,0.6,0,1.3,0,1.9c0,0.2,0,0.4,0.1,0.6c1.6,1.9,2.1,4.1,1.8,6.5 c0,0.1,0.1,0.3,0.2,0.4c1,0.6,2.1,1.4,3.4,1.1c0,0,0,0,0,0c0.5,0,0.9,0.4,0.9,0.9c0,0.9,0,1.8,0,2.7c0,0.6-0.4,0.9-0.9,0.9 c-0.3,0-0.5,0-0.8,0c-0.2,0.7-0.3,1.3-0.5,1.9c-0.5,1.5-1,2.9-1.5,4.4c-0.3,0.9-0.5,1-1.4,1c-4.6,0-9.2,0-13.8,0 c-0.5,0-0.9-0.2-1.1-0.6c-0.1-0.2-0.2-0.4-0.3-0.7c-0.6-2-1.5-3.9-1.8-6c-0.7,0-1.4,0.1-1.8-0.7c0-1.1,0-2.2,0-3.3 c0.3-0.5,0.7-0.7,1.3-0.6c0.5,0,0.9,0,1.4,0c0-0.1,0-0.2,0-0.3c0.2-2.8,2.4-5.2,5.4-5.2c0.2,0,0.3-0.1,0.4-0.3 c0.4-0.8,0.8-1.5,1.3-2.2c0.2-0.3,0.3-0.5,0.3-0.8C23,13.9,23,12.8,24.6,12.2z M30.5,21.9c0-0.6,0.1-1,0-1.5 c-0.2-1.5-0.8-2.9-2.2-3.7c-0.6-0.3-0.7-1.3,0-1.5c0.6-0.2,0.5-0.6,0.4-1c-1.2,0-2.4,0-3.6,0c-0.1,0.5-0.1,0.8,0.4,1.1 c0.2,0.1,0.4,0.5,0.4,0.8c0,0.4-0.3,0.7-0.6,0.8c-1.1,0.4-1.5,1.3-1.8,2.2c0.6,0.4,1.2,0.8,1.8,1.2c0.6-0.8,1.3-0.6,2-0.1 C28.2,20.7,29.3,21.2,30.5,21.9z M17.7,24.1c0.7,0,1.4-0.1,2.1,0c0.8,0.1,1.4-0.2,1.9-0.8c0.6-0.7,1.3-1.3,2-1.9 c-0.9-1-2.5-1.3-3.8-0.7C18.6,21.2,17.7,22.6,17.7,24.1z M24,30.5c0,0.6,0,1.1,0,1.7c0,0.7,0.4,1,0.9,1c0.6,0,0.9-0.4,0.9-1.1 c0-1.1,0-2.2,0-3.3c0-0.7-0.4-1.1-0.9-1.1c-0.6,0-0.9,0.4-0.9,1.1C24,29.4,24,29.9,24,30.5z M20.4,30.5c0,0.6,0,1.1,0,1.7 c0,0,0,0.1,0,0.1c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1c0-1.2,0-2.4,0-3.5c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 C20.4,29.3,20.4,29.9,20.4,30.5z M29.5,30.5c0-0.5,0-1.1,0-1.6c0,0,0-0.1,0-0.1c0-0.6-0.4-1-0.9-1c-0.5,0-0.9,0.4-0.9,1 c0,1.2,0,2.3,0,3.5c0,0.6,0.4,1,0.9,1c0.5,0,0.9-0.4,0.9-1C29.5,31.6,29.5,31.1,29.5,30.5z M30.5,24.1C30.5,24.1,30.5,24,30.5,24.1 c-1.3-0.8-2.7-1.6-4-2.4c-0.1,0-0.3-0.1-0.3,0c-0.8,0.8-1.6,1.5-2.5,2.4C26,24.1,28.2,24.1,30.5,24.1z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe9Directions', 'recipe9Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path class="st0" d="M13.4,26.9c-0.8-0.3-1.5-0.5-2.2-0.8c-1-0.4-1.5-1.2-1.2-2c0.3-0.8,1.2-1.1,2.2-0.8c1.2,0.3,1.3,0.5,1,1.8 c-0.5-0.2-1.1-0.3-1.6-0.5c0,0.1,0,0.1-0.1,0.2c0.7,0.3,1.4,0.5,2.4,0.9c-0.1-0.9-0.2-1.6-0.3-2.3c0-0.2-0.3-0.3-0.5-0.4 c-0.2-0.2-0.3-0.4-0.5-0.6c0.2-0.2,0.5-0.4,0.7-0.5c0.2-0.1,0.4,0,0.6,0c7.6,0,15.1,0,22.7,0c0.2,0,0.5,0,0.7,0 c0.2,0.1,0.4,0.3,0.4,0.4c0,0.2-0.2,0.5-0.3,0.6c-1.3,0.2-0.9,1.2-1,2c0,0.2,0,0.4,0.1,0.8c0.7-0.3,1.4-0.5,2.1-0.8 c0-0.1,0-0.1,0-0.2c-0.5,0.1-1,0.3-1.5,0.4c-0.5-0.8-0.3-1.3,0.6-1.6c0.2-0.1,0.5-0.1,0.7-0.2c0.9-0.1,1.6,0.3,1.9,1 c0.2,0.7-0.2,1.4-1.1,1.8c-0.7,0.3-1.4,0.5-2.2,0.8c0.2,0.7,0.4,1.4,0.6,2.1c0.9,3,0.2,5-2.4,6.8c-0.3,0.2-0.7,0.3-1,0.3 c-5.9,0-11.8,0-17.8,0c-0.3,0-0.7-0.1-1-0.3C12.6,34,11.9,32,12.7,29C12.9,28.3,13.1,27.7,13.4,26.9z M16,23.4c0.3,2-0.5,3.9-1,5.9 c-0.5,1.9,0.1,3.5,1.5,4.8c0.5,0.5,1,0.5,1.7,0.3c-0.4-0.3-0.6-0.6-0.9-0.8c-1.2-1.2-1.5-2.6-1.1-4.3c0.2-0.7,0.4-1.3,0.5-2 c0.1-1.1,0.2-2.3,0.2-3.5C16.9,23.4,16.6,23.2,16,23.4z"/><path class="st0" d="M36.6,21.1c-7.7,0-15.4,0-23.1,0c0.3-1.2,1-2,1.9-2.7c1.6-1.2,3.4-1.7,5.3-2.1c0.9-0.2,1.8-0.4,2.8-0.6 c-0.2-0.6-0.4-1-0.5-1.4c-0.3-0.8-0.1-1.4,0.8-1.7c1.1-0.5,2.2-0.5,3.3,0c0.8,0.4,1.1,1,0.8,1.8c-0.1,0.4-0.3,0.8-0.5,1.3 c0.8,0.2,1.5,0.4,2.2,0.6c2,0.4,4,1,5.6,2.3C35.7,19.2,36.4,19.9,36.6,21.1z M21.6,17c-1.9-0.1-5.4,1.6-6,3.1 c0.7,0.2,1.1-0.1,1.6-0.6c0.5-0.6,1.2-1,1.8-1.4C19.9,17.7,20.8,17.4,21.6,17z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe9Time', 'recipe9Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M25,12.2c6.6,0,12,5.4,12,12c0,6.6-5.4,12-12,12c-6.6,0-12-5.4-12-12C13,17.6,18.4,12.2,25,12.2z M29.4,15.8 c-1.2-0.6-2.4-1-3.8-1.1c0,0.4,0,0.7,0,1.1c0,0.5-0.2,0.8-0.6,0.8c-0.4,0-0.6-0.3-0.6-0.8c0-0.4,0-0.7,0-1.1 c-1.4,0.1-2.6,0.4-3.8,1.1c0.2,0.3,0.4,0.6,0.5,0.9c0,0.1,0,0.3-0.1,0.4c-0.1,0.1-0.3,0-0.4,0c-0.1,0-0.1-0.2-0.2-0.3 c-0.1-0.2-0.3-0.4-0.4-0.6c-1.1,0.7-2.1,1.6-2.8,2.7c0.3,0.2,0.7,0.4,1,0.6c0.4,0.2,0.5,0.6,0.3,0.9c-0.2,0.3-0.5,0.4-0.9,0.2 c-0.3-0.2-0.7-0.4-1-0.6c-0.6,1.2-0.9,2.5-1,3.8c0.3,0,0.6,0,0.9,0c0.2,0,0.4,0.1,0.4,0.3c0,0.3-0.2,0.4-0.5,0.4 c-0.3,0-0.6,0-0.9,0c0.1,1.4,0.4,2.6,1,3.8c0.2-0.1,0.3-0.2,0.5-0.3c0.2-0.1,0.3-0.2,0.5-0.3c0.4-0.2,0.8-0.2,1,0.2 c0.2,0.3,0.1,0.7-0.3,0.9c-0.3,0.2-0.6,0.4-1,0.6c0.8,1.1,1.7,2,2.9,2.8c0.1-0.3,0.3-0.5,0.4-0.7c0.1-0.2,0.3-0.4,0.6-0.3 c0.3,0.1,0.2,0.4,0,0.6c-0.1,0.2-0.3,0.5-0.4,0.8c1.2,0.6,2.4,1,3.7,1.1c0,0,0-0.1,0-0.1c0-0.3,0-0.7,0-1c0-0.5,0.2-0.8,0.6-0.8 c0.4,0,0.6,0.3,0.6,0.8c0,0.4,0,0.7,0,1.1c1.4-0.1,2.6-0.5,3.8-1.1c-0.2-0.3-0.4-0.6-0.5-0.9c0-0.1,0-0.3,0.1-0.4 c0.1-0.1,0.3,0,0.4,0c0.1,0,0.1,0.2,0.2,0.3c0.1,0.2,0.3,0.4,0.4,0.6c1.1-0.7,2.1-1.6,2.8-2.7c-0.3-0.2-0.6-0.4-0.9-0.5 c-0.4-0.2-0.5-0.6-0.3-0.9c0.2-0.3,0.6-0.4,1-0.2c0.3,0.2,0.6,0.4,0.9,0.5c0.6-1.2,0.9-2.5,1-3.9c-0.3,0-0.6,0-0.9,0 c-0.3,0-0.5-0.1-0.5-0.3c0-0.3,0.2-0.4,0.5-0.3c0.3,0,0.6,0,0.9,0c-0.1-1.4-0.4-2.6-1-3.8c-0.3,0.2-0.6,0.4-1,0.5 c-0.4,0.2-0.8,0.2-1-0.2c-0.2-0.3-0.1-0.7,0.3-0.9c0.3-0.2,0.6-0.4,1-0.6c-0.8-1.1-1.7-2-2.8-2.8c-0.1,0.3-0.3,0.5-0.4,0.8 c-0.1,0.2-0.3,0.4-0.5,0.2c-0.2-0.1-0.2-0.3-0.1-0.5C29.1,16.3,29.3,16.1,29.4,15.8z"/><path d="M25,25.5c-0.5,0-1-0.3-1.2-0.8c-0.1-0.1-0.2-0.3-0.3-0.4c-1.2-0.7-2.5-1.4-3.7-2.1c-0.3-0.2-0.5-0.3-0.5-0.7 c-0.1-0.6,0.5-1,1-0.8c0.1,0,0.2,0.1,0.4,0.2c1.2,0.7,2.4,1.3,3.6,2c0.1,0.1,0.3,0.1,0.5,0.1c0.2,0,0.5,0,0.7,0 c0.2,0,0.3,0,0.5-0.1c1.2-0.7,2.4-1.4,3.7-2c0.2-0.1,0.3-0.2,0.5-0.2c0.4,0,0.7,0.2,0.8,0.6c0.1,0.3,0,0.7-0.4,0.9 c-0.7,0.4-1.4,0.8-2.1,1.1c-0.6,0.3-1.2,0.7-1.8,1c-0.1,0.1-0.2,0.2-0.3,0.4C26.1,25.2,25.6,25.5,25,25.5z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event, 'recipe9Serving', 'recipe9Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M24.2,12.2c0.5,0,1.1,0,1.6,0c0.4,0.1,0.8,0.1,1.1,0.2c3.3,0.6,5.9,2.2,7.8,4.9c0.3,0.4,0.2,0.6-0.2,0.9 c-3.1,1.8-6.1,3.5-9.2,5.3c-0.3,0.1-0.5,0.2-0.8,0.2c-3,0-6,0-9,0c-0.6,0-1.3,0-1.9,0c-0.4,0-0.6-0.2-0.5-0.5 c0.2-2,0.8-3.9,1.9-5.6c1.9-2.8,4.5-4.5,7.8-5.1C23.3,12.3,23.7,12.3,24.2,12.2z"/><path d="M36.9,24.5c-0.1,3.1-1.3,5.8-3.6,8.1c-0.3,0.3-0.5,0.3-0.8,0c-2.2-2.6-4.4-5.3-6.6-7.9c-0.3-0.3-0.2-0.6,0.1-0.8 c3-1.7,5.9-3.4,8.9-5.1c0.4-0.2,0.6-0.1,0.8,0.3C36.5,20.7,36.9,22.5,36.9,24.5z"/><path d="M18.7,24.4c1.7,0,3.3,0,5,0c0.5,0,0.7,0.3,0.5,0.8c-1.2,3.1-2.3,6.3-3.4,9.4c-0.1,0.4-0.4,0.5-0.8,0.3 c-3.6-1.8-5.8-4.6-6.7-8.5c-0.1-0.4-0.1-0.9-0.2-1.4c0-0.4,0.1-0.6,0.6-0.6C15.3,24.4,17,24.4,18.7,24.4z"/><path d="M25,36c-1.1,0-2.1-0.2-3.2-0.4c-0.4-0.1-0.5-0.3-0.4-0.8c1.1-3,2.2-6.1,3.3-9.1c0.2-0.5,0.6-0.6,0.9-0.2 c1.6,2,3.3,3.9,4.9,5.9c0.4,0.5,0.9,1.1,1.3,1.6c0.3,0.3,0.2,0.6-0.1,0.8c-1.8,1.2-3.7,2-5.9,2.1C25.6,36,25.3,36,25,36z"/></g></svg></a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openRecipeTab(event,  'recipe9Nutrition', 'recipe9Wrapper')">
+          <svg viewBox="0 0 50 50"><g><path d="M28.3,36c-2.2,0-4.4,0-6.6,0c0-0.6,0-1.2,0-1.7c0-7,0-14,0-20.9c0-0.1,0-0.2,0-0.3c0-0.5,0.3-0.8,0.8-0.8 c1.7,0,3.4,0,5.1,0c0.5,0,0.8,0.3,0.8,0.9c0,1.6,0,3.3,0,4.9c0,5.9,0,11.7,0,17.6C28.3,35.7,28.3,35.8,28.3,36z"/><path d="M37.1,36c-0.1,0-0.2,0-0.3,0c-2,0-4,0-6,0c-0.3,0-0.4-0.1-0.4-0.4c0-4.6,0-9.2,0-13.9c0-0.7,0.3-1,0.9-1c1.6,0,3.2,0,4.8,0 c0.6,0,0.9,0.3,0.9,0.9c0,4.6,0,9.2,0,13.8C37.1,35.7,37.1,35.8,37.1,36z"/><path d="M12.9,36c0-0.9,0-1.8,0-2.7c0-2.3,0-4.6,0-6.9c0-0.7,0.3-0.9,0.9-0.9c1.6,0,3.2,0,4.9,0c0.6,0,0.9,0.3,0.9,0.9 c0,1.7,0,3.4,0,5.1c0,1.4,0,2.8,0,4.2c0,0.3,0,0.4-0.3,0.4c-2,0-4,0-6,0C13.1,36,13,36,12.9,36z"/></g></svg></a></li>
+      </ul>
+      <div id="recipe9Ingredients" class="tabcontent">
+        <h3>Ingredientai</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>1 puodelis raudonųjų lęšių</li>
+          <li>1 morka</li>
+          <li>1 pomidoras</li>
+          <li>1 pomidoras</li>
+          <li>1 skiltelė česnako</li>
+          <li> Lęšių troškinys su daržovėmis</li>
+          <li>600 ml daržovių sultinio</li>
+          <li>Druska, pipirai</li>
+        </ul>
+      </div>
+      <div id="recipe9Directions" class="tabcontent">
+        <h3>Paruošimas</h3> <!-- CHANGE CONTENT -->
+        <p>Keptuvėje apkepinkite smulkintą svogūną ir česnaką.<br><br>
+           Sudėkite supjaustytas daržoves, lęšius, sultinį.<br><br>
+           Virkite 20 min, kol lęšiai suminkštės.<p>
+      </div>
+      <div id="recipe9Time" class="tabcontent">
+        <h3>Laikas</h3> <!-- CHANGE CONTENT -->
+        <ul>
+          <li>Paruošimas: 10min</li>
+          <li>Kepimas: 20</li>
+          <li>Iš viso: 30 min</li>
+        </ul>
+      </div>
+      <div id="recipe9Serving" class="tabcontent">
+        <h3>Porcijos</h3> <!-- CHANGE CONTENT -->
+        <p>Šis receptas skirtas keturiems žmonėms</p>
+      </div>
+      <div id="recipe9Nutrition" class="tabcontent">
+        <h3>Maistinė vertė</h3> <!-- CHANGE CONTENT -->
+        <p><i>Maistinė vertė (1 porcija)</i></p>
+        <ul>
+          <li>Kalorijos: 240 kcal </li>
+          <li>Riebalai: 5,2 g </li>
+          <li>Angliavandeniai: 33,1 g</li>
+          <li>Baltymai: 13,4 g</li>
+          <li>Cholesterolis: 0 mg </li>
+          <li>Natris: 340 mg </li>
+        </ul>
+      </div>
     </div>
     
+
+
+    
+
+
+   
+
+</div>
+
+<script>
+function openRecipeTab(evt, tabContentId, wrapperId) {
+  var i, tabcontent, tablinks;
+  var wrapperElement = document.getElementById(wrapperId);
+
+  // Get all elements with class="tabcontent" INSIDE THE CURRENT WRAPPER and hide them
+  tabcontent = wrapperElement.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" INSIDE THE CURRENT WRAPPER and remove the class "active"
+  tablinks = wrapperElement.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(tabContentId).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Optional: Ensure the first tab is open by default for each recipe
+document.addEventListener('DOMContentLoaded', function() {
+    var wrappers = document.getElementsByClassName('wrapper');
+    for (var k = 0; k < wrappers.length; k++) {
+        var currentWrapper = wrappers[k];
+        // Find the first tab link and its corresponding content ID within the current wrapper
+        var firstTabLink = currentWrapper.querySelector('.tablinks');
+        if (firstTabLink) {
+            var onclickAttribute = firstTabLink.getAttribute('onclick');
+            // Extract the tabContentId (second argument, between single quotes)
+            var match = onclickAttribute.match(/'([^']+)',\s*'([^']+)'/);
+            if (match && match[1]) {
+                 var firstTabContentId = match[1];
+                 var contentElement = document.getElementById(firstTabContentId);
+                 if (contentElement) {
+                    contentElement.style.display = "block";
+                    firstTabLink.className += " active";
+                 }
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
+
 </body>
 </html>
