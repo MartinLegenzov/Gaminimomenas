@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produktų Gidas</title>
     <style>
+        /* Global Styles */
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
@@ -12,19 +13,28 @@
             color: #5d4037;
         }
 
+        /* Header Styles */
         header {
             background-color: #ffffffe3;
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens before full stack */
         }
 
+        header h1 {
+            margin: 0; /* Remove default margin */
+            font-size: 1.8em; /* Adjust as needed */
+        }
+
+        /* Navigation Styles */
         nav ul {
             list-style: none;
             margin: 0;
             padding: 0;
             display: flex;
+            align-items: center; /* Vertically align items with icon */
         }
 
         nav ul li {
@@ -36,12 +46,21 @@
             color: #5d4037;
             font-weight: bold;
             transition: color 0.3s;
+            display: flex; /* For aligning icon and text if needed */
+            align-items: center;
         }
 
         nav ul li a:hover {
             color: #d84315;
         }
 
+        nav ul li img { /* Style for the home icon */
+            width: 30px; /* Adjusted for better proportion with text */
+            height: 30px;
+            vertical-align: middle; /* Good fallback, but flex align-items is better */
+        }
+
+        /* Hero Section Styles */
         .hero {
             text-align: center;
             margin: 20px 0;
@@ -53,11 +72,17 @@
             border-radius: 10px;
         }
 
+        /* Content Area Styles */
         .content {
             padding: 20px;
             text-align: center;
         }
 
+        .content h2 {
+            margin-bottom: 30px; /* More space before blocks */
+        }
+
+        /* Info Blocks Grid Styles */
         .info-blocks {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -66,6 +91,7 @@
             margin: 0 auto;
         }
 
+        /* Individual Info Block Styles */
         .info-block {
             background-color: #ffffff;
             border: 2px solid #044565;
@@ -73,26 +99,101 @@
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: left; /* Align text inside blocks to left */
         }
 
         .info-block:hover {
             transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         .info-block h3 {
             color: #d84315;
-            margin-bottom: 10px;
+            margin-top: 0; /* Remove top margin for h3 inside block */
+            margin-bottom: 15px; /* Space between title and image/text */
+            font-size: 1.2em;
         }
 
         .info-block p {
             display: none;
-            margin-top: 10px;
+            margin-top: 15px;
             color: #5d4037;
+            font-size: 0.95em;
+            line-height: 1.6;
         }
 
         .info-block.active p {
             display: block;
+        }
+
+        /* Uniform Image Styles (used within info-blocks) */
+        .uniform-image {
+            width: 100%;
+            height: 200px; /* Fixed height for uniformity */
+            object-fit: cover; /* Ensures image covers the area, cropping if necessary */
+            border-radius: 8px; /* Slightly smaller radius for internal elements */
+            margin-bottom: 10px; /* Space below image if text is visible */
+        }
+
+        /* Responsive Design - Media Queries */
+
+        /* Tablets and larger phones */
+        @media (max-width: 992px) {
+            .info-blocks {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            header h1 {
+                font-size: 1.6em;
+            }
+        }
+
+        /* Smaller tablets and mobile phones */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column; /* Stack title and nav */
+                align-items: center; /* Center items when stacked */
+                padding: 15px;
+            }
+
+            header h1 {
+                margin-bottom: 15px; /* Space between title and nav */
+            }
+
+            nav ul {
+                flex-direction: column; /* Stack nav items */
+                align-items: center; /* Center nav items */
+                width: 100%; /* Make nav take full width */
+            }
+
+            nav ul li {
+                margin: 10px 0; /* Adjust margin for vertical layout */
+            }
+
+            .info-blocks {
+                grid-template-columns: 1fr; /* Single column */
+            }
+
+            .info-block {
+                padding: 15px;
+            }
+
+            .info-block h3 {
+                font-size: 1.1em;
+            }
+        }
+
+        /* Small mobile phones */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.4em;
+            }
+            nav ul li a {
+                font-size: 0.9em;
+            }
+            .content h2 {
+                font-size: 1.3em;
+            }
         }
     </style>
 </head>
@@ -101,62 +202,65 @@
         <h1>Produktų Gidas</h1>
         <nav>
             <ul>
-                <li><a href="index.html"><img src="images/home.png" alt="Pagrindinis" style="width: 50px; height: 50px; vertical-align: middle;"></a></li>
+                <li><a href="index.html"><img src="images/home.png" alt="Pagrindinis">Pagrindinis</a></li>
                 <li><a href="receptai.html">Receptai</a></li>
                 <li><a href="gidas.html">Produktų Gidas</a></li>
             </ul>
         </nav>
     </header>
+
     <div class="hero">
+        <!-- If you have a hero image, you can place it here, e.g.: -->
+        <!-- <img src="images/hero-image.jpg" alt="Produktų Gidas Hero"> -->
     </div>
+
     <div class="content">
         <h2>Kaip pasirinkti ir laikyti produktus</h2>
         <div class="info-blocks">
             <div class="info-block">
-            <h3>Kaip pasirinkti parduotuvėje</h3>
-            <img src="images/parduotuve.jpg" alt="Parduotuvė" class="uniform-image">
-            <p>Rinkitės šviežius vaisius ir daržoves, atkreipdami dėmesį į jų spalvą ir tekstūrą. Patikrinkite galiojimo datą ant pakuočių. Venkite produktų su pažeistomis pakuotėmis.</p>
+                <h3>Kaip pasirinkti parduotuvėje</h3>
+                <img src="images/parduotuve.jpg" alt="Parduotuvė" class="uniform-image">
+                <p>Rinkitės šviežius vaisius ir daržoves, atkreipdami dėmesį į jų spalvą ir tekstūrą. Patikrinkite galiojimo datą ant pakuočių. Venkite produktų su pažeistomis pakuotėmis.</p>
             </div>
             <div class="info-block">
-            <h3>Kaip laikyti produktus</h3>
-            <img src="images/produktulaikymas.jpg" alt="Produktų laikymas" class="uniform-image">
-            <p>Laikykite šviežius produktus šaldytuve, kad jie ilgiau išliktų švieži. Sausus produktus laikykite sandariuose induose. Šaldykite mėsą ir žuvį, jei jų nesiruošiate naudoti per kelias dienas.</p>
+                <h3>Kaip laikyti produktus</h3>
+                <img src="images/produktulaikymas.jpg" alt="Produktų laikymas" class="uniform-image">
+                <p>Laikykite šviežius produktus šaldytuve, kad jie ilgiau išliktų švieži. Sausus produktus laikykite sandariuose induose. Šaldykite mėsą ir žuvį, jei jų nesiruošiate naudoti per kelias dienas.</p>
             </div>
             <div class="info-block">
-            <h3>Sezoniški ingredientai</h3>
-            <img src="images/Sezoniški ingredientai.jpg" alt="Sezoniški ingredientai" class="uniform-image">
-            <p>Pavasarį: šparagai, ridikėliai, špinatai. Vasarą: braškės, pomidorai, cukinijos. Rudenį: moliūgai, obuoliai, grybai. Žiemą: kopūstai, burokėliai, citrusiniai vaisiai.</p>
+                <h3>Sezoniški ingredientai</h3>
+                <img src="images/Sezoniški ingredientai.jpg" alt="Sezoniški ingredientai" class="uniform-image">
+                <p>Pavasarį: šparagai, ridikėliai, špinatai. Vasarą: braškės, pomidorai, cukinijos. Rudenį: moliūgai, obuoliai, grybai. Žiemą: kopūstai, burokėliai, citrusiniai vaisiai.</p>
             </div>
             <div class="info-block">
-            <h3>Kaip išvengti maisto švaistymo</h3>
-            <img src="images/svaistimas.jpg" alt="Maisto švaistymo išvengimas" class="uniform-image">
-            <p>Planuokite pirkinius iš anksto. Naudokite likučius naujiems patiekalams. Užšaldykite maistą, kurio nesuvalgysite iš karto.</p>
+                <h3>Kaip išvengti maisto švaistymo</h3>
+                <img src="images/svaistimas.jpg" alt="Maisto švaistymo išvengimas" class="uniform-image">
+                <p>Planuokite pirkinius iš anksto. Naudokite likučius naujiems patiekalams. Užšaldykite maistą, kurio nesuvalgysite iš karto.</p>
             </div>
             <div class="info-block">
-            <h3>Ekologiški produktai</h3>
-            <img src="images/ekologiskai.jpg" alt="Ekologiški produktai" class="uniform-image">
-            <p>Rinkitės ekologiškus produktus, kad sumažintumėte pesticidų poveikį. Ieškokite sertifikuotų ekologiškų ženklų ant pakuočių.</p>
+                <h3>Ekologiški produktai</h3>
+                <img src="images/ekologiskai.jpg" alt="Ekologiški produktai" class="uniform-image">
+                <p>Rinkitės ekologiškus produktus, kad sumažintumėte pesticidų poveikį. Ieškokite sertifikuotų ekologiškų ženklų ant pakuočių.</p>
             </div>
             <div class="info-block">
-            <h3>Kaip taupyti perkant maistą</h3>
-            <img src="images/taupyms.jpg" alt="Taupymas" class="uniform-image">
-            <p>Planuokite savaitės meniu ir pirkinių sąrašą. Pirkite didesniais kiekiais, jei tai ekonomiškai naudinga. Venkite impulsyvių pirkinių.</p>
+                <h3>Kaip taupyti perkant maistą</h3>
+                <img src="images/taupyms.jpg" alt="Taupymas" class="uniform-image">
+                <p>Planuokite savaitės meniu ir pirkinių sąrašą. Pirkite didesniais kiekiais, jei tai ekonomiškai naudinga. Venkite impulsyvių pirkinių.</p>
             </div>
         </div>
     </div>
-    <style>
-        .uniform-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-    </style>
+
     <script>
         const infoBlocks = document.querySelectorAll('.info-block');
 
         infoBlocks.forEach(block => {
             block.addEventListener('click', () => {
+                // Optional: Close other blocks when one is opened
+                // infoBlocks.forEach(otherBlock => {
+                //     if (otherBlock !== block) {
+                //         otherBlock.classList.remove('active');
+                //     }
+                // });
                 block.classList.toggle('active');
             });
         });
